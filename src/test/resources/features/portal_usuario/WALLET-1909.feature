@@ -1,7 +1,7 @@
 Feature: WALLET-1909
 
   @TC_01
-Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - búsqueda de Carteras con filtros
+Scenario: PORTAL USUARIO - REVOCACIÓN CREDENCIAL PID - Indicar motivo de revocación - mostrar respuesta al indicar el motivo de revocación
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
     When Click en el botón acceder

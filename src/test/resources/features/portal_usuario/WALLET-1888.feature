@@ -1,7 +1,7 @@
 Feature: WALLET-1888
 
   @TC_01
-Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - búsqueda de Carteras con filtros
+Scenario: PORTAL USUARIO - INICIO - Aviso Legal - mostrar respuesta al acceder a la pantalla Aviso Legal
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
     When Click en el botón acceder

@@ -1,7 +1,7 @@
 Feature: WALLET-1750
 
   @TC_01
-Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - búsqueda de Carteras con filtros
+Scenario: PID PROVIDER (AEAD) - EJECUTIVO - Login Portal PID Provider AEAD - mostrar respuesta al logarse mediante autentica
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
     When Click en el botón acceder

@@ -1,7 +1,7 @@
 Feature: WALLET-1812
 
   @TC_01
-Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - búsqueda de Carteras con filtros
+Scenario: EAA PROVIDER - CONSULTIVO - Filtro tipo credenciales en información destacada - mostrar respuesta de información destacada tras cambiar el tipo de credencial a las diferentes opciones
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
     When Click en el botón acceder

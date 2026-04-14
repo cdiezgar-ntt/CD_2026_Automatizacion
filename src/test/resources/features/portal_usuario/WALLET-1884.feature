@@ -1,7 +1,7 @@
 Feature: WALLET-1884
 
   @TC_01
-Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - búsqueda de Carteras con filtros
+Scenario: PORTAL USUARIO - INICIO - Landing portal usuario - mostrar pantalla de inicio con 3 opciones de acceso
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
     When Click en el botón acceder

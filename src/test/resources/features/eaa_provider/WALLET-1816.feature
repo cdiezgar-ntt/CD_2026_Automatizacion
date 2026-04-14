@@ -1,7 +1,7 @@
 Feature: WALLET-1816
 
   @TC_01
-Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - búsqueda de Carteras con filtros
+Scenario: EAA PROVIDER - CONSULTIVO - Detalle de credencial caducada - mostrar respuesta de error en el detalle de credencial caducada
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
     When Click en el botón acceder

@@ -1,7 +1,7 @@
 Feature: WALLET-1892
 
   @TC_01
-Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - búsqueda de Carteras con filtros
+Scenario: PORTAL USUARIO - INICIO - Probar responsive - mostrar responsive del landing y pantallas anexas del portal usuario
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
     When Click en el botón acceder

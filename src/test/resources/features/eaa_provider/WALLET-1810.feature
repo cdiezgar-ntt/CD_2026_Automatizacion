@@ -1,7 +1,7 @@
 Feature: WALLET-1810
 
   @TC_01
-Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - búsqueda de Carteras con filtros
+Scenario: EAA PROVIDER - CONSULTIVO - Pantalla inicio - búsqueda de credenciales sin resultados
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
     When Click en el botón acceder

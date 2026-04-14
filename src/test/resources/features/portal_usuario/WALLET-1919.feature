@@ -1,7 +1,7 @@
 Feature: WALLET-1919
 
   @TC_01
-Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - búsqueda de Carteras con filtros
+Scenario: PORTAL USUARIO - REVOCACIÓN PRESENCIAL - Probar responsive - mostrar responsive del flujo Revocación presencial
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
     When Click en el botón acceder

@@ -1,7 +1,7 @@
 Feature: WALLET-1820
 
   @TC_01
-Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - búsqueda de Carteras con filtros
+Scenario: EAA PROVIDER - CONSULTIVO - Detalle de información destacada – Credenciales revocadas - mostrar respuesta de detalle de Credenciales revocadas en el último mes
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
     When Click en el botón acceder

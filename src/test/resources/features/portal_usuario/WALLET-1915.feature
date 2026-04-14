@@ -1,7 +1,7 @@
 Feature: WALLET-1915
 
   @TC_01
-Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - búsqueda de Carteras con filtros
+Scenario: PORTAL USUARIO - REVOCACIÓN CREDENCIAL PID - Traducción flujo Revocación Credencial PID - traducción del flujo Revocación Credencial PID a todos los idiomas disponibles
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
     When Click en el botón acceder

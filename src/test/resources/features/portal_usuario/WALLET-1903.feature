@@ -1,7 +1,7 @@
 Feature: WALLET-1903
 
   @TC_01
-Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - búsqueda de Carteras con filtros
+Scenario: PORTAL USUARIO - REVOCACIÓN CARTERA DIGITAL - Traducción flujo Revocación Cartera - traducción del flujo Revocación Cartera a todos los idiomas disponibles
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
     When Click en el botón acceder

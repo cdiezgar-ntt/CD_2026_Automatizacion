@@ -1,7 +1,7 @@
 Feature: WALLET-1773
 
   @TC_01
-Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - búsqueda de Carteras con filtros
+Scenario: ROVIDER (AEAD) - EJECUTIVO - Revocación por archivo - mostrar respuesta de bloques y detalle del histórico de revocación sin error
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
     When Click en el botón acceder

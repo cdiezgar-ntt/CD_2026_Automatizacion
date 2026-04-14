@@ -1,7 +1,7 @@
 Feature: WALLET-1914
 
   @TC_01
-Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - búsqueda de Carteras con filtros
+Scenario: PORTAL USUARIO - REVOCACIÓN CREDENCIAL PID - Resumen del proceso - mostrar respuesta de error al revocar la Credencial PID y volver al inicio
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
     When Click en el botón acceder
