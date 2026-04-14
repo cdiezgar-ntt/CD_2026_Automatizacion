@@ -5,10 +5,10 @@ import org.openqa.selenium.By;
 
 public class WP_ControlPanel extends BasePageObject {
 
-    private final By btnBuscarBy = By.xpath(prop.getPantallaInicio_BotonBuscar());
-    private final By primerElementoListaBy = By.xpath(prop.getPantallaInicio_PrimerElementoTabla());
-    private final By textBoxEmailBy = By.xpath(prop.getPantallaInicio_textBoxEmail());
-    private final By primerElementoListaBusquedaEmailBy = By.xpath(prop.getPantallaInicio_primerElementoTablaBusquedaEmail());
+    private final By btnBuscarBy = By.xpath(prop.getwp_pantallaInicio_BotonBuscar());
+    private final By primerElementoListaBy = By.xpath(prop.getwp_pantallaInicio_PrimerElementoTabla());
+    private final By textBoxEmailBy = By.xpath(prop.getwp_pantallaInicio_textBoxEmail());
+    private final By primerElementoListaBusquedaEmailBy = By.xpath(prop.getwp_pantallaInicio_primerElementoTablaBusquedaEmail());
 
 
     public void clickBtnBuscar() {

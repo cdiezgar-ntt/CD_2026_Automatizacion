@@ -5,16 +5,49 @@ public class Properties {
     //######WALLET PROVIDER PATHS
     //##Control Panel
     public String pantallaLogin_BotonAcceder;
-    public String pantallaInicio_BotonBuscar;
-    public String pantallaInicio_PrimerElementoTabla;
-    public String pantallaInicio_textBoxEmail;
-    public String pantallaInicio_BotonBuscarEmail;
-    public String pantallaInicio_primerElementoTablaBusquedaEmail;
-    public String pantallInicio_informacionDestacada_carterasActivadas_verTodas;
-    public String pantallInicio_informacionDestacada_carterasActivas_verTodas;
-    public String pantallInicio_informacionDestacada_carterasRevocadas_verTodas;
-    public String pantallaInicio_HistoricoRevocacion;
+    public String wp_pantallaInicio_BotonBuscar;
+    public String wp_pantallaInicio_PrimerElementoTabla;
+    public String wp_pantallaInicio_textBoxEmail;
+    public String wp_pantallaInicio_textBoxIdCartera;
+    public String wp_pantallaInicio_textBoxTelefono;
+    public String wp_pantallaInicio_ComboEstado;
+    public String wp_pantallaInicio_ComboFechaActivacion;
+    public String wp_pantallaInicio_ComboFechaRevocacion;
+    public String wp_pantallaInicio_ComboMotivoRevocacion;
+    public String wp_pantallaInicio_ComboMedioSolicitudRevocacion;
+    public String wp_pantallaInicio_CheckMostrarSoloMisRevocaciones;
+    public String wp_pantallaInicio_MostrarBusquedaAvanzada;
+    public String wp_pantallaInicio_OcultarBusquedaAvanzada;
+    public String wp_pantallaInicio_primerElementoTablaBusquedaEmail;
+    public String wp_pantallaInicio_informacionDestacada_carterasActivadas_verTodas;
+    public String wp_pantallaInicio_informacionDestacada_carterasActivas_verTodas;
+    public String wp_pantallaInicio_informacionDestacada_carterasRevocadas_verTodas;
+    public String wp_pantallaInicio_HistoricoRevocacion;
+    //##Control Panel - Revocacion
+    public String wp_pantallaInicio_Revocacion_BtnRevocar;
+    public String wp_pantallaInicio_Revocacion_MotivoRevocacion;
+    public String wp_pantallaInicio_Revocacion_BtnSiRevocar;
+    public String wp_pantallaInicio_Revocacion_BtnCancelar;
     //##Detalles cartera
+    public String wp_detalleCartera_volverAInicio;
+    public String wp_detalleCartera_botonRevocarCartera;
+    public String wp_detalleCartera_InformacionGeneral_IdCartera;
+    public String wp_detalleCartera_InformacionGeneral_estado;
+    public String wp_detalleCartera_InformacionGeneral_fechaActivacion;
+    public String wp_detalleCartera_InformacionContacto_email;
+    public String wp_detalleCartera_InformacionContacto_telefono;
+    public String wp_detalleCartera_informacionAdicionalCartera_SO;
+    public String wp_detalleCartera_informacionAdicionalCartera_versionAPP;
+    public String wp_detalleCartera_informacionAdicionalCartera_versionTandC;
+    public String wp_detalleCartera_RevocarCartera_ComboMotivoRevocacion;
+    public String wp_detalleCartera_RevocarCartera_SiRevocar;
+    public String wp_detalleCartera_RevocarCartera_CancelarRevocacion;
+    //##Carteras Activadas Ultimo Mes
+    public String wp_carterasActivadasUltimoMes_verTodas;
+    public String wp_carterasActivadasUltimoMes_primerElementoTabla;
+    //##Carteras Activas Ultimo Mes
+
+    //##Carteras Revocadas Ultimo Mes
 
     //PID Provider PATHS
 
@@ -30,26 +63,26 @@ public class Properties {
         //######WALLET PROVIDER PATHS
         //##Control Panel
         System.out.println("Leyendo valores de properties para pantalla principal...");
-        pantallaLogin_BotonAcceder = pm.readPropertiesPantallaIncio("pantallaLogin_BotonAcceder");
+        pantallaLogin_BotonAcceder = pm.readPropertiesPantallaInicio("pantallaLogin_BotonAcceder");
         System.out.println("Valor leído para pantallaLogin_Acceder: " + pantallaLogin_BotonAcceder);
-        pantallaInicio_BotonBuscar = pm.readPropertiesPantallaIncio("pantallaInicio_BotonBuscar");
-        System.out.println("Valor leído para pantallaInicio_BotonBuscar: " + pantallaInicio_BotonBuscar);
-        pantallaInicio_PrimerElementoTabla = pm.readPropertiesPantallaIncio("pantallaInicio_PrimerElementoTabla");
-        System.out.println("Valor leído para pantallaInicio_PrimerElementoTabla: " + pantallaInicio_PrimerElementoTabla);
-        pantallaInicio_textBoxEmail = pm.readPropertiesPantallaIncio("pantallaInicio_textBoxEmail");
-        System.out.println("Valor leído para pantallaInicio_textBoxEmail: " + pantallaInicio_textBoxEmail);
-        pantallaInicio_primerElementoTablaBusquedaEmail = pm.readPropertiesPantallaIncio("pantallaInicio_primerElementoTablaBusquedaEmail");
-        System.out.println("Valor leído para pantallaInicio_primerElementoTablaBusquedaEmail: " + pantallaInicio_primerElementoTablaBusquedaEmail);
-        pantallaInicio_BotonBuscarEmail = pm.readPropertiesPantallaIncio("pantallaInicio_BotonBuscarEmail");
-        System.out.println("Valor leído para pantallaInicio_BotonBuscarEmail: " + pantallaInicio_BotonBuscarEmail);
-        pantallInicio_informacionDestacada_carterasActivadas_verTodas = pm.readPropertiesPantallaIncio("pantallInicio_informacionDestacada_carterasActivadas_verTodas");
-        System.out.println("Valor leído para pantallInicio_informacionDestacada_carterasActivadas_verTodas: " + pantallInicio_informacionDestacada_carterasActivadas_verTodas);
-        pantallInicio_informacionDestacada_carterasActivas_verTodas = pm.readPropertiesPantallaIncio("pantallInicio_informacionDestacada_carterasActivas_verTodas");
-        System.out.println("Valor leído para pantallInicio_informacionDestacada_carterasActivas_verTodas: " + pantallInicio_informacionDestacada_carterasActivas_verTodas);
-        pantallInicio_informacionDestacada_carterasRevocadas_verTodas = pm.readPropertiesPantallaIncio("pantallInicio_informacionDestacada_carterasRevocadas_verTodas");
-        System.out.println("Valor leído para pantallInicio_informacionDestacada_carterasRevocadas_verTodas: " + pantallInicio_informacionDestacada_carterasRevocadas_verTodas);
-        pantallaInicio_HistoricoRevocacion = pm.readPropertiesPantallaIncio("pantallaInicio_HistoricoRevocacion");
-        System.out.println("Valor leído para pantallaInicio_HistoricoRevocacion: " + pantallaInicio_HistoricoRevocacion);
+        wp_pantallaInicio_BotonBuscar = pm.readPropertiesPantallaInicio("wp_pantallaInicio_BotonBuscar");
+        System.out.println("Valor leído para wp_pantallaInicio_BotonBuscar: " + wp_pantallaInicio_BotonBuscar);
+        wp_pantallaInicio_PrimerElementoTabla = pm.readPropertiesPantallaInicio("wp_pantallaInicio_PrimerElementoTabla");
+        System.out.println("Valor leído para wp_pantallaInicio_PrimerElementoTabla: " + wp_pantallaInicio_PrimerElementoTabla);
+        wp_pantallaInicio_textBoxEmail = pm.readPropertiesPantallaInicio("wp_pantallaInicio_textBoxEmail");
+        System.out.println("Valor leído para wp_pantallaInicio_textBoxEmail: " + wp_pantallaInicio_textBoxEmail);
+        wp_pantallaInicio_primerElementoTablaBusquedaEmail = pm.readPropertiesPantallaInicio("wp_pantallaInicio_primerElementoTablaBusquedaEmail");
+        System.out.println("Valor leído para wp_pantallaInicio_primerElementoTablaBusquedaEmail: " + wp_pantallaInicio_primerElementoTablaBusquedaEmail);
+        //wp_pantallaInicio_BotonBuscarEmail = pm.readPropertiesPantallaInicio("wp_pantallaInicio_BotonBuscarEmail");
+        //System.out.println("Valor leído para wp_pantallaInicio_BotonBuscarEmail: " + wp_pantallaInicio_BotonBuscarEmail);
+        wp_pantallaInicio_informacionDestacada_carterasActivadas_verTodas = pm.readPropertiesPantallaInicio("wp_pantallaInicio_informacionDestacada_carterasActivadas_verTodas");
+        System.out.println("Valor leído para wp_pantallaInicio_informacionDestacada_carterasActivadas_verTodas: " + wp_pantallaInicio_informacionDestacada_carterasActivadas_verTodas);
+        wp_pantallaInicio_informacionDestacada_carterasActivas_verTodas = pm.readPropertiesPantallaInicio("wp_pantallaInicio_informacionDestacada_carterasActivas_verTodas");
+        System.out.println("Valor leído para wp_pantallaInicio_informacionDestacada_carterasActivas_verTodas: " + wp_pantallaInicio_informacionDestacada_carterasActivas_verTodas);
+        wp_pantallaInicio_informacionDestacada_carterasRevocadas_verTodas = pm.readPropertiesPantallaInicio("wp_pantallaInicio_informacionDestacada_carterasRevocadas_verTodas");
+        System.out.println("Valor leído para wp_pantallaInicio_informacionDestacada_carterasRevocadas_verTodas: " + wp_pantallaInicio_informacionDestacada_carterasRevocadas_verTodas);
+        wp_pantallaInicio_HistoricoRevocacion = pm.readPropertiesPantallaInicio("wp_pantallaInicio_HistoricoRevocacion");
+        System.out.println("Valor leído para wp_pantallaInicio_HistoricoRevocacion: " + wp_pantallaInicio_HistoricoRevocacion);
         //##Detalles cartera
 
         //PID Provider PATHS
@@ -70,76 +103,76 @@ public class Properties {
         this.pantallaLogin_BotonAcceder = pantallaLogin_BotonAcceder;
     }
 
-    public String getPantallaInicio_BotonBuscar() {
-        return pantallaInicio_BotonBuscar;
+    public String getwp_pantallaInicio_BotonBuscar() {
+        return wp_pantallaInicio_BotonBuscar;
     }
 
-    public void setPantallaInicio_BotonBuscar(String pantallaInicio_BotonBuscar) {
-        this.pantallaInicio_BotonBuscar = pantallaInicio_BotonBuscar;
+    public void setwp_pantallaInicio_BotonBuscar(String wp_pantallaInicio_BotonBuscar) {
+        this.wp_pantallaInicio_BotonBuscar = wp_pantallaInicio_BotonBuscar;
     }
 
-    public String getPantallaInicio_PrimerElementoTabla() {
-        return pantallaInicio_PrimerElementoTabla;
+    public String getwp_pantallaInicio_PrimerElementoTabla() {
+        return wp_pantallaInicio_PrimerElementoTabla;
     }
 
-    public void setPantallaInicio_PrimerElementoTabla(String pantallaInicio_PrimerElementoTabla) {
-        this.pantallaInicio_PrimerElementoTabla = pantallaInicio_PrimerElementoTabla;
+    public void setwp_pantallaInicio_PrimerElementoTabla(String wp_pantallaInicio_PrimerElementoTabla) {
+        this.wp_pantallaInicio_PrimerElementoTabla = wp_pantallaInicio_PrimerElementoTabla;
     }
 
-    public String getPantallaInicio_textBoxEmail() {
-        return pantallaInicio_textBoxEmail;
+    public String getwp_pantallaInicio_textBoxEmail() {
+        return wp_pantallaInicio_textBoxEmail;
     }
 
-    public void setPantallaInicio_textBoxEmail(String pantallaInicio_PrimerElementoTabla) {
-        this.pantallaInicio_textBoxEmail = pantallaInicio_textBoxEmail;
+    public void setwp_pantallaInicio_textBoxEmail(String wp_pantallaInicio_PrimerElementoTabla) {
+        this.wp_pantallaInicio_textBoxEmail = wp_pantallaInicio_textBoxEmail;
     }
 
-    public String getPantallaInicio_primerElementoTablaBusquedaEmail() {
-        return pantallaInicio_primerElementoTablaBusquedaEmail;
+    public String getwp_pantallaInicio_primerElementoTablaBusquedaEmail() {
+        return wp_pantallaInicio_primerElementoTablaBusquedaEmail;
     }
 
-    public void setPantallaInicio_primerElementoTablaBusquedaEmail(String pantallaInicio_primerElementoTablaBusquedaEmail) {
-        this.pantallaInicio_primerElementoTablaBusquedaEmail = pantallaInicio_primerElementoTablaBusquedaEmail;
+    public void setwp_pantallaInicio_primerElementoTablaBusquedaEmail(String wp_pantallaInicio_primerElementoTablaBusquedaEmail) {
+        this.wp_pantallaInicio_primerElementoTablaBusquedaEmail = wp_pantallaInicio_primerElementoTablaBusquedaEmail;
     }
 
-    public String getPantallaInicio_BotonBuscarEmail() {
-        return pantallaInicio_BotonBuscarEmail;
+//    public String getwp_pantallaInicio_BotonBuscarEmail() {
+//        return wp_pantallaInicio_BotonBuscarEmail;
+//    }
+//
+//    public void setwp_pantallaInicio_BotonBuscarEmail(String wp_pantallaInicio_BotonBuscar) {
+//        this.wp_pantallaInicio_BotonBuscarEmail = wp_pantallaInicio_BotonBuscar;
+//    }
+
+    public String getwp_pantallaInicio_informacionDestacada_carterasActivadas_verTodas() {
+        return wp_pantallaInicio_informacionDestacada_carterasActivadas_verTodas;
     }
 
-    public void setPantallaInicio_BotonBuscarEmail(String pantallaInicio_BotonBuscar) {
-        this.pantallaInicio_BotonBuscarEmail = pantallaInicio_BotonBuscar;
+    public void setwp_pantallaInicio_informacionDestacada_carterasActivadas_verTodas(String wp_pantallaInicio_BotonBuscar) {
+        this.wp_pantallaInicio_informacionDestacada_carterasActivadas_verTodas = wp_pantallaInicio_BotonBuscar;
     }
 
-    public String getpantallInicio_informacionDestacada_carterasActivadas_verTodas() {
-        return pantallInicio_informacionDestacada_carterasActivadas_verTodas;
+    public String getwp_pantallaInicio_informacionDestacada_carterasActivas_verTodas() {
+        return wp_pantallaInicio_informacionDestacada_carterasActivas_verTodas;
     }
 
-    public void setpantallInicio_informacionDestacada_carterasActivadas_verTodas(String pantallaInicio_BotonBuscar) {
-        this.pantallInicio_informacionDestacada_carterasActivadas_verTodas = pantallaInicio_BotonBuscar;
+    public void setwp_pantallaInicio_informacionDestacada_carterasActivas_verTodas(String wp_pantallaInicio_BotonBuscar) {
+        this.wp_pantallaInicio_informacionDestacada_carterasActivas_verTodas = wp_pantallaInicio_BotonBuscar;
     }
 
-    public String getpantallInicio_informacionDestacada_carterasActivas_verTodas() {
-        return pantallInicio_informacionDestacada_carterasActivas_verTodas;
+    public String getwp_pantallaInicio_informacionDestacada_carterasRevocadas_verTodas() {
+        return wp_pantallaInicio_informacionDestacada_carterasRevocadas_verTodas;
     }
 
-    public void setpantallInicio_informacionDestacada_carterasActivas_verTodas(String pantallaInicio_BotonBuscar) {
-        this.pantallInicio_informacionDestacada_carterasActivas_verTodas = pantallaInicio_BotonBuscar;
+    public void setwp_pantallaInicio_informacionDestacada_carterasRevocadas_verTodas(String wp_pantallaInicio_BotonBuscar) {
+        this.wp_pantallaInicio_informacionDestacada_carterasRevocadas_verTodas = wp_pantallaInicio_BotonBuscar;
     }
 
-    public String getpantallInicio_informacionDestacada_carterasRevocadas_verTodas() {
-        return pantallInicio_informacionDestacada_carterasRevocadas_verTodas;
+    public String getwp_pantallaInicio_HistoricoRevocacion() {
+        return wp_pantallaInicio_HistoricoRevocacion;
     }
 
-    public void setpantallInicio_informacionDestacada_carterasRevocadas_verTodas(String pantallaInicio_BotonBuscar) {
-        this.pantallInicio_informacionDestacada_carterasRevocadas_verTodas = pantallaInicio_BotonBuscar;
-    }
-
-    public String getpantallaInicio_HistoricoRevocacion() {
-        return pantallaInicio_HistoricoRevocacion;
-    }
-
-    public void setpantallaInicio_HistoricoRevocacion(String pantallaInicio_BotonBuscar) {
-        this.pantallaInicio_HistoricoRevocacion = pantallaInicio_BotonBuscar;
+    public void setwp_pantallaInicio_HistoricoRevocacion(String wp_pantallaInicio_BotonBuscar) {
+        this.wp_pantallaInicio_HistoricoRevocacion = wp_pantallaInicio_BotonBuscar;
     }
 
     //##Detalles cartera

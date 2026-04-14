@@ -14,7 +14,7 @@ public class PropertiesManager {
     }
 
 
-    public String readPropertiesPantallaIncio(String clave) {
+    public String readPropertiesPantallaInicio(String clave) {
         // Implementación para leer el archivo de propiedades
         // Puedes usar java.util.Properties para cargar el archivo y acceder a las propiedades
         Properties propiedades = new Properties();
