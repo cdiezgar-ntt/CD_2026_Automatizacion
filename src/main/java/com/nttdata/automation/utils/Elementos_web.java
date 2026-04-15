@@ -20,6 +20,9 @@ public enum Elementos_web {
     wp_pantallaInicio_informacionDestacada_carterasActivadas_verTodas,
     wp_pantallaInicio_informacionDestacada_carterasActivas_verTodas,
     wp_pantallaInicio_informacionDestacada_carterasRevocadas_verTodas,
+    wp_pantallaInicio_SistemaOperativo,
+    wp_pantallaInicio_VersionTC,
+    wp_pantallaInicio_OcultarUltimoMes,
     wp_pantallaInicio_HistoricoRevocacion,
     wp_pantallaInicio_Revocacion_BtnRevocar,
     //ControlPanel - Revocación
