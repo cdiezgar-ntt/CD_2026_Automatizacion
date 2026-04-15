@@ -1,6 +1,7 @@
 package com.nttdata.automation.base;
 
 import com.nttdata.automation.driver.DriverManager;
+import com.nttdata.automation.utils.Elementos_web;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,12 +12,13 @@ import com.nttdata.automation.utils.Properties;
 //import utils.reports.extentReportHook;
 
 import java.time.Duration;
+import java.util.Map;
 
 public class BasePageObject {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
-    protected Properties prop;
+    protected Map<Elementos_web, String> prop;
 
     public BasePageObject() {
         this.driver = DriverManager.getDriver();
@@ -24,8 +26,8 @@ public class BasePageObject {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         // Se cargan los identificadores de todos los objetos web y se preparan para ser utilizados
-        this.prop = new Properties();
-        prop.read();
+        this.prop = new Properties().read_v2();
+
     }
 
     protected void pulsar(By localizador) {
