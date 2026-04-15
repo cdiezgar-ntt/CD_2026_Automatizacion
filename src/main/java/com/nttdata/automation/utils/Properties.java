@@ -54,6 +54,13 @@ public class Properties {
     //EAA Provider PATHS
 
     //Portal Usuario PATHS
+    //##Navegación inferior
+    public String cit_home_titulopantallaenlace;
+    public String cit_home_accesibilidad;
+    public String cit_home_avisolegal;
+    public String cit_home_mapaweb;
+    public String cit_home_politicaprivacidad;
+    public String cit_home_politicadecookies;
 
 
     public static PropertiesManager pm = new PropertiesManager();
@@ -90,6 +97,20 @@ public class Properties {
         //EAA Provider PATHS
 
         //Portal Usuario PATHS
+        cit_home_accesibilidad = pm.readPropertiesPantallaInicio("cit_home_accesibilidad");
+        System.out.println("Valor leído para cit_home_accesibilidad: " + cit_home_accesibilidad);
+        cit_home_avisolegal = pm.readPropertiesPantallaInicio("cit_home_avisolegal");
+        System.out.println("Valor leído para cit_home_avisolegal: " + cit_home_avisolegal);
+        cit_home_mapaweb = pm.readPropertiesPantallaInicio("cit_home_mapaweb");
+        System.out.println("Valor leído para cit_home_mapaweb: " + cit_home_mapaweb);
+        cit_home_politicaprivacidad = pm.readPropertiesPantallaInicio("cit_home_politicaprivacidad");
+        System.out.println("Valor leído para cit_home_politicaprivacidad: " + cit_home_politicaprivacidad);
+        cit_home_politicadecookies = pm.readPropertiesPantallaInicio("cit_home_politicadecookies");
+        System.out.println("Valor leído para cit_home_politicadecookies: " + cit_home_politicadecookies);
+        cit_home_titulopantallaenlace= pm.readPropertiesPantallaInicio("cit_home_titulopantallaenlace");
+        System.out.println("Valor leído para cit_home_politicadecookies: " + cit_home_titulopantallaenlace);
+
+
 
     }
 
@@ -182,6 +203,12 @@ public class Properties {
     //EAA Provider PATHS
 
     //Portal Usuario PATHS
+    public String getCit_home_avisolegal() {
+        return cit_home_avisolegal;
+    }
 
+    public String getCit_home_titulopantallaenlace() {
+        return cit_home_titulopantallaenlace;
+    }
 
 }
