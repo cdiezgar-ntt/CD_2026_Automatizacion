@@ -1,11 +1,13 @@
 package com.nttdata.automation.steps;
 
+import com.nttdata.automation.base.BasePageObject;
 import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.pages.Login;
 import com.nttdata.automation.utils.Commons;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;
 import com.nttdata.automation.pages.WP_ControlPanel;
 import com.nttdata.automation.hooks.ExtentReportHook;
@@ -76,6 +78,13 @@ public class CommonSteps {
         } catch (Exception e) {
             System.out.println("Excepción al seleccionar certificado: " + e);
         }
+    }
+
+    @Then("Validar que el campo {string} de tipo {string} tiene el valor {string}")
+    public void validarQueElCampoTieneElValor(String id, String tipo, String valor) {
+        BasePageObject bpo = new BasePageObject();
+        System.out.println("El tipo es: " +tipo);
+        bpo.validarCampoDeTipo(id, tipo, valor);
     }
 
     @And("Cerrar el navegador")
