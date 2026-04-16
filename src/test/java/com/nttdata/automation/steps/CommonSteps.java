@@ -80,10 +80,11 @@ public class CommonSteps {
         }
     }
 
-    @Then("Validar que el campo {string} tiene el valor {string}")
-    public void validarQueElCampoTieneElValor(String id, String valor) {
+    @Then("Validar que el campo {string} de tipo {string} tiene el valor {string}")
+    public void validarQueElCampoTieneElValor(String id, String tipo, String valor) {
         BasePageObject bpo = new BasePageObject();
-        bpo.validarCampo(id, valor);
+        System.out.println("El tipo es: " +tipo);
+        bpo.validarCampoDeTipo(id, tipo, valor);
     }
 
     @And("Cerrar el navegador")

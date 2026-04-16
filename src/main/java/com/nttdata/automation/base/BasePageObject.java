@@ -11,6 +11,7 @@ import com.nttdata.automation.utils.Properties;
 
 //import utils.reports.extentReportHook;
 
+import java.lang.runtime.SwitchBootstraps;
 import java.time.Duration;
 import java.util.Map;
 
@@ -69,19 +70,62 @@ public class BasePageObject {
         WebElement elemento = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
     }
 
-    public void validarCampo(String id1, String valor1) {
+    public void validarCampoDeTipo(String id1, String tipo, String valor1) {
 
-        By localizador = By.className(prop.get(Elementos_web.valueOf(id1)));
+        String tipoSwitch = tipo.toLowerCase().trim();
+        String textoElemento = "";
+        WebElement we;
+        By localizador;
 
-        System.out.println("Esperando a que el elemento sea visible...");
-        WebElement we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
-        System.out.println("Obteniendo texto del elemento...");
-        String textoElemento = we.getText();
+        switch (tipo){
+            case "xpath":
+                localizador = By.xpath(prop.get(Elementos_web.valueOf(id1)));
+
+                System.out.println("Esperando a que el elemento sea visible...");
+                we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
+                System.out.println("Obteniendo texto del elemento...");
+                textoElemento = we.getText();
+                break;
+            case "classname":
+                localizador = By.className(prop.get(Elementos_web.valueOf(id1)));
+
+                System.out.println("Esperando a que el elemento sea visible...");
+                we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
+                System.out.println("Obteniendo texto del elemento...");
+                textoElemento = we.getText();
+                break;
+            case "id":
+                localizador = By.id(prop.get(Elementos_web.valueOf(id1)));
+
+                System.out.println("Esperando a que el elemento sea visible...");
+                we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
+                System.out.println("Obteniendo texto del elemento...");
+                textoElemento = we.getText();
+                break;
+            case "tagname":
+                localizador = By.tagName(prop.get(Elementos_web.valueOf(id1)));
+
+                System.out.println("Esperando a que el elemento sea visible...");
+                we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
+                System.out.println("Obteniendo texto del elemento...");
+                textoElemento = we.getText();;
+                break;
+            case "name":
+                localizador = By.name(prop.get(Elementos_web.valueOf(id1)));
+
+                System.out.println("Esperando a que el elemento sea visible...");
+                we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
+                System.out.println("Obteniendo texto del elemento...");
+                textoElemento = we.getText();;
+                break;
+            default:
+                System.out.println("Tipo de localizador no reconocido: " + tipo);
+                throw new IllegalArgumentException("Tipo de localizador no reconocido: " + tipo);
+        }
 
         // Validar
         try{
             assertEquals("El campo no coincide", valor1, textoElemento);
-            System.out.println("Validación correcta: el campo coincide con el valor esperado.");
         }
         catch (AssertionError e){
             System.out.println("Error de validación: " + e.getMessage());
