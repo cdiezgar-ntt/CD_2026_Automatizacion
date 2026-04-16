@@ -5,6 +5,7 @@ import com.nttdata.automation.utils.Elementos_web;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.nttdata.automation.utils.Properties;
@@ -41,6 +42,8 @@ public class BasePageObject {
             System.out.println("2. Localizando elemento...");
             WebElement we = driver.findElement(localizador);
 
+            //Scrollear hasta el elemento
+            new Actions(driver).scrollToElement(we).perform();
             System.out.println("3. Haciendo click...");
             we.click();
 
@@ -55,6 +58,8 @@ public class BasePageObject {
         try {
             System.out.println("Esperando a que el elemento sea visible...");
             WebElement we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
+            //Scrollear hasta el elemento
+            new Actions(driver).scrollToElement(we).perform();
             we.clear();
             we.sendKeys(contenido);
             System.out.println("Escrito: " + contenido);
