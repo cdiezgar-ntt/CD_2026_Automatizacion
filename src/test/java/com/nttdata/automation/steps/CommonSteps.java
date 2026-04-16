@@ -28,8 +28,9 @@ public class CommonSteps {
 
         // Abre la página: driver.get("https://pre-wp-cd.redsara.es/control-panel/");
         driver.get(web);
-        //ExtentReportHook.getTest().info("Conectados a la web" + web);
+        ExtentReportHook.getTest().info("Conectados a la web" + web);
 
+        //
 
     }
 
@@ -47,7 +48,14 @@ public class CommonSteps {
     @When("Click en el botón acceder")
     public void hacerClickEnElBotonAcceder() {
         System.out.println("Se va a clicar en acceder");
+
         login.clickBtnAcceder();
+
+        // Espera de 5 segundos para que le de tiempo a elegir el certificado
+        esperarSegundos();
+        esperarSegundos();
+        esperarSegundos();
+
     }
 
     @And("Intro en certificado")

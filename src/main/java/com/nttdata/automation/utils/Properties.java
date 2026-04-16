@@ -16,11 +16,11 @@ public class Properties {
             // Convierto el elemento web a string
             String clave = key.toString();
             // Obtengo su valor de la lectura de las propiedades
-            String valor = pm.readPropertiesPantallaInicio(clave);
+            String valor_leido = pm.readPropertiesPantallaInicio(clave);
             // Almaceno el par en el mapa y trazo log de lectura
-            identificadores_elementos.put(key, valor);
-            if (valor != null)
-                System.out.println("Valor leído para "+clave+": " + valor);
+            identificadores_elementos.put(key, valor_leido);
+            if (valor_leido != null)
+                System.out.println("Valor leído para "+clave+": " + valor_leido);
         }
 
         return identificadores_elementos;

@@ -6,6 +6,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DriverManager {
 
@@ -15,7 +18,15 @@ public class DriverManager {
         if (driver.get() == null) {
 
             ChromeOptions options = new ChromeOptions();
-            options.setPageLoadStrategy(PageLoadStrategy.NONE);
+
+            // Necesario para que funcione la carga del certificado
+            // options.setPageLoadStrategy(PageLoadStrategy.NONE);
+
+            // Selección del certificado
+            Map<String, Object> prefs = new HashMap<>();
+            prefs.put("profile.managed_auto_select_certificate_for_urls",
+                    List.of("{\"pattern\":\"https://[*.]redsara.es\",\"filter\":{\"SUBJECT\":{\"CN\":\"EIDAS CERTIFICADO PRUEBAS - 99999999R\"}}}"));
+            options.setExperimentalOption("prefs", prefs);
 
             // Selenium Manager descarga y configura Chrome automáticamente
             driver.set(new ChromeDriver(options));
