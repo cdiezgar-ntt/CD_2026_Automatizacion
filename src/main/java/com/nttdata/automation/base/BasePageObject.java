@@ -14,6 +14,8 @@ import com.nttdata.automation.utils.Properties;
 import java.time.Duration;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
+
 public class BasePageObject {
 
     protected WebDriver driver;
@@ -67,7 +69,25 @@ public class BasePageObject {
         WebElement elemento = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
     }
 
+    public void validarCampo(String id1, String valor1) {
 
+        By localizador = By.className(prop.get(Elementos_web.valueOf(id1)));
+
+        System.out.println("Esperando a que el elemento sea visible...");
+        WebElement we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
+        System.out.println("Obteniendo texto del elemento...");
+        String textoElemento = we.getText();
+
+        // Validar
+        try{
+            assertEquals("El campo no coincide", valor1, textoElemento);
+            System.out.println("Validación correcta: el campo coincide con el valor esperado.");
+        }
+        catch (AssertionError e){
+            System.out.println("Error de validación: " + e.getMessage());
+            throw e;
+        }
+    }
 
 
 
