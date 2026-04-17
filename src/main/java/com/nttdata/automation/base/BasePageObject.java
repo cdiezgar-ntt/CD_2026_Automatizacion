@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.SourceType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.nttdata.automation.utils.Properties;
@@ -14,7 +15,9 @@ import com.nttdata.automation.utils.Properties;
 
 import java.lang.runtime.SwitchBootstraps;
 import java.time.Duration;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
@@ -75,14 +78,14 @@ public class BasePageObject {
         WebElement elemento = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
     }
 
+
     public void validarCampoDeTipo(String id1, String tipo, String valor1) {
 
         String tipoSwitch = tipo.toLowerCase().trim();
         String textoElemento = "";
         WebElement we;
         By localizador;
-
-        switch (tipo){
+        switch (tipoSwitch) {
             case "xpath":
                 localizador = By.xpath(prop.get(Elementos_web.valueOf(id1)));
 
@@ -93,7 +96,6 @@ public class BasePageObject {
                 break;
             case "classname":
                 localizador = By.className(prop.get(Elementos_web.valueOf(id1)));
-
                 System.out.println("Esperando a que el elemento sea visible...");
                 we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
                 System.out.println("Obteniendo texto del elemento...");
@@ -113,7 +115,7 @@ public class BasePageObject {
                 System.out.println("Esperando a que el elemento sea visible...");
                 we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
                 System.out.println("Obteniendo texto del elemento...");
-                textoElemento = we.getText();;
+                textoElemento = we.getText();
                 break;
             case "name":
                 localizador = By.name(prop.get(Elementos_web.valueOf(id1)));
@@ -121,13 +123,12 @@ public class BasePageObject {
                 System.out.println("Esperando a que el elemento sea visible...");
                 we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
                 System.out.println("Obteniendo texto del elemento...");
-                textoElemento = we.getText();;
+                textoElemento = we.getText();
                 break;
             default:
                 System.out.println("Tipo de localizador no reconocido: " + tipo);
                 throw new IllegalArgumentException("Tipo de localizador no reconocido: " + tipo);
         }
-
         // Validar
         try{
             assertEquals("El campo no coincide", valor1, textoElemento);
@@ -136,9 +137,41 @@ public class BasePageObject {
             System.out.println("Error de validación: " + e.getMessage());
             throw e;
         }
+
+
     }
 
+    protected List<String> obtenerTextosElementosWeb(By localizador) {
+        try {
+            System.out.println("Esperando a que los elementos sean visibles");
+            List <WebElement> we = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(localizador));
+            return we.stream().map(WebElement::getText).collect(Collectors.toList());
+        } catch (Exception e) {
+            System.out.println("Excepción al obtener textos: " + e);
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 
+    protected void seleccionarDeLista(By localizador, String opcion) {
+        try {
+            System.out.println("Esperando a que los elementos sean visibles");
 
+            List <WebElement> we = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(localizador));
+            List <WebElement> we_filtrados = we.stream().filter(e -> e.getText().contentEquals(opcion)).toList();
+
+            if (we_filtrados.size() > 1) {
+                System.out.println("La lista tiene más de un elemento, se pulsará en el primero...");
+            }
+
+            WebElement we_a_pulsar = wait.until(ExpectedConditions.elementToBeClickable(we_filtrados.getFirst()));
+            we_a_pulsar.click();
+
+        } catch (Exception e) {
+            System.out.println("Excepción al seleccionar de la lista la opción " +opcion+ ":" + e);
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 
 }

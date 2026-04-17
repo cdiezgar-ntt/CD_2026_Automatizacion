@@ -58,6 +58,8 @@ public enum Elementos_web {
     //EAA Provider
 
     //Portal Usuario - Navegación inferior
+    cit_home_botonIdiomas,
+    cit_home_listaDeIdiomas,
     cit_home_accesibilidad,
     cit_home_avisolegal,
     cit_home_mapaweb,
@@ -67,4 +69,10 @@ public enum Elementos_web {
     //Portal Usuario - Detalle enlaces
     cit_home_titulopantallaenlace,
 
+    //Portal Usuario - Tipos revocacion
+    cit_home_titulosTiposRevocacion,
+    cit_home_botonConsultarOficina,
+
+    // Portal Usuario - Oficinas
+    cit_revocacionPresencial_oficinas_titulos
     }
