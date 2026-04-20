@@ -2,22 +2,13 @@ Feature: WALLET-1820
 
   @TC_01
 Scenario: EAA PROVIDER - CONSULTIVO - Detalle de información destacada – Credenciales revocadas - mostrar respuesta de detalle de Credenciales revocadas en el último mes
-    Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
+    Given Abrir la web "https://pre-eaa-cd.redsara.es/auth/login"
     And Esperar 5 segundos
     When Click en el botón acceder
-    And  Intro en certificado
     And Esperar 5 segundos
-    When Rellenar el texto "alberto.sanchez.tsol@gmail.com" en el campo de búsqueda email
+    When Click en el botón ver todas credenciales revocadas
     And Esperar 5 segundos
-    When Click en el botón buscar
+    Given Click en el primer valor de la columna ID credencial
     And Esperar 5 segundos
-
-    When Rellenar el texto "alberto.sanchez.tsol@gmail.com" en el campo de búsqueda email
-    And Esperar 5 segundos
-    When Click en el botón buscar
-    And Esperar 5 segundos
-
-    And Click en el primer elemento de la lista con busqueda
-    And Comprobar detalle cartera datos correctos "alberto.sanchez.tsol@gmail.com"
-    And Cerrar el navegador
+    Then Validar que el campo "estado" de tipo "xpath" tiene el valor "Revocada"
 
