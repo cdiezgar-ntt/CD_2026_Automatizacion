@@ -1,6 +1,8 @@
 package com.nttdata.automation.utils;
 
 public enum Elementos_web {
+    abrirWeb,
+
     //ControlPanel
     pantallaLogin_BotonAcceder,
     wp_pantallaInicio_BotonBuscar,
@@ -29,6 +31,8 @@ public enum Elementos_web {
     wp_pantallaInicio_Revocacion_MotivoRevocacion,
     wp_pantallaInicio_Revocacion_BtnSiRevocar,
     wp_pantallaInicio_Revocacion_BtnCancelar,
+    wp_pantallaInicio_SinResultados,
+    wp_pantallaInicio_SinResultados_descripcion,
 
     //Detalles cartera
     wp_detalleCartera_volverAInicio,

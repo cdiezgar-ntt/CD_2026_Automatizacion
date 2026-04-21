@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.SourceType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.nttdata.automation.utils.Properties;
 
@@ -37,6 +38,10 @@ public class BasePageObject {
 
     }
 
+    public void abrirWeb(){
+        driver.get(prop.get(Elementos_web.abrirWeb));
+    }
+
     protected void pulsar(By localizador) {
         try {
             System.out.println("1. Esperando a que el elemento sea clickable...");
@@ -62,12 +67,34 @@ public class BasePageObject {
             System.out.println("Esperando a que el elemento sea visible...");
             WebElement we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
             //Scrollear hasta el elemento
+            System.out.println("Prueba borrar visibilidad de elemento");
             new Actions(driver).scrollToElement(we).perform();
             we.clear();
             we.sendKeys(contenido);
+
             System.out.println("Escrito: " + contenido);
         } catch (Exception e) {
             System.out.println("Excepción al escribir: " + e);
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected void seleccionCombo(By localizador, String opcion) {
+        try{
+            System.out.println("Esperando a que el elemento sea visible...");
+            WebElement we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
+            //Scrollear hasta el elemento
+            new Actions(driver).scrollToElement(we).perform();
+            System.out.println("Rellenando combobox");
+            Select comboBox = new Select(we);
+            comboBox.selectByValue(opcion);
+            //comboBox.selectByVisibleText(opcion);
+            System.out.println("Combobox seleccionado: " + opcion);
+
+
+        }catch (Exception e){
+            System.out.println("Excepción al seleccionar combo: " + e);
             e.printStackTrace();
             throw new RuntimeException(e);
         }

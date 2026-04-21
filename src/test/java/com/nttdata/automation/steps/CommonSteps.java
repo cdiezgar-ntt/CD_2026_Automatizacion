@@ -2,6 +2,7 @@ package com.nttdata.automation.steps;
 
 import com.nttdata.automation.base.BasePageObject;
 import com.nttdata.automation.driver.DriverManager;
+import com.nttdata.automation.hooks.ExtentReportHook;
 import com.nttdata.automation.pages.Login;
 import com.nttdata.automation.utils.Commons;
 import io.cucumber.java.en.And;
@@ -10,7 +11,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;
 import com.nttdata.automation.pages.WP_ControlPanel;
-import com.nttdata.automation.hooks.ExtentReportHook;
+
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -25,15 +26,12 @@ public class CommonSteps {
 
     WebDriver driver = DriverManager.getDriver();
 
-    @Given("Abrir la web {string}")
-    public void abrirElNavegadorChrome(String web) {
-
-        // Abre la página: driver.get("https://pre-wp-cd.redsara.es/control-panel/");
-        driver.get(web);
-        ExtentReportHook.getTest().info("Conectados a la web" + web);
-
-        //
-
+    @Given("Abrir la web")
+    public void abrirElNavegadorChrome() {
+        BasePageObject bpo = new BasePageObject();
+        // Abre la página del propierties);
+        bpo.abrirWeb();
+        ExtentReportHook.getTest().info("Conectados a la web");
     }
 
     @And("Esperar 5 segundos")
@@ -85,6 +83,7 @@ public class CommonSteps {
         BasePageObject bpo = new BasePageObject();
         System.out.println("El tipo es: " +tipo);
         bpo.validarCampoDeTipo(id, tipo, valor);
+        ExtentReportHook.getTest().info("El campo `" + id + "` ha sido validado con el valor `" + valor + "`");
     }
 
     @And("Cerrar el navegador")
