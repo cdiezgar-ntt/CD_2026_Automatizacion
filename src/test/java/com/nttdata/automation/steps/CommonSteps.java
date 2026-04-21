@@ -26,13 +26,39 @@ public class CommonSteps {
 
     WebDriver driver = DriverManager.getDriver();
 
-    @Given("Abrir la web")
-    public void abrirElNavegadorChrome() {
+    @Given("Abrir la web usuario")
+    public void abrirElNavegadorChrome_PortalUsuario() {
         BasePageObject bpo = new BasePageObject();
         // Abre la página del propierties);
-        bpo.abrirWeb();
+        bpo.abrirWebPortalUsuario();
         ExtentReportHook.getTest().info("Conectados a la web");
     }
+
+    @Given("Abrir la web wallet provider")
+    public void abrirElNavegadorChrome_PortalWalletProvider() {
+        BasePageObject bpo = new BasePageObject();
+        // Abre la página del propierties);
+        bpo.abrirWebPortalAdministrador_WP();
+        ExtentReportHook.getTest().info("Conectados a la web");
+    }
+
+    @Given("Abrir la web EAA provider")
+    public void abrirElNavegadorChrome_PortalEAAProvider() {
+        BasePageObject bpo = new BasePageObject();
+        // Abre la página del propierties);
+        bpo.abrirWebPortalAdministrador_EEAProvider();
+        ExtentReportHook.getTest().info("Conectados a la web");
+    }
+
+    @Given("Abrir la web PID provider")
+    public void abrirElNavegadorChrome_PortalPIDProvider() {
+        BasePageObject bpo = new BasePageObject();
+        // Abre la página del propierties);
+        bpo.abrirWebPortalAdministrador_PIDProvider();
+        ExtentReportHook.getTest().info("Conectados a la web");
+    }
+
+
 
     @And("Esperar 5 segundos")
     public void esperarSegundos() {

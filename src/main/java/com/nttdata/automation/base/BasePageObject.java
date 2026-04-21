@@ -38,8 +38,20 @@ public class BasePageObject {
 
     }
 
-    public void abrirWeb(){
-        driver.get(prop.get(Elementos_web.abrirWeb));
+    public void abrirWebPortalUsuario(){
+        driver.get(prop.get(Elementos_web.abrirWebUsuario));
+    }
+
+    public void abrirWebPortalAdministrador_WP(){
+        driver.get(prop.get(Elementos_web.abrirWebWalletProvider));
+    }
+
+    public void abrirWebPortalAdministrador_EEAProvider(){
+        driver.get(prop.get(Elementos_web.abrirWebEAAProvider));
+    }
+
+    public void abrirWebPortalAdministrador_PIDProvider(){
+        driver.get(prop.get(Elementos_web.abrirWebPIDProvider));
     }
 
     protected void pulsar(By localizador) {

@@ -1,7 +1,11 @@
 package com.nttdata.automation.utils;
 
 public enum Elementos_web {
-    abrirWeb,
+    abrirWebUsuario,
+    abrirWebWalletProvider,
+    abrirWebEAAProvider,
+    abrirWebPIDProvider,
+
 
     //ControlPanel
     pantallaLogin_BotonAcceder,
