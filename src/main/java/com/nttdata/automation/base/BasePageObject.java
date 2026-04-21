@@ -92,10 +92,13 @@ public class BasePageObject {
         }
     }
 
-    protected void seleccionCombo(By localizador, String opcion) {
+    public void seleccionComboById(String elmentoWebString, String opcion) {
+        WebElement we;
+        By localizador;
         try{
+            localizador = By.id(prop.get(Elementos_web.valueOf(elmentoWebString)));
             System.out.println("Esperando a que el elemento sea visible...");
-            WebElement we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
+            we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
             //Scrollear hasta el elemento
             new Actions(driver).scrollToElement(we).perform();
             System.out.println("Rellenando combobox");
@@ -103,8 +106,7 @@ public class BasePageObject {
             comboBox.selectByValue(opcion);
             //comboBox.selectByVisibleText(opcion);
             System.out.println("Combobox seleccionado: " + opcion);
-
-
+            
         }catch (Exception e){
             System.out.println("Excepción al seleccionar combo: " + e);
             e.printStackTrace();

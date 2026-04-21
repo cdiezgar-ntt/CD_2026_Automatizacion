@@ -112,6 +112,14 @@ public class CommonSteps {
         ExtentReportHook.getTest().info("El campo `" + id + "` ha sido validado con el valor `" + valor + "`");
     }
 
+    @And("Seleccionar en el combo con id {string} la opcion con valor {string}")
+    public void seleccionarElComboMotivoRevocacionConElTexto(String id, String texto) {
+        BasePageObject bpo = new BasePageObject();
+        System.out.println("Seleccionando el combo Motivo Revocacion con el texto: " + texto);
+        bpo.seleccionComboById(id,texto);
+        System.out.println("Combo Motivo Revocacion seleccionado con el texto: " + texto);
+    }
+
     @And("Cerrar el navegador")
     public void cerrarElNavegador() {
         DriverManager.quitDriver();
