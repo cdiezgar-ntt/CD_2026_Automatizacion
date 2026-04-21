@@ -9,11 +9,12 @@ import io.cucumber.junit.CucumberOptions;
 
 
         //features = "src/test/test_wp",
-        features = "src/test/resources/features/00_launcher", // Dónde están los feature
+        features = "src/test/resources/features", // Dónde están los feature
         glue = {
                 "com.nttdata.automation.steps",       // Dónde está el código Java de los pasos
                 "com.nttdata.automation.hooks"        // Dónde están los Hooks (@Before, @After)
         },
+        tags = "@Test",
         plugin = {"pretty", "html:target/cucumber-report.html"},
         monochrome = true
 )
