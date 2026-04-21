@@ -1,8 +1,8 @@
 Feature: WALLET-1884
 
-  @TC_01
+@portal_usuario
 Scenario: PORTAL USUARIO - INICIO - Landing portal usuario - mostrar pantalla de inicio con 3 opciones de acceso
-      Given Abrir la web "https://pre-citizen-cd.redsara.es/control-panel/"
+      Given Abrir la web usuario
       Then El usuario visualiza 3 tipos de revocación
       And El usuario visualiza la opción de revocación "Revocación total de Cartera Digital"
       And El usuario visualiza la opción de revocación "Revocación de tu credencial de Identidad Digital online"

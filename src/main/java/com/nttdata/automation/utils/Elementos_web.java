@@ -66,6 +66,7 @@ public enum Elementos_web {
     //EAA Provider
 
     //Portal Usuario - Navegación inferior
+    cit_home_opcionesBarraNavegacion,
     cit_home_botonIdiomas,
     cit_home_listaDeIdiomas,
     cit_home_accesibilidad,
@@ -73,6 +74,11 @@ public enum Elementos_web {
     cit_home_mapaweb,
     cit_home_politicaprivacidad,
     cit_home_politicadecookies,
+    cit_home_seccionPreguntasFrecuentes,
+    cit_home_preguntasFrecuentes,
+    cit_home_preguntasFrecuentesRespuestas,
+
+
 
     //Portal Usuario - Detalle enlaces
     cit_home_titulopantallaenlace,
@@ -82,5 +88,6 @@ public enum Elementos_web {
     cit_home_botonConsultarOficina,
 
     // Portal Usuario - Oficinas
-    cit_revocacionPresencial_oficinas_titulos
+    cit_revocacionPresencial_oficinas_titulos,
+    cit_revocacionPresencial_oficinas_textos
     }
