@@ -1,4 +1,4 @@
-package com.nttdata.automation.hooks;
+package com.nttdata.automation.utils;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
