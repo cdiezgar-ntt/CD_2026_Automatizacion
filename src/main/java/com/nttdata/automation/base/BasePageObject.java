@@ -54,23 +54,20 @@ public class BasePageObject {
         driver.get(prop.get(Elementos_web.abrirWebPIDProvider));
     }
 
+    private WebElement obtenerElementoClickable(By localizador) {
+        return wait.until(ExpectedConditions.elementToBeClickable(localizador));
+    }
+
     protected void pulsar(By localizador) {
+        pulsar(obtenerElementoClickable(localizador));
+    }
+
+    public void pulsar(WebElement we) {
         try {
-            System.out.println("1. Esperando a que el elemento sea clickable...");
-            wait.until(ExpectedConditions.elementToBeClickable(localizador));
-
-            System.out.println("2. Localizando elemento...");
-            WebElement we = driver.findElement(localizador);
-
-            //Scrollear hasta el elemento
             new Actions(driver).scrollToElement(we).perform();
-            System.out.println("3. Haciendo click...");
             we.click();
-
         } catch (Exception e) {
-            System.out.println("Excepción al clicar: " + e);
-            e.printStackTrace();
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error al clicar", e);
         }
     }
 
@@ -106,7 +103,7 @@ public class BasePageObject {
             comboBox.selectByValue(opcion);
             //comboBox.selectByVisibleText(opcion);
             System.out.println("Combobox seleccionado: " + opcion);
-            
+
         }catch (Exception e){
             System.out.println("Excepción al seleccionar combo: " + e);
             e.printStackTrace();
@@ -186,6 +183,7 @@ public class BasePageObject {
         try {
             System.out.println("Esperando a que los elementos sean visibles");
             List <WebElement> we = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(localizador));
+            hacerScroll(we.getFirst());
             return we.stream().map(WebElement::getText).collect(Collectors.toList());
         } catch (Exception e) {
             System.out.println("Excepción al obtener textos: " + e);
@@ -213,6 +211,31 @@ public class BasePageObject {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean esVisibleEnPantalla(By locator) {
+        try {
+            WebElement we = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return we.isDisplayed();
+        } catch(Exception e) {
+            return false;
+        }
+    }
+
+    protected boolean existeElAtributoEnElElemento(WebElement we, String atr) {
+        try {
+            String atr_str = we.getDomAttribute(atr);
+            System.out.println("El atributo " + atr + " tiene el valor " + atr_str);
+            return atr_str != null;
+        } catch (Exception e) {
+            System.out.println("Excepción: el elemento es nulo");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private void hacerScroll(WebElement we) {
+        new Actions(driver).scrollToElement(we).perform();
     }
 
 }

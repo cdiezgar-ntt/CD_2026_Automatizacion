@@ -19,13 +19,6 @@ public class PortalUsuario_ControlPanel_Steps {
         portal_usuario = new CIT_PortalUsuario();
     }
 
-    @When("Acceder a la pantalla Aviso Legal por el pie de pagina")
-    public void hacerClickEnAvisoLegal() {
-        System.out.println("Se pulsa en aviso legal");
-        ExtentReportHook.getTest().info("Se pulsa en aviso legal");
-        portal_usuario.clickEnAvisoLegal();
-    }
-
     @Then("Visualizar el contenido del aviso legal")
     public void visualizarAvisoLegal() {
         System.out.println("Se comprueba el contenido del título de aviso legal");
@@ -163,10 +156,30 @@ public class PortalUsuario_ControlPanel_Steps {
         portal_usuario.clickMapaWeb();
     }
 
+    @When("El usuario pulsa en aviso legal")
+    public void pulsarAvisoLegal() {
+        ExtentReportHook.getTest().info("Pulsando Aviso Legal...");
+        portal_usuario.clickAvisoLegal();
+    }
+
+    @When("El usuario pulsa en politica de privacidad")
+    public void pulsarPoliticaPrivacidad() {
+        ExtentReportHook.getTest().info("Pulsando Política de Privacidad");
+        portal_usuario.clickPoliticaPrivacidad();
+    }
+
+    @When("El usuario pulsa en política de cookies")
+    public void pulsarPoliticaCookies() {
+        ExtentReportHook.getTest().info("Pulsando Política de cookies");
+        portal_usuario.clickPoliticaCookies();
+    }
+
+
     @Then("Se carga la pagina de {string}")
-    public void validarCargaAccesibilidad(String pantalla) {
+    public void validarCargaPantalla(String pantalla) {
         Validator.validarVerdadero(portal_usuario.getTituloPantallaEnlace().contains(pantalla),
                 "Se ha cargado la pantalla " + pantalla, true);
     }
+
 
 }

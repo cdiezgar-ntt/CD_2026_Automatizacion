@@ -7,4 +7,3 @@ Scenario: PORTAL USUARIO - INICIO - Mapa Web - mostrar respuesta al acceder a la
       And Existe la opción "Mapa Web" en la barra de navegación
       When El usuario pulsa en mapa web
       Then Se carga la pagina de "Mapa Web"
-    #And El usuario visualiza los requisitos de accesibilidad del Portal de Usuario -- PTE HASTA QUE SE DEFINAN REQUISITOS

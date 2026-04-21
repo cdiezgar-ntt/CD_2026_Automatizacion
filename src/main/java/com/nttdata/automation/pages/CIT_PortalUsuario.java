@@ -12,7 +12,6 @@ public class CIT_PortalUsuario extends BasePageObject {
 
     private final By botonIdiomas = By.xpath(prop.get(Elementos_web.cit_home_botonIdiomas));
     private final By listaDeIdiomas = By.xpath(prop.get(Elementos_web.cit_home_listaDeIdiomas));
-    private final By enlaceAvisoLegal = By.xpath(prop.get(Elementos_web.cit_home_avisolegal));
     private final By tituloPantallaEnlace = By.tagName(prop.get(Elementos_web.cit_home_titulopantallaenlace));
     private final By titulosTiposRevocacion = By.tagName(prop.get(Elementos_web.cit_home_titulosTiposRevocacion));
     private final By botonConsultarOficina = By.xpath(prop.get(Elementos_web.cit_home_botonConsultarOficina));
@@ -22,12 +21,13 @@ public class CIT_PortalUsuario extends BasePageObject {
     private final By preguntasFrecuentes = By.tagName(prop.get(Elementos_web.cit_home_preguntasFrecuentes));
     private final By respuestasPreguntasFrecuentes = By.xpath(prop.get(Elementos_web.cit_home_preguntasFrecuentesRespuestas));
     private final By enlacesBarraInferior = By.xpath(prop.get(Elementos_web.cit_home_opcionesBarraNavegacion));
-    private final By botonAccesibilidad = By.xpath(prop.get(Elementos_web.cit_home_accesibilidad));
-    private final By botonMapaWeb = By.xpath(prop.get(Elementos_web.cit_home_mapaweb));
+    private final By enlaceAccesibilidad = By.xpath(prop.get(Elementos_web.cit_home_accesibilidad));
+    private final By enlaceMapaWeb = By.xpath(prop.get(Elementos_web.cit_home_mapaweb));
+    private final By enlacePolicitaPrivacidad = By.xpath(prop.get(Elementos_web.cit_home_politicaprivacidad));
+    private final By enlaceAvisoLegal = By.xpath(prop.get(Elementos_web.cit_home_avisolegal));
+    private final By enlacePoliticaCookies = By.xpath(prop.get(Elementos_web.cit_home_politicadecookies));
 
-    public void clickEnAvisoLegal() {
-        pulsar(enlaceAvisoLegal);
-    }
+
 
     public String getTituloPantallaEnlace() {
         return driver.findElement(tituloPantallaEnlace).getText();
@@ -92,12 +92,23 @@ public class CIT_PortalUsuario extends BasePageObject {
     }
 
     public void clickAccesibilidad() {
-        pulsar(botonAccesibilidad);
+        pulsar(enlaceAccesibilidad);
     }
 
     public void clickMapaWeb() {
-        pulsar(botonMapaWeb);
+        pulsar(enlaceMapaWeb);
     }
 
+    public void clickAvisoLegal() {
+        pulsar(enlaceAvisoLegal);
+    }
+
+    public void clickPoliticaPrivacidad() {
+        pulsar(enlacePolicitaPrivacidad);
+    }
+
+    public void clickPoliticaCookies() {
+        pulsar(enlacePoliticaCookies);
+    }
 
 }

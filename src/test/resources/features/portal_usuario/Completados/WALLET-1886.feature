@@ -7,4 +7,3 @@ Scenario: PORTAL USUARIO - INICIO - Accesibilidad - mostrar respuesta al acceder
     And Existe la opción "Accesibilidad" en la barra de navegación
     When El usuario pulsa en accesibilidad
     Then Se carga la pagina de "Accesibilidad"
-    #And El usuario visualiza los requisitos de accesibilidad del Portal de Usuario -- PTE HASTA QUE SE DEFINAN REQUISITO
