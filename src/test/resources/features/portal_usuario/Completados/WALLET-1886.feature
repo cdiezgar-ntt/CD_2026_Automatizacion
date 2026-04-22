@@ -1,6 +1,6 @@
 Feature: WALLET-1886
 
-@portal_usuario
+@portal_usuario @navegacion
 Scenario: PORTAL USUARIO - INICIO - Accesibilidad - mostrar respuesta al acceder a la pantalla Accesibilidad
     Given Abrir la web usuario
     Then El usuario visualiza una barra de navegación inferior con varias opciones

@@ -10,6 +10,7 @@ import java.util.List;
 
 public class CIT_PortalUsuario extends BasePageObject {
 
+    private final By tituloHome = By.tagName(prop.get(Elementos_web.cit_home_titulo));
     private final By botonIdiomas = By.xpath(prop.get(Elementos_web.cit_home_botonIdiomas));
     private final By listaDeIdiomas = By.xpath(prop.get(Elementos_web.cit_home_listaDeIdiomas));
     private final By tituloPantallaEnlace = By.tagName(prop.get(Elementos_web.cit_home_titulopantallaenlace));
@@ -26,11 +27,14 @@ public class CIT_PortalUsuario extends BasePageObject {
     private final By enlacePolicitaPrivacidad = By.xpath(prop.get(Elementos_web.cit_home_politicaprivacidad));
     private final By enlaceAvisoLegal = By.xpath(prop.get(Elementos_web.cit_home_avisolegal));
     private final By enlacePoliticaCookies = By.xpath(prop.get(Elementos_web.cit_home_politicadecookies));
+    private final By botonVolverHome = By.xpath(prop.get(Elementos_web.cit_home_botonVolver));
 
-
+    public String getTituloHome() {
+        return obtenerTextosElementosWeb(tituloHome).getFirst();
+    }
 
     public String getTituloPantallaEnlace() {
-        return driver.findElement(tituloPantallaEnlace).getText();
+        return obtenerTextosElementosWeb(tituloPantallaEnlace).getFirst();
     }
 
     public List<String> getTitulosTiposRevocacion() {
@@ -109,6 +113,10 @@ public class CIT_PortalUsuario extends BasePageObject {
 
     public void clickPoliticaCookies() {
         pulsar(enlacePoliticaCookies);
+    }
+
+    public void clickVolver() {
+        pulsar(botonVolverHome);
     }
 
 }

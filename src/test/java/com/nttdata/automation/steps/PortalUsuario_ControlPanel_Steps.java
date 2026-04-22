@@ -6,7 +6,6 @@ import com.nttdata.automation.hooks.ExtentReportHook;
 import com.nttdata.automation.validation.Validator;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
 
 import java.util.List;
 
@@ -19,12 +18,10 @@ public class PortalUsuario_ControlPanel_Steps {
         portal_usuario = new CIT_PortalUsuario();
     }
 
-    @Then("Visualizar el contenido del aviso legal")
-    public void visualizarAvisoLegal() {
-        System.out.println("Se comprueba el contenido del título de aviso legal");
-        ExtentReportHook.getTest().info("Se comprueba el contenido del título aviso legal");
-        String titulo = portal_usuario.getTituloPantallaEnlace();
-        Assert.assertEquals("Aviso Legal", titulo);
+    @Then("El titulo de la home es {string}")
+    public void validarTituloHomeEnIdioma(String titulo_home) {
+        Validator.validarVerdadero(portal_usuario.getTituloHome().contentEquals(titulo_home),
+                "El titulo de la home es " + titulo_home, true);
     }
 
     @Then("El usuario visualiza 3 tipos de revocación")
@@ -144,6 +141,21 @@ public class PortalUsuario_ControlPanel_Steps {
                 "Existe la opción " + opcion + " en la barra inferior");
     }
 
+    @Then("Los enlaces son {string}, {string}, {string}, {string}, {string}")
+    public void validarEnlacesNavegacionEnIdioma(String enlace_accesibilidad, String enlace_mapaWeb, String enlaceAvisoLegal, String enlace_politicaPrivacidad, String enlace_politicaCookies) {
+        List<String> enlaces_web = portal_usuario.getOpcionesBarraNavegacionInferior();
+        Validator.validarVerdadero(enlaces_web.stream().anyMatch(e -> e.toLowerCase().contains(enlace_accesibilidad.toLowerCase())),
+                "Se encuentra el enlace " + enlace_accesibilidad);
+        Validator.validarVerdadero(enlaces_web.stream().anyMatch(e -> e.toLowerCase().contains(enlace_mapaWeb.toLowerCase())),
+                "Se encuentra el enlace " + enlace_mapaWeb);
+        Validator.validarVerdadero(enlaces_web.stream().anyMatch(e -> e.toLowerCase().contains(enlaceAvisoLegal.toLowerCase())),
+                "Se encuentra el enlace " + enlaceAvisoLegal);
+        Validator.validarVerdadero(enlaces_web.stream().anyMatch(e -> e.toLowerCase().contains(enlace_politicaPrivacidad.toLowerCase())),
+                "Se encuentra el enlace " + enlace_politicaPrivacidad);
+        Validator.validarVerdadero(enlaces_web.stream().anyMatch(e -> e.toLowerCase().contains(enlace_politicaCookies.toLowerCase())),
+                "Se encuentra el enlace " + enlace_politicaCookies);
+    }
+
     @When("El usuario pulsa en accesibilidad")
     public void pulsarAccesibilidad() {
         ExtentReportHook.getTest().info("Pulsando accesibilidad...");
@@ -177,8 +189,14 @@ public class PortalUsuario_ControlPanel_Steps {
 
     @Then("Se carga la pagina de {string}")
     public void validarCargaPantalla(String pantalla) {
-        Validator.validarVerdadero(portal_usuario.getTituloPantallaEnlace().contains(pantalla),
+        Validator.validarVerdadero(portal_usuario.getTituloPantallaEnlace().toLowerCase().contains(pantalla.toLowerCase()),
                 "Se ha cargado la pantalla " + pantalla, true);
+    }
+
+    @When("El usuario vuelve a la home")
+    public void volverHome() {
+        ExtentReportHook.getTest().info("Volviendo a la home...");
+        portal_usuario.clickVolver();
     }
 
 

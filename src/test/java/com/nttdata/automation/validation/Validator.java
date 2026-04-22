@@ -8,16 +8,21 @@ import org.junit.Assert;
 public class Validator {
 
     public static void validarVerdadero(Boolean exp, String msg) {
-        validarVerdadero(exp, msg, false);
+        validarVerdadero(exp, msg, false, false);
     }
 
-    public static void validarVerdadero(Boolean exp, String msg, boolean conCaptura) {
+    public static void validarVerdadero(Boolean exp, String msg, Boolean conCaptura) {
+        validarVerdadero(exp, msg, conCaptura, false);
+    }
+
+    public static void validarVerdadero(Boolean exp, String msg, boolean conCaptura, boolean bloqueante) {
         try {
             Assert.assertTrue(exp);
             logPass(msg, conCaptura);
         } catch (AssertionError error) {
             logFail(msg, conCaptura);
-            throw error;
+            //Comentar si se quiere que una validación detenga el test
+            if (bloqueante) throw error;
         }
     }
 
@@ -25,13 +30,18 @@ public class Validator {
         validarFalso(exp, msg, false);
     }
 
-    public static void validarFalso(Boolean exp, String msg, boolean conCaptura) {
+    public static void validarFalso(Boolean exp, String msg, Boolean bloqueante) {
+        validarFalso(exp, msg, bloqueante, bloqueante);
+    }
+
+    public static void validarFalso(Boolean exp, String msg, boolean conCaptura , boolean bloqueante) {
         try {
             Assert.assertFalse(exp);
             logPass(msg, conCaptura);
         } catch (AssertionError error) {
             logFail(msg, conCaptura);
-            throw error;
+            //Comentar si se quiere que una validación detenga el test
+            if (bloqueante) throw error;
         }
     }
 

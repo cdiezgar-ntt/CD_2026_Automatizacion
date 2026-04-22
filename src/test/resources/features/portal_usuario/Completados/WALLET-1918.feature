@@ -1,6 +1,6 @@
 Feature: WALLET-1918
 
-@portal_usuario
+@portal_usuario @idiomas
 Scenario Outline: PORTAL USUARIO - REVOCACIÓN PRESENCIAL - Traducción flujo Revocación Presencial - <idioma>
   Given Abrir la web usuario
   When El usuario pulsa en consultar oficina

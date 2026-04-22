@@ -1,6 +1,6 @@
 Feature: WALLET-1887
 
-@portal_usuario
+@portal_usuario @navegacion
 Scenario: PORTAL USUARIO - INICIO - Mapa Web - mostrar respuesta al acceder a la pantalla Mapa Web
       Given Abrir la web usuario
       Then El usuario visualiza una barra de navegación inferior con varias opciones

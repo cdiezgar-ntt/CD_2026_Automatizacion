@@ -1,6 +1,6 @@
 Feature: WALLET-1885
 
-@portal_usuario
+@portal_usuario @home
 Scenario: PORTAL USUARIO - INICIO - Landing portal usuario - visualizar preguntas frecuentes
     Given Abrir la web usuario
     Then El usuario ve una sección de preguntas frecuentes

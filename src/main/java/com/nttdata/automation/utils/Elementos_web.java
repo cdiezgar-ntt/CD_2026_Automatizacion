@@ -66,6 +66,7 @@ public enum Elementos_web {
     //EAA Provider
 
     //Portal Usuario - Navegación inferior
+    cit_home_titulo,
     cit_home_opcionesBarraNavegacion,
     cit_home_botonIdiomas,
     cit_home_listaDeIdiomas,
@@ -77,7 +78,7 @@ public enum Elementos_web {
     cit_home_seccionPreguntasFrecuentes,
     cit_home_preguntasFrecuentes,
     cit_home_preguntasFrecuentesRespuestas,
-
+    cit_home_botonVolver,
 
 
     //Portal Usuario - Detalle enlaces

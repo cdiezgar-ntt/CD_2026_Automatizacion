@@ -1,6 +1,6 @@
 Feature: WALLET-1888
 
-@portal_usuario
+@portal_usuario @navegacion
 Scenario: PORTAL USUARIO - INICIO - Aviso Legal - mostrar respuesta al acceder a la pantalla Aviso Legal
     Given Abrir la web usuario
     Then El usuario visualiza una barra de navegación inferior con varias opciones
