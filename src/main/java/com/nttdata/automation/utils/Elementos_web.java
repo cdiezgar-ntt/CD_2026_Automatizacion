@@ -32,6 +32,7 @@ public enum Elementos_web {
     wp_pantallaInicio_HistoricoRevocacion,
     wp_pantallaInicio_Revocacion_BtnRevocar,
     //ControlPanel - Revocación
+    //WP - ControlPanel - Revocación
     wp_pantallaInicio_Revocacion_MotivoRevocacion,
     wp_pantallaInicio_Revocacion_BtnSiRevocar,
     wp_pantallaInicio_Revocacion_BtnCancelar,
@@ -39,6 +40,8 @@ public enum Elementos_web {
     wp_pantallaInicio_SinResultados_descripcion,
 
     //Detalles cartera
+    //WP - Detalles cartera
+    wp_detalleCartera_titulo,
     wp_detalleCartera_volverAInicio,
     wp_detalleCartera_botonRevocarCartera,
     wp_detalleCartera_InformacionGeneral_IdCartera,
@@ -55,12 +58,18 @@ public enum Elementos_web {
 
     //Carteras Activadas Ultimo Mes
     wp_carterasActivadasUltimoMes_verTodas,
+    //WP - Pantalla carteras activas
     wp_carterasActivadasUltimoMes_primerElementoTabla,
+    wp_carterasActivas_titulo,
 
     //Carteras Activas Ultimo Mes
 
     //Carteras Revocadas Ultimo Mes
 
+    //Historio revocacion
+    wp_historicoRevocacion_titulo,
+    wp_historicoRevocacion_TablaId,
+    wp_hitoricoRevocacion_TablaEstado,
     //PID Provider
 
     //EAA Provider

@@ -154,42 +154,42 @@ public class WP_ControlPanel_Steps {
 //        test.info("Combo Version TC seleccionado con el texto: " + texto);
 //    }
 //
-//    @And("Click en el link Historico Revocaciones")
-//    public void clickEnElLinkHistoricoRevocaciones() {
-//        System.out.println("Clicando en el link Historico Revocaciones");
-//        test.info("Clicando en el link Historico Revocaciones");
-//        wp_cp.clickLinkHistoricoRevocaciones();
-//        System.out.println("Link Historico Revocaciones clicado");
-//        test.info("Link Historico Revocaciones clicado");
-//    }
-//
-//    @And("Click en el link Carteras Activadas Ver Todas")
-//    public void clickEnElLinkCarterasActivadasVerTodas() {
-//        System.out.println("Clicando en el link Carteras Activadas Ver Todas");
-//        test.info("Clicando en el link Carteras Activadas Ver Todas");
-//        wp_cp.clickLinkCarterasActivadasVerTodas();
-//        System.out.println("Link Carteras Activadas Ver Todas clicado");
-//        test.info("Link Carteras Activadas Ver Todas clicado");
-//    }
-//
-//    @And("Click en el link Carteras Revocadas Ver Todas")
-//    public void clickEnElLinkCarterasRevocadasVerTodas() {
-//        System.out.println("Clicando en el link Carteras Revocadas Ver Todas");
-//        test.info("Clicando en el link Carteras Revocadas Ver Todas");
-//        wp_cp.clickLinkCarterasRevocadasVerTodas();
-//        System.out.println("Link Carteras Revocadas Ver Todas clicado");
-//        test.info("Link Carteras Revocadas Ver Todas clicado");
-//    }
-//
-//    @And("Click en el link Carteras Activas Ver Todas")
-//    public void clickEnElLinkCarterasActivasVerTodas() {
-//        System.out.println("Clicando en el link Carteras Activas Ver Todas");
-//        test.info("Clicando en el link Carteras Activas Ver Todas");
-//        wp_cp.clickLinkCarterasActivasVerTodas();
-//        System.out.println("Link Carteras Activas Ver Todas clicado");
-//        test.info("Link Carteras Activas Ver Todas clicado");
-//    }
-//
+    @And("Click en el link Historico Revocaciones")
+    public void clickEnElLinkHistoricoRevocaciones() {
+        System.out.println("Clicando en el link Historico Revocaciones");
+        test.info("Clicando en el link Historico Revocaciones");
+        wp_cp.clickLinkHistoricoRevocaciones();
+        System.out.println("Link Historico Revocaciones clicado");
+        test.info("Link Historico Revocaciones clicado");
+    }
+
+    @And("Click en el botón ver todas carteras activadas ultimo mes")
+    public void clickEnElLinkCarterasActivadasVerTodas() {
+        System.out.println("Clicando en el link Carteras Activadas Ver Todas");
+        test.info("Clicando en el link Carteras Activadas Ver Todas");
+        wp_cp.clickLinkCarterasActivadasVerTodas();
+        System.out.println("Link Carteras Activadas Ver Todas clicado");
+        test.info("Link Carteras Activadas Ver Todas clicado");
+    }
+
+    @And("Click en el botón ver todas carteras revocadas ultimo mes")
+    public void clickEnElLinkCarterasRevocadasVerTodas() {
+        System.out.println("Clicando en el link Carteras Revocadas Ver Todas");
+        test.info("Clicando en el link Carteras Revocadas Ver Todas");
+        wp_cp.clickLinkCarterasRevocadasVerTodas();
+        System.out.println("Link Carteras Revocadas Ver Todas clicado");
+        test.info("Link Carteras Revocadas Ver Todas clicado");
+    }
+
+    @And("Click en el botón ver todas carteras activas ultimo mes")
+    public void clickEnElLinkCarterasActivasVerTodas() {
+        System.out.println("Clicando en el link Carteras Activas Ver Todas");
+        test.info("Clicando en el link Carteras Activas Ver Todas");
+        wp_cp.clickLinkCarterasActivasVerTodas();
+        System.out.println("Link Carteras Activas Ver Todas clicado");
+        test.info("Link Carteras Activas Ver Todas clicado");
+    }
+
 //    @And("Click en el link Ocultar Ultimo Mes")
 //    public void clickEnElLinkOcultarUltimoMes() {
 //        System.out.println("Clicando en el link Ocultar Ultimo Mes");
