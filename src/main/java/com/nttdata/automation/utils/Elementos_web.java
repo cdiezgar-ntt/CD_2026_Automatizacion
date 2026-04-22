@@ -64,6 +64,10 @@ public enum Elementos_web {
     //PID Provider
 
     //EAA Provider
+    eaa_totalCarteras,
+    eaa_comboFiltroEstado,
+    eaa_pantallaInicio_PrimerElementoTabla,
+    eaa_estadoDetalleCredencial,
 
     //Portal Usuario - Navegación inferior
     cit_home_titulo,
