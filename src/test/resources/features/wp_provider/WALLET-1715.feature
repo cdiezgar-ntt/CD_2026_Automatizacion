@@ -1,8 +1,8 @@
 Feature: WALLET-1715
 
-  @TC_02
+  @WALLET-1715 @wallet_provider
   Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - mostrar respuesta de información destacada y búsqueda de Carteras sin filtros
-    Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
+    Given Abrir la web wallet provider
     And Esperar 5 segundos
     When Click en el botón acceder
     And  Intro en certificado

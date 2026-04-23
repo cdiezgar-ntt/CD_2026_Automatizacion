@@ -1,8 +1,8 @@
 Feature: WALLET-1713
 
-  @TC_02
+  @WALLET-1713 @wallet_provider
   Scenario: WALLET PROVIDER - EJECUTIVO - Aceptar términos y condiciones - mostrar respuesta al aceptar los términos y condiciones
-    Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
+    Given Abrir la web wallet provider
     And Esperar 5 segundos
     When Click en el botón acceder
     And  Intro en certificado
