@@ -1,6 +1,6 @@
-Feature: WALLET-1721
+Feature: WALLET-1721-XXXX
 
-  @TC_02
+  @WALLET-1721 @wallet_provider
   Scenario: WALLET PROVIDER - EJECUTIVO - Detalle de Cartera – Cartera revocable - mostrar respuesta de detalle de cartera revocable
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos

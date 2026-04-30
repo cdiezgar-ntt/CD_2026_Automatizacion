@@ -1,6 +1,6 @@
-Feature: WALLET-1720
+Feature: WALLET-1720-XXXX
 
-  @TC_01
+  @WALLET-1720 @wallet_provider
 Scenario: WALLET PROVIDER - EJECUTIVO - Detalle de Cartera – Cartera revocada - mostrar respuesta de error en el detalle de cartera revocada
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
