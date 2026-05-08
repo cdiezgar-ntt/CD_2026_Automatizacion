@@ -18,6 +18,11 @@ public class WP_ControlPanel_Steps {
 
     public static ExtentTest test = ExtentReportHook.getTest();
 
+
+    /**
+     * Step Wallet Provider:
+     * <p>Llama al método clickBtnBuscar() de la clase WP_ControlPanel para hacer click en el botón "Buscar" de la pantalla de inicio del Control Panel del Wallet Provider</p>
+     */
     @When("Click en el botón buscar")
     public void hacerClickEnElBotonBuscar() {
         wp_cp.clickBtnBuscar();
@@ -25,6 +30,10 @@ public class WP_ControlPanel_Steps {
         test.info("Botón buscar clickeado");
     }
 
+    /**
+     * Step Wallet Provider:
+     * <p>Llama al método clickPrimerElementoLista() de la clase WP_ControlPanel para hacer click en el primer elemento de la lista de resultados de búsqueda de la pantalla de inicio del Control Panel del Wallet Provider</p>
+     */
     @And("Click en el primer elemento de la lista")
     public void clickEnElPrimerElementoDeLaLista() {
         System.out.println("Clicando en el primer elemento de la lista");
@@ -34,7 +43,11 @@ public class WP_ControlPanel_Steps {
         test.info("Primer elemento de la lista clicado");
     }
 
-
+    /**
+     * Step Wallet Provider:
+     * <p>Llama al método rellenarCampoBusquedaEmail(String textoBusqueda) de la clase WP_ControlPanel para rellenar el campo de búsqueda por email de la pantalla de inicio del Control Panel del Wallet Provider con el texto pasado como parámetro</p>
+     * @param texto: String con el texto a introducir en el campo de búsqueda por email
+     */
     @Given("Rellenar el texto {string} en el campo de busqueda email")
     public void rellenarElTextoEnElCampoDeBusquedaEmail(String texto) {
         System.out.println("Rellenando el campo de búsqueda email con el texto: " + texto);
@@ -154,6 +167,11 @@ public class WP_ControlPanel_Steps {
 //        test.info("Combo Version TC seleccionado con el texto: " + texto);
 //    }
 //
+
+    /**
+     * Step Wallet Provider:
+     * <p>Llama al método clickLinkHistoricoRevocaciones() de la clase WP_ControlPanel para hacer click en el link "Historico Revocaciones" de la pantalla de inicio del Control Panel del Wallet Provider</p>
+     */
     @And("Click en el link Historico Revocaciones")
     public void clickEnElLinkHistoricoRevocaciones() {
         System.out.println("Clicando en el link Historico Revocaciones");
@@ -163,6 +181,10 @@ public class WP_ControlPanel_Steps {
         test.info("Link Historico Revocaciones clicado");
     }
 
+    /**
+     * Step Wallet Provider:
+     * <p>Llama al método clickLinkCarterasActivadasVerTodas() de la clase WP_ControlPanel para hacer click en el link "Carteras Activadas Ver Todas" de la pantalla de inicio del Control Panel del Wallet Provider</p>
+     */
     @And("Click en el botón ver todas carteras activadas ultimo mes")
     public void clickEnElLinkCarterasActivadasVerTodas() {
         System.out.println("Clicando en el link Carteras Activadas Ver Todas");
@@ -172,6 +194,10 @@ public class WP_ControlPanel_Steps {
         test.info("Link Carteras Activadas Ver Todas clicado");
     }
 
+    /**
+     * Step Wallet Provider:
+     * <p>Llama al método clickLinkCarterasRevocadasVerTodas() de la clase WP_ControlPanel para hacer click en el link "Carteras Revocadas Ver Todas" de la pantalla de inicio del Control Panel del Wallet Provider</p>
+     */
     @And("Click en el botón ver todas carteras revocadas ultimo mes")
     public void clickEnElLinkCarterasRevocadasVerTodas() {
         System.out.println("Clicando en el link Carteras Revocadas Ver Todas");
@@ -181,6 +207,10 @@ public class WP_ControlPanel_Steps {
         test.info("Link Carteras Revocadas Ver Todas clicado");
     }
 
+    /**
+     * Step Wallet Provider:
+     * <p>Llama al método clickLinkCarterasActivasVerTodas() de la clase WP_ControlPanel para hacer click en el link "Carteras Activas Ver Todas" de la pantalla de inicio del Control Panel del Wallet Provider</p>
+     */
     @And("Click en el botón ver todas carteras activas ultimo mes")
     public void clickEnElLinkCarterasActivasVerTodas() {
         System.out.println("Clicando en el link Carteras Activas Ver Todas");

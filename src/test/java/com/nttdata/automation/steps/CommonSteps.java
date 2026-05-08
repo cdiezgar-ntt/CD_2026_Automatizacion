@@ -26,6 +26,9 @@ public class CommonSteps {
 
     WebDriver driver = DriverManager.getDriver();
 
+    /**
+     * @description Método para abrir el navegador y navegar a la URL del portal de usuario, wallet provider, EAA provider o PID provider dependiendo del escenario
+     */
     @Given("Abrir la web usuario")
     public void abrirElNavegadorChrome_PortalUsuario() {
         BasePageObject bpo = new BasePageObject();
@@ -34,6 +37,9 @@ public class CommonSteps {
         ExtentReportHook.getTest().info("Conectados a la web");
     }
 
+    /**
+     * @description Método para abrir el navegador y navegar a la URL del portal de wallet provider
+     */
     @Given("Abrir la web wallet provider")
     public void abrirElNavegadorChrome_PortalWalletProvider() {
         BasePageObject bpo = new BasePageObject();
@@ -42,6 +48,9 @@ public class CommonSteps {
         ExtentReportHook.getTest().info("Conectados a la web");
     }
 
+    /**
+     * @description Método para abrir el navegador y navegar a la URL del portal de EAA provider
+     */
     @Given("Abrir la web EAA provider")
     public void abrirElNavegadorChrome_PortalEAAProvider() {
         BasePageObject bpo = new BasePageObject();
@@ -50,6 +59,9 @@ public class CommonSteps {
         ExtentReportHook.getTest().info("Conectados a la web");
     }
 
+    /**
+     * @description Método para abrir el navegador y navegar a la URL del portal de PID provider
+     */
     @Given("Abrir la web PID provider")
     public void abrirElNavegadorChrome_PortalPIDProvider() {
         BasePageObject bpo = new BasePageObject();
@@ -59,7 +71,9 @@ public class CommonSteps {
     }
 
 
-
+    /**
+     * @description Método para esperar 5 segundos, utilizado principalmente para dar tiempo a que se carguen elementos o para esperar a que se abra el modal de selección de certificado
+     */
     @And("Esperar 5 segundos")
     public void esperarSegundos() {
         try {
@@ -71,6 +85,9 @@ public class CommonSteps {
         }
     }
 
+    /**
+     * @description Método para hacer click en el botón "Acceder" de la pantalla de login, que abre el modal de selección de certificado
+     */
     @When("Click en el botón acceder")
     public void hacerClickEnElBotonAcceder() {
         System.out.println("Se va a clicar en acceder");
@@ -84,6 +101,9 @@ public class CommonSteps {
 
     }
 
+    /**
+     * @description Método para simular la pulsación de la tecla "Enter" para confirmar la selección del certificado en el modal nativo de selección de certificado
+     */
     @And("Intro en certificado")
     public void introCertificado() {
         try {
@@ -104,6 +124,12 @@ public class CommonSteps {
         }
     }
 
+    /**
+     * @description Método para validar que un campo de la pantalla tiene un valor concreto, se le pasa el id del campo, el tipo (input, select o textarea) y el valor a validar
+     * @param id: String con el id del campo a validar
+     * @param tipo: String con el tipo del campo a validar (input, select o textarea)
+     * @param valor: String con el valor a validar en el campo
+     */
     @Then("Validar que el campo {string} de tipo {string} tiene el valor {string}")
     public void validarQueElCampoTieneElValor(String id, String tipo, String valor) {
         BasePageObject bpo = new BasePageObject();
@@ -112,6 +138,11 @@ public class CommonSteps {
         ExtentReportHook.getTest().info("El campo `" + id + "` ha sido validado con el valor `" + valor + "`");
     }
 
+    /**
+     * @description Método para seleccionar una opción de un combo, se le pasa el id del combo y el valor a seleccionar
+     * @param id: String con el id del combo
+     * @param texto: String con el valor a seleccionar en el combo
+     */
     @And("Seleccionar en el combo con id {string} la opcion con valor {string}")
     public void seleccionarElComboMotivoRevocacionConElTexto(String id, String texto) {
         BasePageObject bpo = new BasePageObject();
@@ -120,6 +151,9 @@ public class CommonSteps {
         System.out.println("Combo Motivo Revocacion seleccionado con el texto: " + texto);
     }
 
+    /**
+     * @description Método para cerrar el navegador al finalizar el escenario
+     */
     @And("Cerrar el navegador")
     public void cerrarElNavegador() {
         DriverManager.quitDriver();
