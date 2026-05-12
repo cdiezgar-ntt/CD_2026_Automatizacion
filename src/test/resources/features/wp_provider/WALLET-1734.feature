@@ -1,6 +1,6 @@
 Feature: WALLET-1734
 
-  @TC_01
+  @WALLET-1734 @wallet_provider
 Scenario: WALLET PROVIDER - EJECUTIVO - Histórico de revocación - mostrar respuesta de bloques y detalle del histórico de revocación en proceso
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos

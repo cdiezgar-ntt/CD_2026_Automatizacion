@@ -1,6 +1,6 @@
-Feature: WALLET-1728
+Feature: WALLET-1728-XXXXX
 
-  @TC_01
+  @WALLET-1728 @wallet_provider
 Scenario: WALLET PROVIDER - EJECUTIVO - Revocar carteras seleccionadas - mostrar respuesta de error tras revocación de carteras seleccionadas
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
