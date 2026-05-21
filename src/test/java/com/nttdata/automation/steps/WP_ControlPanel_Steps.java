@@ -229,4 +229,12 @@ public class WP_ControlPanel_Steps {
 //        test.info("Link Ocultar Ultimo Mes clicado");
 //    }
 
+    @And("Obtener primer correo")
+    public String obtenerPrimerCorreo() {
+        String primerCorreo = wp_cp.obtenerPrimerCorreo();
+        System.out.println("Primer correo obtenido: " + primerCorreo);
+        test.info("Primer correo obtenido: " + primerCorreo);
+        return primerCorreo;
+    }
+
 }

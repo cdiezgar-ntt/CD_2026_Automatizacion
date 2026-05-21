@@ -27,6 +27,7 @@ public class WP_ControlPanel extends BasePageObject {
     private final By linkCarterasRevocadasVerTodasBy = By.xpath(prop.get(Elementos_web.wp_pantallaInicio_informacionDestacada_carterasRevocadas_verTodas));
     private final By linkCarterasActivasVerTodasBy = By.xpath(prop.get(Elementos_web.wp_pantallaInicio_informacionDestacada_carterasActivas_verTodas));
     private final By linkOcultarUltimoMesBy = By.xpath(prop.get(Elementos_web.wp_pantallaInicio_OcultarUltimoMes));
+    private final By primerCorreoDeLaListaBy = By.xpath(prop.get(Elementos_web.wp_primerCorreoDeLaListaBy));
 
 
     /**
@@ -182,6 +183,11 @@ public class WP_ControlPanel extends BasePageObject {
     }
 
 
+    public String obtenerPrimerCorreo() {
+        String correo = guardarTextoDeUnCampoXpath(primerCorreoDeLaListaBy);
+        System.out.println("El correo del primer resultado es: " + correo);
+        return correo;
+    }
 
 
 

@@ -238,4 +238,12 @@ public class BasePageObject {
         new Actions(driver).scrollToElement(we).perform();
     }
 
+
+
+    public String guardarTextoDeUnCampoXpath(By localizador) {
+        String dato = driver.findElement(localizador).getText();
+        System.out.println("El dato guardado es: " + dato);
+        return dato;
+    }
+
 }
