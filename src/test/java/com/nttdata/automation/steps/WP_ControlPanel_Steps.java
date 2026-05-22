@@ -229,6 +229,11 @@ public class WP_ControlPanel_Steps {
 //        test.info("Link Ocultar Ultimo Mes clicado");
 //    }
 
+    /**
+     * Step Wallet Provider:
+     * <p>Llama al método obtenerPrimerCorreo() de la clase WP_ControlPanel para obtener el texto del primer correo de la lista de resultados de búsqueda de la pantalla de inicio del Control Panel del Wallet Provider</p>
+     * @return String con el texto del primer correo obtenido
+     */
     @And("Obtener primer correo")
     public String obtenerPrimerCorreo() {
         String primerCorreo = wp_cp.obtenerPrimerCorreo();

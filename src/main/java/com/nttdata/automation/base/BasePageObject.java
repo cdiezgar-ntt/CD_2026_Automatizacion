@@ -241,6 +241,7 @@ public class BasePageObject {
 
 
     public String guardarTextoDeUnCampoXpath(By localizador) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
         String dato = driver.findElement(localizador).getText();
         System.out.println("El dato guardado es: " + dato);
         return dato;
