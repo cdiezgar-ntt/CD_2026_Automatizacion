@@ -14,5 +14,6 @@ Feature: WALLET-1715
     When Click en el botón acceder
     And  Intro en certificado
     When Click en el botón buscar - portal wallet provider
-    And Click en el primer elemento de la lista - portal wallet provider
+    And Obtener primer correo
+    #And Click en el primer elemento de la lista - portal wallet provider
     And Cerrar el navegador

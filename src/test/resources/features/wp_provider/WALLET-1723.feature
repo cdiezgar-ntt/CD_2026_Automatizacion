@@ -1,13 +1,22 @@
 Feature: WALLET-1723-XXXX
+#Descripción: Detalle de Cartera – Cartera revocable - mostrar respuesta de error en el detalle de cartera revocable
+  #Pasos:
+  #1. Tras autenticarse en el Portal Administración con un certificado electrónico válido el usuario y aceptar los términos y condiciones del Wallet Provider, el usuario accede a la pantalla de inicio del Portal.
+  #2. La pantalla muestra la información destacada sobre las Carteras: carteras activas, activadas y revocadas
+  #3. El usuario pulsa en el botón “Buscar” que se encuentra debajo de la información destacada.
+  #4. La pantalla muestra todas las carteras sin filtrar.
+  #5. El usuario accede al detalle de una Cartera que no se encuentra revocada al clicar sobre su id.
+  #6. Se dirige al usuario a una nueva pantalla en la que se muestra un mensaje de error y no se muestra el detalle de la Cartera que no se encuentra revocada.
 
-  @WALLET-1723 @wallet_provider
+  #Etiquetas
+  @WALLET-1723 @wallet_provider @noejecutar
   Scenario: WALLET PROVIDER - EJECUTIVO - Detalle de Cartera – Cartera revocable - mostrar respuesta de error en el detalle de cartera revocable
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
     When Click en el botón acceder
     And  Intro en certificado
-    When Añado el texto "XXXXXXXXX" en el campo de búsqueda "revocable"
-    When Click en el botón buscar
-    And Click en el primer elemento de la lista
-    And Comprobar error en detalle cartera revocable
+    When Añado el texto "XXXXXXXXX" en el campo de búsqueda "revocable" - portal wallet provider
+    When Click en el botón buscar - portal wallet provider
+    And Click en el primer elemento de la lista - portal wallet provider
+    And Comprobar error en detalle cartera revocable - portal wallet provider
     And Cerrar el navegador
