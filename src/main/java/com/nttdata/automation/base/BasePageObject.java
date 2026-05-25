@@ -38,6 +38,34 @@ public class BasePageObject {
 
     }
 
+    //HELPERS PARA EL REFACTOR
+
+    protected String element(Elementos_web key) {
+        String value = prop.get(key);
+
+        if (value == null) {
+            throw new IllegalArgumentException("No existe el elemento en properties: " + key);
+        }
+
+        return value;
+    }
+
+    protected By id(Elementos_web key) {
+        return By.id(element(key));
+    }
+
+    protected By xpath(Elementos_web key) {
+        return By.xpath(element(key));
+    }
+
+    protected By tag(Elementos_web key) {
+        return By.tagName(element(key));
+    }
+
+    protected By css(Elementos_web key) {
+        return By.cssSelector(element(key));
+    }
+
     public void abrirWebPortalUsuario(){
         driver.get(prop.get(Elementos_web.abrirWebUsuario));
     }
