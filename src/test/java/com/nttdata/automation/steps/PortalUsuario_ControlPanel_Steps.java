@@ -276,6 +276,24 @@ public class PortalUsuario_ControlPanel_Steps {
         Validator.validarVerdadero(portal_usuario.estaHabilitadoRevocacion(), "El botón revocación está deshabilitado");
     }
 
+    @When("El usuario pulsa en Enviar")
+    public void confirmarRevocacion() {
+        ExtentReportHook.getTest().info("Pulsando en 'Enviar'...");
+        portal_usuario.clickEnviar();
+    }
+
+    @When("El usuario introduce el email invalido {string}")
+    public void introducirEmailInvalido(String email_invalido) {
+        ExtentReportHook.getTest().info("Escribiendo email invalido: " + email_invalido);
+        portal_usuario.introducirEmail(email_invalido);
+    }
+
+    @Then("El portal devuelve un mensaje de error")
+    public void validarMensajeError() {
+        String mensajeError = portal_usuario.obtenerMensajeError();
+        Validator.validarVerdadero(mensajeError.contains("El formato del mail introducido es incorrecto"), "Aparece mensaje de error", true);
+    }
+
 
 }
 

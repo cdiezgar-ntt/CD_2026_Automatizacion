@@ -34,6 +34,8 @@ public class CIT_PortalUsuario extends BasePageObject {
     private final By inputEmail = By.id(prop.get(Elementos_web.cit_email));
     private final By botonContinuarRevocacion = By.xpath(prop.get(Elementos_web.cit_boton_continuar_revocacion));
     private final By codigosDigitos = By.xpath(prop.get(Elementos_web.cit_codigos_digitos));
+    private final By alerta = By.xpath(prop.get(Elementos_web.cit_alerta));
+    private final By enviar = By.xpath(prop.get(Elementos_web.cit_enviar));
 
     public String getTituloHome() {
         return obtenerTextosElementosWeb(tituloHome).getFirst();
@@ -162,6 +164,14 @@ public class CIT_PortalUsuario extends BasePageObject {
 
     public void clickContinuarRevocacion() {
         pulsar(botonContinuarRevocacion);
+    }
+
+    public void clickEnviar() {
+        pulsar(enviar);
+    }
+
+    public String obtenerMensajeError() {
+        return obtenerTextosElementosWeb(alerta).getFirst();
     }
 
 }

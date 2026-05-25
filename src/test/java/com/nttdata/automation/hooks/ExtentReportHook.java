@@ -8,6 +8,8 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
+import java.util.Collection;
+
 public class ExtentReportHook {
 
     private static final ThreadLocal<ExtentTest> testTL = new ThreadLocal<>();
@@ -22,20 +24,28 @@ public class ExtentReportHook {
 
         String featureName = getFeatureNameFromScenario(scenario);
         String scenarioName = sanitize(scenario.getName());
-        String casePath = sanitize(featureName) + "/" + scenarioName;
+        String casePath = sanitize(featureName);
 
         featureNameTL.set(featureName);
         scenarioNameTL.set(scenarioName);
         casePathTL.set(casePath);
 
         ExtentTest currentTest = ExtentReportManagement.createTest(scenario.getName());
-        currentTest.assignCategory(featureName);
+
+        // Obtener tags
+        Collection<String> tags = scenario.getSourceTagNames();
+
+        // Asignar cada tag como categoría
+        for (String tag : tags) {
+            currentTest.assignCategory(tag.replace("@", ""));
+        }
 
         testTL.set(currentTest);
 
         System.out.println("Inicio escenario: " + scenario.getName());
         System.out.println("Feature: " + featureName);
         System.out.println("CasePath: " + casePath);
+        System.out.println("Tags: " + tags);
     }
 
     @After

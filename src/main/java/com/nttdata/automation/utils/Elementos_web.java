@@ -100,8 +100,10 @@ public enum Elementos_web {
     //Revocación cartera digital
     cit_titulo_revocacion_cartera,
     cit_email,
+    cit_enviar,
     cit_boton_continuar_revocacion,
     cit_codigos_digitos,
+    cit_alerta,
 
     //Portal Usuario - Detalle enlaces
     cit_home_titulopantallaenlace,
