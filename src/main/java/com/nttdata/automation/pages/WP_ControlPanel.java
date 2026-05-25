@@ -183,6 +183,10 @@ public class WP_ControlPanel extends BasePageObject {
     }
 
 
+    /**
+     * @description Método para obtener el correo del primer resultado de la lista de resultados de búsqueda de la pantalla de inicio del Control Panel del Wallet Provider
+     * @return String con el correo del primer resultado de la lista
+     */
     public String obtenerPrimerCorreo() {
         return obtenerTextosElementosWeb(primerCorreoDeLaListaBy).getFirst();
     }
