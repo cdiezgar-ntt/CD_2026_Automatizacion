@@ -13,7 +13,6 @@ public class PropertiesManager {
         pantallaInicioPath = "elements/pages.properties";
     }
 
-
     public String readPropertiesPantallaInicio(String clave) {
         // Implementación para leer el archivo de propiedades
         // Puedes usar java.util.Properties para cargar el archivo y acceder a las propiedades

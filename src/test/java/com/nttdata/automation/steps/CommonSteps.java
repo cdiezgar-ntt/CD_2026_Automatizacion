@@ -95,9 +95,9 @@ public class CommonSteps {
         login.clickBtnAcceder();
 
         // Espera de 5 segundos para que le de tiempo a elegir el certificado
-        esperarSegundos();
-        esperarSegundos();
-        esperarSegundos();
+//        esperarSegundos();
+//        esperarSegundos();
+//        esperarSegundos();
 
     }
 

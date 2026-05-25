@@ -95,7 +95,13 @@ public enum Elementos_web {
     cit_home_preguntasFrecuentes,
     cit_home_preguntasFrecuentesRespuestas,
     cit_home_botonVolver,
+    cit_btn_revocar_cartera_digital,
 
+    //Revocación cartera digital
+    cit_titulo_revocacion_cartera,
+    cit_email,
+    cit_boton_continuar_revocacion,
+    cit_codigos_digitos,
 
     //Portal Usuario - Detalle enlaces
     cit_home_titulopantallaenlace,

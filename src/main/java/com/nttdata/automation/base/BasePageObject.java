@@ -72,21 +72,33 @@ public class BasePageObject {
     }
 
     protected void escribir(By localizador, String contenido) {
+        escribir(obtenerElementoVisible(localizador), contenido);
+    }
+
+    protected void escribir(WebElement we, String contenido) {
+
         try {
-            System.out.println("Esperando a que el elemento sea visible...");
-            WebElement we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
-            //Scrollear hasta el elemento
-            System.out.println("Prueba borrar visibilidad de elemento");
-            new Actions(driver).scrollToElement(we).perform();
+
+            new Actions(driver)
+                    .scrollToElement(we)
+                    .perform();
+
             we.clear();
+
             we.sendKeys(contenido);
 
-            System.out.println("Escrito: " + contenido);
         } catch (Exception e) {
-            System.out.println("Excepción al escribir: " + e);
-            e.printStackTrace();
-            throw new RuntimeException(e);
+
+            throw new RuntimeException(
+                    "Error al escribir el contenido: " + contenido, e
+            );
         }
+    }
+
+    protected WebElement obtenerElementoVisible(By localizador) {
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(localizador)
+        );
     }
 
     public void seleccionComboById(String elmentoWebString, String opcion) {
@@ -237,8 +249,6 @@ public class BasePageObject {
     private void hacerScroll(WebElement we) {
         new Actions(driver).scrollToElement(we).perform();
     }
-
-
 
     public String guardarTextoDeUnCampoXpath(By localizador) {
         String dato = driver.findElement(localizador).getText();

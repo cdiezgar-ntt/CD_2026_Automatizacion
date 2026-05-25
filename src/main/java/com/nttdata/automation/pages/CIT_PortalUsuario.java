@@ -4,6 +4,7 @@ import com.nttdata.automation.base.BasePageObject;
 import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.utils.Elementos_web;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -28,6 +29,11 @@ public class CIT_PortalUsuario extends BasePageObject {
     private final By enlaceAvisoLegal = By.xpath(prop.get(Elementos_web.cit_home_avisolegal));
     private final By enlacePoliticaCookies = By.xpath(prop.get(Elementos_web.cit_home_politicadecookies));
     private final By botonVolverHome = By.xpath(prop.get(Elementos_web.cit_home_botonVolver));
+    private final By revocarCarteraDigital = By.xpath(prop.get(Elementos_web.cit_btn_revocar_cartera_digital));
+    private final By tituloRevocacionCartera = By.xpath(prop.get(Elementos_web.cit_titulo_revocacion_cartera));
+    private final By inputEmail = By.id(prop.get(Elementos_web.cit_email));
+    private final By botonContinuarRevocacion = By.xpath(prop.get(Elementos_web.cit_boton_continuar_revocacion));
+    private final By codigosDigitos = By.xpath(prop.get(Elementos_web.cit_codigos_digitos));
 
     public String getTituloHome() {
         return obtenerTextosElementosWeb(tituloHome).getFirst();
@@ -117,6 +123,45 @@ public class CIT_PortalUsuario extends BasePageObject {
 
     public void clickVolver() {
         pulsar(botonVolverHome);
+    }
+
+    public void clickRevocarCarteraDigital() {
+        pulsar(revocarCarteraDigital);
+    }
+
+    public String getTituloRevocacionCartera() {
+        return obtenerTextosElementosWeb(tituloRevocacionCartera).getFirst();
+    }
+
+    public void introducirEmail(String email) {
+        escribir(inputEmail, email);
+    }
+
+    public boolean estaHabilitadoDigitos() {
+        List<WebElement> digitos = DriverManager.getDriver().findElements(codigosDigitos);
+        return digitos.stream().noneMatch(w -> existeElAtributoEnElElemento(w,"disabled"));
+    }
+
+    public void escribirOtp(String otp) {
+        List<WebElement> digitos = DriverManager.getDriver().findElements(codigosDigitos);
+
+        if (otp.length() != digitos.size()) {
+            throw new RuntimeException("El OTP tiene " + otp.length() + " dígitos pero se esperaban " + digitos.size());
+        }
+
+        for (int i = 0; i < digitos.size(); i++) {
+            escribir(digitos.get(i), String.valueOf(otp.charAt(i)));
+        }
+
+    }
+
+    public boolean estaHabilitadoRevocacion() {
+        WebElement boton_continuar_revocacion = DriverManager.getDriver().findElement(botonContinuarRevocacion);
+        return !existeElAtributoEnElElemento(boton_continuar_revocacion,"disabled");
+    }
+
+    public void clickContinuarRevocacion() {
+        pulsar(botonContinuarRevocacion);
     }
 
 }

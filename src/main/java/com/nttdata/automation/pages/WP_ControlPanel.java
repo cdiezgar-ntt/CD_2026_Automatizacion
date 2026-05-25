@@ -184,9 +184,7 @@ public class WP_ControlPanel extends BasePageObject {
 
 
     public String obtenerPrimerCorreo() {
-        String correo = guardarTextoDeUnCampoXpath(primerCorreoDeLaListaBy);
-        System.out.println("El correo del primer resultado es: " + correo);
-        return correo;
+        return obtenerTextosElementosWeb(primerCorreoDeLaListaBy).getFirst();
     }
 
 
