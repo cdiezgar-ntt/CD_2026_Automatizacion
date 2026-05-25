@@ -2,6 +2,7 @@ package com.nttdata.automation.base;
 
 import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.utils.Elementos_web;
+import com.nttdata.automation.utils.PropertiesReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,6 +28,8 @@ public class BasePageObject {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Map<Elementos_web, String> prop;
+    private final PropertiesReader propertiesReader;
+
 
     public BasePageObject() {
         this.driver = DriverManager.getDriver();
@@ -35,10 +38,15 @@ public class BasePageObject {
 
         // Se cargan los identificadores de todos los objetos web y se preparan para ser utilizados
         this.prop = new Properties().read_v2();
-
+        this.propertiesReader = new PropertiesReader();
     }
 
     //HELPERS PARA EL REFACTOR
+
+    protected String url(String key) {
+        return propertiesReader.get("config/urls.properties", key);
+    }
+
 
     protected String element(Elementos_web key) {
         String value = prop.get(key);
@@ -66,20 +74,24 @@ public class BasePageObject {
         return By.cssSelector(element(key));
     }
 
+    protected By classname(Elementos_web key) {
+        return By.className(element(key));
+    }
+
     public void abrirWebPortalUsuario(){
-        driver.get(prop.get(Elementos_web.abrirWebUsuario));
+       driver.get(url("web_usuario"));
     }
 
     public void abrirWebPortalAdministrador_WP(){
-        driver.get(prop.get(Elementos_web.abrirWebWalletProvider));
+        driver.get(url("web_wp"));
     }
 
     public void abrirWebPortalAdministrador_EEAProvider(){
-        driver.get(prop.get(Elementos_web.abrirWebEAAProvider));
+        driver.get(url("web_eaa"));
     }
 
     public void abrirWebPortalAdministrador_PIDProvider(){
-        driver.get(prop.get(Elementos_web.abrirWebPIDProvider));
+        driver.get(url("web_pid"));
     }
 
     private WebElement obtenerElementoClickable(By localizador) {
@@ -133,7 +145,7 @@ public class BasePageObject {
         WebElement we;
         By localizador;
         try{
-            localizador = By.id(prop.get(Elementos_web.valueOf(elmentoWebString)));
+            localizador = id(Elementos_web.valueOf(elmentoWebString));
             System.out.println("Esperando a que el elemento sea visible...");
             we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
             //Scrollear hasta el elemento
@@ -165,7 +177,7 @@ public class BasePageObject {
         By localizador;
         switch (tipoSwitch) {
             case "xpath":
-                localizador = By.xpath(prop.get(Elementos_web.valueOf(id1)));
+                localizador = xpath(Elementos_web.valueOf(id1));
 
                 System.out.println("Esperando a que el elemento sea visible...");
                 we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
@@ -180,7 +192,7 @@ public class BasePageObject {
                 textoElemento = we.getText();
                 break;
             case "id":
-                localizador = By.id(prop.get(Elementos_web.valueOf(id1)));
+                localizador = id(Elementos_web.valueOf(id1));
 
                 System.out.println("Esperando a que el elemento sea visible...");
                 we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
