@@ -3,9 +3,14 @@ package com.nttdata.automation.steps;
 import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.pages.CIT_PortalUsuario;
 import com.nttdata.automation.hooks.ExtentReportHook;
+import com.nttdata.automation.pages.WP_Carteras;
+import com.nttdata.automation.pages.WP_ControlPanel;
+import com.nttdata.automation.utils.Elementos_web;
+import com.nttdata.automation.utils.Properties;
 import com.nttdata.automation.validation.Validator;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WindowType;
 
 import java.util.List;
 
@@ -199,5 +204,95 @@ public class PortalUsuario_ControlPanel_Steps {
         portal_usuario.clickVolver();
     }
 
+    @When("El usuario pulsa en Revocar Cartera Digital")
+    public void pulsarRevocarCarteraDigital() {
+        ExtentReportHook.getTest().info("Pulsando en revocar cartera digital...");
+        portal_usuario.clickRevocarCarteraDigital();
+    }
+
+    @Then("El usuario accede a la pantalla {string}")
+    public void comprobarPantallaRevocacionCartera(String titulo_esperado) {
+        String url = (DriverManager.getDriver().getCurrentUrl()) == null ? "" : DriverManager.getDriver().getCurrentUrl();
+        Validator.validarVerdadero(url.endsWith("/revocacion-cartera"), "La url termina en /revocacion-cartera",
+                true, true);
+        String titulo = portal_usuario.getTituloRevocacionCartera();
+        Validator.validarVerdadero(titulo.trim().contentEquals(titulo_esperado), "El titulo es " + titulo_esperado);
+    }
+
+    @Then("El botón continuar revocación está deshabilitado")
+    public void validarBotonRevocarDeshabilitado() {
+        Validator.validarFalso(portal_usuario.estaHabilitadoRevocacion(), "El botón revocación está deshabilitado");
+    }
+
+    @Then("Los digitos estan deshabilitados")
+    public void validarDigitosDeshabilitados() {
+        Validator.validarFalso(portal_usuario.estaHabilitadoDigitos(), "Los digitos estan deshabilitados");
+    }
+
+    @When("El usuario introduce el mail de una cartera válida")
+    public void localizarCarteraValida_introducirMail() {
+
+        // Se accede al WP a consultar un mail valido en una nueva pestaña
+        ExtentReportHook.getTest().info("Obteniendo un email valido...");
+        String mainWindow = DriverManager.getDriver().getWindowHandle();
+        DriverManager.getDriver().switchTo().newWindow(WindowType.TAB);
+        WP_ControlPanel wallet_provider = new WP_ControlPanel();
+        wallet_provider.cargarWeb();
+        new CommonSteps().hacerClickEnElBotonAcceder();
+        wallet_provider.clickLinkCarterasActivasVerTodas();
+
+        String email = wallet_provider.obtenerPrimerCorreo();
+        ExtentReportHook.getTest().info("Email obtenido: " + email);
+
+        // Salimos del WP y volvemos a la pestaña
+        DriverManager.getDriver().close();
+        DriverManager.getDriver().switchTo().window(mainWindow);
+
+        // Introducimos el mail encontrado
+        ExtentReportHook.getTest().info("Introduciendo el mail...");
+        portal_usuario.introducirEmail(email);
+
+    }
+
+    @Then("El usuario recibe un código de verificación")
+    public void comprobarRecepcionVerificacion() {
+        // Pendiente que funcione servicio de envío OTP, no se puede probar
+    }
+
+    @Then("Los digitos estan habilitados")
+    public void validarDigitosHabilitados() {
+        Validator.validarVerdadero(portal_usuario.estaHabilitadoDigitos(), "Los digitos estan habilitados", true, true);
+    }
+
+    @When("El usuario introduce el código de verificación recibido")
+    public void introducirCodigoOtp() {
+        // Pendiente que funcione servicio de envío OTP, no se puede probar
+        portal_usuario.escribirOtp("000000");
+    }
+
+    @Then("Se desbloquea el botón continuar revocación")
+    public void validarBotonContinuarRevocacion() {
+        Validator.validarVerdadero(portal_usuario.estaHabilitadoRevocacion(), "El botón revocación está deshabilitado");
+    }
+
+    @When("El usuario pulsa en Enviar")
+    public void confirmarRevocacion() {
+        ExtentReportHook.getTest().info("Pulsando en 'Enviar'...");
+        portal_usuario.clickEnviar();
+    }
+
+    @When("El usuario introduce el email invalido {string}")
+    public void introducirEmailInvalido(String email_invalido) {
+        ExtentReportHook.getTest().info("Escribiendo email invalido: " + email_invalido);
+        portal_usuario.introducirEmail(email_invalido);
+    }
+
+    @Then("El portal devuelve un mensaje de error")
+    public void validarMensajeError() {
+        String mensajeError = portal_usuario.obtenerMensajeError();
+        Validator.validarVerdadero(mensajeError.contains("El formato del mail introducido es incorrecto"), "Aparece mensaje de error", true);
+    }
+
 
 }
+

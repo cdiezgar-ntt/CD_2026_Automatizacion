@@ -18,14 +18,23 @@ public class WP_ControlPanel_Steps {
 
     public static ExtentTest test = ExtentReportHook.getTest();
 
-    @When("Click en el botón buscar")
+
+    /**
+     * Step Wallet Provider:
+     * <p>Llama al método clickBtnBuscar() de la clase WP_ControlPanel para hacer click en el botón "Buscar" de la pantalla de inicio del Control Panel del Wallet Provider</p>
+     */
+    @When("Click en el botón buscar - portal wallet provider")
     public void hacerClickEnElBotonBuscar() {
         wp_cp.clickBtnBuscar();
         System.out.println("Botón buscar clickeado");
         test.info("Botón buscar clickeado");
     }
 
-    @And("Click en el primer elemento de la lista")
+    /**
+     * Step Wallet Provider:
+     * <p>Llama al método clickPrimerElementoLista() de la clase WP_ControlPanel para hacer click en el primer elemento de la lista de resultados de búsqueda de la pantalla de inicio del Control Panel del Wallet Provider</p>
+     */
+    @And("Click en el primer elemento de la lista - portal wallet provider")
     public void clickEnElPrimerElementoDeLaLista() {
         System.out.println("Clicando en el primer elemento de la lista");
         test.info("Clicando en el primer elemento de la lista");
@@ -34,8 +43,12 @@ public class WP_ControlPanel_Steps {
         test.info("Primer elemento de la lista clicado");
     }
 
-
-    @Given("Rellenar el texto {string} en el campo de busqueda email")
+    /**
+     * Step Wallet Provider:
+     * <p>Llama al método rellenarCampoBusquedaEmail(String textoBusqueda) de la clase WP_ControlPanel para rellenar el campo de búsqueda por email de la pantalla de inicio del Control Panel del Wallet Provider con el texto pasado como parámetro</p>
+     * @param texto: String con el texto a introducir en el campo de búsqueda por email
+     */
+    @Given("Rellenar el texto {string} en el campo de busqueda email - portal wallet provider")
     public void rellenarElTextoEnElCampoDeBusquedaEmail(String texto) {
         System.out.println("Rellenando el campo de búsqueda email con el texto: " + texto);
         test.info("Rellenando el campo de búsqueda email con el texto: " + texto);
@@ -154,7 +167,12 @@ public class WP_ControlPanel_Steps {
 //        test.info("Combo Version TC seleccionado con el texto: " + texto);
 //    }
 //
-    @And("Click en el link Historico Revocaciones")
+
+    /**
+     * Step Wallet Provider:
+     * <p>Llama al método clickLinkHistoricoRevocaciones() de la clase WP_ControlPanel para hacer click en el link "Historico Revocaciones" de la pantalla de inicio del Control Panel del Wallet Provider</p>
+     */
+    @And("Click en el link Historico Revocaciones - portal wallet provider")
     public void clickEnElLinkHistoricoRevocaciones() {
         System.out.println("Clicando en el link Historico Revocaciones");
         test.info("Clicando en el link Historico Revocaciones");
@@ -163,7 +181,11 @@ public class WP_ControlPanel_Steps {
         test.info("Link Historico Revocaciones clicado");
     }
 
-    @And("Click en el botón ver todas carteras activadas ultimo mes")
+    /**
+     * Step Wallet Provider:
+     * <p>Llama al método clickLinkCarterasActivadasVerTodas() de la clase WP_ControlPanel para hacer click en el link "Carteras Activadas Ver Todas" de la pantalla de inicio del Control Panel del Wallet Provider</p>
+     */
+    @And("Click en el botón ver todas carteras activadas ultimo mes - portal wallet provider")
     public void clickEnElLinkCarterasActivadasVerTodas() {
         System.out.println("Clicando en el link Carteras Activadas Ver Todas");
         test.info("Clicando en el link Carteras Activadas Ver Todas");
@@ -172,7 +194,11 @@ public class WP_ControlPanel_Steps {
         test.info("Link Carteras Activadas Ver Todas clicado");
     }
 
-    @And("Click en el botón ver todas carteras revocadas ultimo mes")
+    /**
+     * Step Wallet Provider:
+     * <p>Llama al método clickLinkCarterasRevocadasVerTodas() de la clase WP_ControlPanel para hacer click en el link "Carteras Revocadas Ver Todas" de la pantalla de inicio del Control Panel del Wallet Provider</p>
+     */
+    @And("Click en el botón ver todas carteras revocadas ultimo mes - portal wallet provider")
     public void clickEnElLinkCarterasRevocadasVerTodas() {
         System.out.println("Clicando en el link Carteras Revocadas Ver Todas");
         test.info("Clicando en el link Carteras Revocadas Ver Todas");
@@ -181,7 +207,11 @@ public class WP_ControlPanel_Steps {
         test.info("Link Carteras Revocadas Ver Todas clicado");
     }
 
-    @And("Click en el botón ver todas carteras activas ultimo mes")
+    /**
+     * Step Wallet Provider:
+     * <p>Llama al método clickLinkCarterasActivasVerTodas() de la clase WP_ControlPanel para hacer click en el link "Carteras Activas Ver Todas" de la pantalla de inicio del Control Panel del Wallet Provider</p>
+     */
+    @And("Click en el botón ver todas carteras activas ultimo mes - portal wallet provider")
     public void clickEnElLinkCarterasActivasVerTodas() {
         System.out.println("Clicando en el link Carteras Activas Ver Todas");
         test.info("Clicando en el link Carteras Activas Ver Todas");
@@ -198,5 +228,18 @@ public class WP_ControlPanel_Steps {
 //        System.out.println("Link Ocultar Ultimo Mes clicado");
 //        test.info("Link Ocultar Ultimo Mes clicado");
 //    }
+
+    /**
+     * Step Wallet Provider:
+     * <p>Llama al método obtenerPrimerCorreo() de la clase WP_ControlPanel para obtener el texto del primer correo de la lista de resultados de búsqueda de la pantalla de inicio del Control Panel del Wallet Provider</p>
+     * @return String con el texto del primer correo obtenido
+     */
+    @And("Obtener primer correo")
+    public String obtenerPrimerCorreo() {
+        String primerCorreo = wp_cp.obtenerPrimerCorreo();
+        System.out.println("Primer correo obtenido: " + primerCorreo);
+        test.info("Primer correo obtenido: " + primerCorreo);
+        return primerCorreo;
+    }
 
 }
