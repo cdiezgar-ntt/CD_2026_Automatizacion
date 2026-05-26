@@ -11,31 +11,35 @@ import java.util.List;
 
 public class CIT_PortalUsuario extends BasePageObject {
 
-    private final By tituloHome = tag(Elementos_web.cit_home_titulo);
-    private final By botonIdiomas = xpath(Elementos_web.cit_home_botonIdiomas);
-    private final By listaDeIdiomas = xpath(Elementos_web.cit_home_listaDeIdiomas);
-    private final By tituloPantallaEnlace = tag(Elementos_web.cit_home_titulopantallaenlace);
-    private final By titulosTiposRevocacion = tag(Elementos_web.cit_home_titulosTiposRevocacion);
-    private final By botonConsultarOficina = xpath(Elementos_web.cit_home_botonConsultarOficina);
-    private final By textosRevocacionOficinas = xpath(Elementos_web.cit_revocacionPresencial_oficinas_titulos);
-    private final By textoOficinas = tag(Elementos_web.cit_revocacionPresencial_oficinas_textos);
-    private final By seccionPreguntasFrecuentes = xpath(Elementos_web.cit_home_seccionPreguntasFrecuentes);
-    private final By preguntasFrecuentes = tag(Elementos_web.cit_home_preguntasFrecuentes);
-    private final By respuestasPreguntasFrecuentes = xpath(Elementos_web.cit_home_preguntasFrecuentesRespuestas);
-    private final By enlacesBarraInferior = xpath(Elementos_web.cit_home_opcionesBarraNavegacion);
-    private final By enlaceAccesibilidad = xpath(Elementos_web.cit_home_accesibilidad);
-    private final By enlaceMapaWeb = xpath(Elementos_web.cit_home_mapaweb);
-    private final By enlacePolicitaPrivacidad = xpath(Elementos_web.cit_home_politicaprivacidad);
-    private final By enlaceAvisoLegal = xpath(Elementos_web.cit_home_avisolegal);
-    private final By enlacePoliticaCookies = xpath(Elementos_web.cit_home_politicadecookies);
-    private final By botonVolverHome = xpath(Elementos_web.cit_home_botonVolver);
-    private final By revocarCarteraDigital = xpath(Elementos_web.cit_btn_revocar_cartera_digital);
-    private final By tituloRevocacionCartera = xpath(Elementos_web.cit_titulo_revocacion_cartera);
-    private final By inputEmail = id(Elementos_web.cit_email);
-    private final By botonContinuarRevocacion = xpath(Elementos_web.cit_boton_continuar_revocacion);
-    private final By codigosDigitos = xpath(Elementos_web.cit_codigos_digitos);
-    private final By alerta = xpath(Elementos_web.cit_alerta);
-    private final By enviar = xpath(Elementos_web.cit_enviar);
+    private final By tituloHome = tag("cit_home_titulo");
+    private final By botonIdiomas = xpath("cit_home_botonIdiomas");
+    private final By listaDeIdiomas = xpath("cit_home_listaDeIdiomas");
+    private final By tituloPantallaEnlace = tag("cit_home_titulopantallaenlace");
+    private final By titulosTiposRevocacion = tag("cit_home_titulosTiposRevocacion");
+    private final By botonConsultarOficina = xpath("cit_home_botonConsultarOficina");
+    private final By textosRevocacionOficinas = xpath("cit_revocacionPresencial_oficinas_titulos");
+    private final By textoOficinas = tag("cit_revocacionPresencial_oficinas_textos");
+    private final By seccionPreguntasFrecuentes = xpath("cit_home_seccionPreguntasFrecuentes");
+    private final By preguntasFrecuentes = tag("cit_home_preguntasFrecuentes");
+    private final By respuestasPreguntasFrecuentes = xpath("cit_home_preguntasFrecuentesRespuestas");
+    private final By enlacesBarraInferior = xpath("cit_home_opcionesBarraNavegacion");
+    private final By enlaceAccesibilidad = xpath("cit_home_accesibilidad");
+    private final By enlaceMapaWeb = xpath("cit_home_mapaweb");
+    private final By enlacePolicitaPrivacidad = xpath("cit_home_politicaprivacidad");
+    private final By enlaceAvisoLegal = xpath("cit_home_avisolegal");
+    private final By enlacePoliticaCookies = xpath("cit_home_politicadecookies");
+    private final By botonVolverHome = xpath("cit_home_botonVolver");
+    private final By revocarCarteraDigital = xpath("cit_btn_revocar_cartera_digital");
+    private final By tituloRevocacionCartera = xpath("cit_titulo_revocacion_cartera");
+    private final By inputEmail = id("cit_email");
+    private final By botonContinuarRevocacion = xpath("cit_boton_continuar_revocacion");
+    private final By codigosDigitos = xpath("cit_codigos_digitos");
+    private final By alerta = xpath("cit_alerta");
+    private final By enviar = xpath("cit_enviar");
+
+    public CIT_PortalUsuario() {
+        super("pages/web_usuario.properties");
+    }
 
     public String getTituloHome() {
         return obtenerTextosElementosWeb(tituloHome).getFirst();

@@ -6,4 +6,12 @@ import org.openqa.selenium.By;
 
 public class WP_DetalleCartera  extends BasePageObject {
 
+    private final By titulo = tag("wp_detalleCartera_titulo");
+    private final By infoContacto_telefono = xpath("wp_detalleCartera_InformacionContacto_telefono");
+    private final By infoContacto_email = xpath("wp_detalleCartera_InformacionContacto_email");
+    private final By infoGeneral_estado = tag("wp_detalleCartera_InformacionGeneral_estado");
+
+    public WP_DetalleCartera() {
+        super("pages/web_wp_detalle_cartera.properties");
+    }
 }

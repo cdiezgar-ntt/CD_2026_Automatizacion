@@ -29,6 +29,7 @@ public class BasePageObject {
     protected WebDriverWait wait;
     protected Map<Elementos_web, String> prop;
     private final PropertiesReader propertiesReader;
+    private String elementsFile;
 
 
     public BasePageObject() {
@@ -39,6 +40,11 @@ public class BasePageObject {
         // Se cargan los identificadores de todos los objetos web y se preparan para ser utilizados
         this.prop = new Properties().read_v2();
         this.propertiesReader = new PropertiesReader();
+    }
+
+    protected BasePageObject(String elementsFile) {
+        this();
+        this.elementsFile = elementsFile;
     }
 
     //HELPERS PARA EL REFACTOR
@@ -75,6 +81,36 @@ public class BasePageObject {
     }
 
     protected By classname(Elementos_web key) {
+        return By.className(element(key));
+    }
+
+    protected String element(String key) {
+        if (elementsFile == null) {
+            throw new IllegalStateException(
+                    "Este Page Object no tiene fichero de elementos asociado"
+            );
+        }
+
+        return propertiesReader.get(elementsFile, key);
+    }
+
+    protected By id(String key) {
+        return By.id(element(key));
+    }
+
+    protected By xpath(String key) {
+        return By.xpath(element(key));
+    }
+
+    protected By tag(String key) {
+        return By.tagName(element(key));
+    }
+
+    protected By css(String key) {
+        return By.cssSelector(element(key));
+    }
+
+    protected By classname(String key) {
         return By.className(element(key));
     }
 

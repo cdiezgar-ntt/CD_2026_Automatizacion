@@ -58,6 +58,7 @@ public enum Elementos_web {
 
     //Carteras Activadas Ultimo Mes
     wp_carterasActivadasUltimoMes_verTodas,
+
     //WP - Pantalla carteras activas
     wp_carterasActivadasUltimoMes_primerElementoTabla,
     wp_carterasActivas_titulo,
@@ -81,38 +82,4 @@ public enum Elementos_web {
     eaa_pantallaInicio_PrimerElementoTabla,
     eaa_estadoDetalleCredencial,
 
-    //Portal Usuario - Navegación inferior
-    cit_home_titulo,
-    cit_home_opcionesBarraNavegacion,
-    cit_home_botonIdiomas,
-    cit_home_listaDeIdiomas,
-    cit_home_accesibilidad,
-    cit_home_avisolegal,
-    cit_home_mapaweb,
-    cit_home_politicaprivacidad,
-    cit_home_politicadecookies,
-    cit_home_seccionPreguntasFrecuentes,
-    cit_home_preguntasFrecuentes,
-    cit_home_preguntasFrecuentesRespuestas,
-    cit_home_botonVolver,
-    cit_btn_revocar_cartera_digital,
-
-    //Revocación cartera digital
-    cit_titulo_revocacion_cartera,
-    cit_email,
-    cit_enviar,
-    cit_boton_continuar_revocacion,
-    cit_codigos_digitos,
-    cit_alerta,
-
-    //Portal Usuario - Detalle enlaces
-    cit_home_titulopantallaenlace,
-
-    //Portal Usuario - Tipos revocacion
-    cit_home_titulosTiposRevocacion,
-    cit_home_botonConsultarOficina,
-
-    // Portal Usuario - Oficinas
-    cit_revocacionPresencial_oficinas_titulos,
-    cit_revocacionPresencial_oficinas_textos
     }

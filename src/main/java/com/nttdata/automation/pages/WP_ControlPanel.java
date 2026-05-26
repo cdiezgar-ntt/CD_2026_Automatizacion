@@ -7,28 +7,31 @@ import org.openqa.selenium.By;
 public class WP_ControlPanel extends BasePageObject {
 
     // Localizadores de los elementos de la pantalla de inicio del Control Panel del Wallet Provider
-    private final By btnBuscarBy = xpath(Elementos_web.wp_pantallaInicio_BotonBuscar);
-    private final By primerElementoListaBy = xpath(Elementos_web.wp_pantallaInicio_PrimerElementoTabla);
-    private final By textBoxEmailBy = id(Elementos_web.wp_pantallaInicio_textBoxEmail);
-    private final By textBoxIdCarteraBy = xpath(Elementos_web.wp_pantallaInicio_textBoxIdCartera);
-    private final By textBoxTelefonoBy = xpath(Elementos_web.wp_pantallaInicio_textBoxTelefono);
-    private final By comboEstadoBy = xpath(Elementos_web.wp_pantallaInicio_ComboEstado);
-    private final By comboRangoFechasActivacionBy = xpath(Elementos_web.wp_pantallaInicio_ComboFechaActivacion);
-    private final By comboRangoFechasRevocacionBy = xpath(Elementos_web.wp_pantallaInicio_ComboFechaRevocacion);
-    private final By comboMotivoRevocacionBy = id(Elementos_web.wp_pantallaInicio_ComboMotivoRevocacion);
-    private final By comboMedioSolicitudRevocacionBy = xpath(Elementos_web.wp_pantallaInicio_ComboMedioSolicitudRevocacion);
-    private final By checkMostrarSoloMisRevocacionesBy = xpath(Elementos_web.wp_pantallaInicio_CheckMostrarSoloMisRevocaciones);
-    private final By linkMostrarBusquedaAvanzadaBy = xpath(Elementos_web.wp_pantallaInicio_MostrarBusquedaAvanzada);
-    private final By linkOcultarBusquedaAvanzadaBy = xpath(Elementos_web.wp_pantallaInicio_OcultarBusquedaAvanzada);
-    private final By comboSistemaOperativoBy = xpath(Elementos_web.wp_pantallaInicio_SistemaOperativo);
-    private final By comboVersionTCBy = xpath(Elementos_web.wp_pantallaInicio_VersionTC);
-    private final By linkHistoricoRevocacionesBy = xpath(Elementos_web.wp_pantallaInicio_HistoricoRevocacion);
-    private final By linkCarterasActivadasVerTodasBy = xpath(Elementos_web.wp_pantallaInicio_informacionDestacada_carterasActivadas_verTodas);
-    private final By linkCarterasRevocadasVerTodasBy = xpath(Elementos_web.wp_pantallaInicio_informacionDestacada_carterasRevocadas_verTodas);
-    private final By linkCarterasActivasVerTodasBy = xpath(Elementos_web.wp_pantallaInicio_informacionDestacada_carterasActivas_verTodas);
-    private final By linkOcultarUltimoMesBy = xpath(Elementos_web.wp_pantallaInicio_OcultarUltimoMes);
-    private final By primerCorreoDeLaListaBy = xpath(Elementos_web.wp_primerCorreoDeLaListaBy);
+    private final By btnBuscarBy = xpath("wp_pantallaInicio_BotonBuscar");
+    private final By primerElementoListaBy = xpath("wp_pantallaInicio_PrimerElementoTabla");
+    private final By textBoxEmailBy = id("wp_pantallaInicio_textBoxEmail");
+    private final By textBoxIdCarteraBy = xpath("wp_pantallaInicio_textBoxIdCartera");
+    private final By textBoxTelefonoBy = xpath("wp_pantallaInicio_textBoxTelefono");
+    private final By comboEstadoBy = xpath("wp_pantallaInicio_ComboEstado");
+    private final By comboRangoFechasActivacionBy = xpath("wp_pantallaInicio_ComboFechaActivacion");
+    private final By comboRangoFechasRevocacionBy = xpath("wp_pantallaInicio_ComboFechaRevocacion");
+    private final By comboMotivoRevocacionBy = id("wp_pantallaInicio_ComboMotivoRevocacion");
+    private final By comboMedioSolicitudRevocacionBy = xpath("wp_pantallaInicio_ComboMedioSolicitudRevocacion");
+    private final By checkMostrarSoloMisRevocacionesBy = xpath("wp_pantallaInicio_CheckMostrarSoloMisRevocaciones");
+    private final By linkMostrarBusquedaAvanzadaBy = xpath("wp_pantallaInicio_MostrarBusquedaAvanzada");
+    private final By linkOcultarBusquedaAvanzadaBy = xpath("wp_pantallaInicio_OcultarBusquedaAvanzada");
+    private final By comboSistemaOperativoBy = xpath("wp_pantallaInicio_SistemaOperativo");
+    private final By comboVersionTCBy = xpath("wp_pantallaInicio_VersionTC");
+    private final By linkHistoricoRevocacionesBy = xpath("wp_pantallaInicio_HistoricoRevocacion");
+    private final By linkCarterasActivadasVerTodasBy = xpath("wp_pantallaInicio_informacionDestacada_carterasActivadas_verTodas");
+    private final By linkCarterasRevocadasVerTodasBy = xpath("wp_pantallaInicio_informacionDestacada_carterasRevocadas_verTodas");
+    private final By linkCarterasActivasVerTodasBy = xpath("wp_pantallaInicio_informacionDestacada_carterasActivas_verTodas");
+    private final By linkOcultarUltimoMesBy = xpath("wp_pantallaInicio_OcultarUltimoMes");
+    private final By primerCorreoDeLaListaBy = xpath("wp_primerCorreoDeLaListaBy");
 
+    public WP_ControlPanel() {
+        super("pages/web_wp.properties");
+    }
 
     /**
      * @description Método para hacer click en el botón "Buscar" de la pantalla de inicio del Control Panel del Wallet Provider
