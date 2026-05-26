@@ -2,6 +2,7 @@ package com.nttdata.automation.base;
 
 import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.utils.Elementos_web;
+import com.nttdata.automation.utils.PropertiesManager;
 import com.nttdata.automation.utils.PropertiesReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,7 +32,8 @@ public class BasePageObject {
     private static final PropertiesReader propertiesReader = new PropertiesReader();
     private final String elementsFile;
 
-
+    // SE SOBRECARGA EL CONSTRUCTOR PARA COMPATIBILIDAD CON LA VALIDACION ACTUALMENTE AUNQUE DEBERÍA DESAPARECER
+    // POR MANTENIBILIDAD. LO NUEVO DEBERÍA HACERSE CON LA VALIDACION GENÉRICA
     public BasePageObject() {
         this("elements/all_elements.properties");
     }
@@ -43,6 +45,8 @@ public class BasePageObject {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         this.elementsFile = elementsFile;
+
+        this.prop = new Properties().read_v2(); // ESTO HAY QUE ELIMINARLO CUANDO ESTÉ TODO EL REFACTOR
     }
 
     //HELPERS PARA EL REFACTOR - HAY QUE BORRAR ESTOS DE AQUI TRAS EL REFACTOR
@@ -50,7 +54,6 @@ public class BasePageObject {
     protected String url(String key) {
         return propertiesReader.get("config/urls.properties", key);
     }
-
 
     protected String element(Elementos_web key) {
         String value = prop.get(key);
