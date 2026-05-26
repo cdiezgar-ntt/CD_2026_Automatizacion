@@ -70,7 +70,9 @@ public enum Elementos_web {
     wp_historicoRevocacion_titulo,
     wp_historicoRevocacion_TablaId,
     wp_hitoricoRevocacion_TablaEstado,
+
     //PID Provider
+    pid_dniFiltro,
 
     //EAA Provider
     eaa_totalCarteras,

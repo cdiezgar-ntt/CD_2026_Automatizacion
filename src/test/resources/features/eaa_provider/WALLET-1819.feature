@@ -6,6 +6,7 @@ Scenario: EAA PROVIDER - CONSULTIVO - Detalle de información destacada – Cred
     And Esperar 5 segundos
     When Click en el botón acceder
     And Esperar 5 segundos
-    When Click boton ultimo mes
+    When Click en el botón ver todas credenciales emitidas
     When Click en el botón buscar
     And Esperar 5 segundos
+    Then Validar que el campo "estado" de tipo "xpath" tiene el valor "Emitida"

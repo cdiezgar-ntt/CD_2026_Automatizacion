@@ -10,5 +10,6 @@ Scenario: EAA PROVIDER - CONSULTIVO - Detalle de credencial caducada - mostrar r
     And Esperar 5 segundos
     Given Click en el primer valor de la columna ID credencial
     And Esperar 5 segundos
+    Then Validar que el campo "estado" de tipo "xpath" tiene el valor "Caducada"
 
 

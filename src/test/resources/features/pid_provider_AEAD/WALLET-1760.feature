@@ -2,22 +2,15 @@ Feature: WALLET-1760
 
   @TC_01
 Scenario: PID PROVIDER (AEAD) - EJECUTIVO - Detalle de credencial – Credencial revocable - revocar credencial a través del detalle de credencial revocable
-    Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
-    And Esperar 5 segundos
+
+    Given Abrir la web PID provider
     When Click en el botón acceder
-    And  Intro en certificado
-    And Esperar 5 segundos
-    When Rellenar el texto "alberto.sanchez.tsol@gmail.com" en el campo de búsqueda email
-    And Esperar 5 segundos
+    When Seleciono el combo tipo credencial el valor "Activa"
     When Click en el botón buscar
-    And Esperar 5 segundos
-
-    When Rellenar el texto "alberto.sanchez.tsol@gmail.com" en el campo de búsqueda email
-    And Esperar 5 segundos
-    When Click en el botón buscar
-    And Esperar 5 segundos
-
-    And Click en el primer elemento de la lista con busqueda
-    And Comprobar detalle cartera datos correctos "alberto.sanchez.tsol@gmail.com"
+    And Click en el primer elemento de la lista
+    And Comprobar detalle credencial activa
+    And Click en el botón revocar credencial
+    And Seleccionar motivo de revocación "Pérdida o robo del dispositivo"
+    And Click en el botón confirmar revocación
     And Cerrar el navegador
 

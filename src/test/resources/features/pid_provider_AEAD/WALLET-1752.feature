@@ -2,22 +2,11 @@ Feature: WALLET-1752
 
   @TC_01
 Scenario: PID PROVIDER (AEAD) - EJECUTIVO - Aceptar términos y condiciones - cancelar los términos y condiciones
-    Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
+    Given Abrir la web PID provider
     And Esperar 5 segundos
     When Click en el botón acceder
     And  Intro en certificado
-    And Esperar 5 segundos
-    When Rellenar el texto "alberto.sanchez.tsol@gmail.com" en el campo de búsqueda email
-    And Esperar 5 segundos
-    When Click en el botón buscar
-    And Esperar 5 segundos
-
-    When Rellenar el texto "alberto.sanchez.tsol@gmail.com" en el campo de búsqueda email
-    And Esperar 5 segundos
-    When Click en el botón buscar
-    And Esperar 5 segundos
-
-    And Click en el primer elemento de la lista con busqueda
-    And Comprobar detalle cartera datos correctos "alberto.sanchez.tsol@gmail.com"
+    When Leer el texto de los términos y condiciones
+    And Cancelar los términos y condiciones
+    And Comprobación de vuelta a la pantalla prelogin
     And Cerrar el navegador
-

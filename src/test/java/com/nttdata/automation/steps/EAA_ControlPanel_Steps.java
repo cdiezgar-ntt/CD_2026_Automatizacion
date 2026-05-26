@@ -11,7 +11,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class EAA_ControlPanel_Steps {
+public class yoEAA_ControlPanel_Steps {
 
     public static ExtentTest test = ExtentReportHook.getTest();
     EAA_ControlPanel eaa_cp;

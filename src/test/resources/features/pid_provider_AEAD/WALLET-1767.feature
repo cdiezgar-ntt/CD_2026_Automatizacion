@@ -6,18 +6,7 @@ Scenario: PID PROVIDER (AEAD) - EJECUTIVO - Detalle de informaci贸n destacada 鈥
     And Esperar 5 segundos
     When Click en el bot贸n acceder
     And  Intro en certificado
-    And Esperar 5 segundos
-    When Rellenar el texto "alberto.sanchez.tsol@gmail.com" en el campo de b煤squeda email
-    And Esperar 5 segundos
-    When Click en el bot贸n buscar
-    And Esperar 5 segundos
-
-    When Rellenar el texto "alberto.sanchez.tsol@gmail.com" en el campo de b煤squeda email
-    And Esperar 5 segundos
-    When Click en el bot贸n buscar
-    And Esperar 5 segundos
-
-    And Click en el primer elemento de la lista con busqueda
-    And Comprobar detalle cartera datos correctos "alberto.sanchez.tsol@gmail.com"
+    When Click en el bot贸n detalle carteras revocadas ultimo mes
+    And Compruebo acceso a carteras revocadas el ultimo mes
     And Cerrar el navegador
 

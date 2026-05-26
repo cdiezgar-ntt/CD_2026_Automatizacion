@@ -11,4 +11,5 @@ Scenario: EAA PROVIDER - CONSULTIVO - Detalle de credencial caducada - mostrar r
     Given Click en el primer valor de la columna ID credencial
     And Esperar 5 segundos
     Then Muestra mensaje de error
+    Then Validar que se muestra el mensaje de error
 

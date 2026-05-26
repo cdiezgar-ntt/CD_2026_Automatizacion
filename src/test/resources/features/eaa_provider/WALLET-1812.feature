@@ -9,3 +9,4 @@ Scenario: EAA PROVIDER - CONSULTIVO - Filtro tipo credenciales en información d
     When Seleciono el combo tipo credencial el valor "Revocacion a traves del sistema automatico"
     When Click en el botón buscar
     And Esperar 5 segundos
+    Then Validar que el campo "estado" de tipo "xpath" tiene el valor "Revocada"

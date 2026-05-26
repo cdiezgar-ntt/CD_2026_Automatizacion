@@ -9,3 +9,5 @@ Scenario: EAA PROVIDER - CONSULTIVO - Aceptar términos y condiciones - mostrar 
     When Hacer scroll
     When Pulsar check aceptar terminos
     When Click en el boton continuar
+    Then Validar que avanza a la siguiente pantalla
+ #   No existen los terminos y condiciones aun

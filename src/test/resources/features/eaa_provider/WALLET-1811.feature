@@ -9,3 +9,4 @@ Scenario: EAA PROVIDER - CONSULTIVO - Pantalla inicio - búsqueda de credenciale
     When Click en el botón buscar
     And Esperar 5 segundos
     Then Muestra mensaje de error
+    Then Validar que salta un error

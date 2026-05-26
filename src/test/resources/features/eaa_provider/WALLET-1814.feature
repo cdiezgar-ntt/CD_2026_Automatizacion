@@ -11,3 +11,4 @@ Scenario: EAA PROVIDER - CONSULTIVO - Detalle de credencial válida - mostrar re
     Given Click en el primer valor de la columna ID credencial
     And Esperar 5 segundos
     Then Muestra mensaje de error
+    Then Validar aparece mensaje de error

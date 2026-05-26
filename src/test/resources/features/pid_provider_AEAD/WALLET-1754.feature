@@ -2,22 +2,11 @@ Feature: WALLET-1754
 
   @TC_01
 Scenario: PID PROVIDER (AEAD) - EJECUTIVO - Pantalla inicio - búsqueda de Credenciales con filtros
-    Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
-    And Esperar 5 segundos
+    Given Abrir la web PID provider
     When Click en el botón acceder
-    And  Intro en certificado
-    And Esperar 5 segundos
-    When Rellenar el texto "alberto.sanchez.tsol@gmail.com" en el campo de búsqueda email
-    And Esperar 5 segundos
+    When Rellenar el texto "50649281S" en el campo de búsqueda DNI/NIE
     When Click en el botón buscar
-    And Esperar 5 segundos
-
-    When Rellenar el texto "alberto.sanchez.tsol@gmail.com" en el campo de búsqueda email
-    And Esperar 5 segundos
-    When Click en el botón buscar
-    And Esperar 5 segundos
-
-    And Click en el primer elemento de la lista con busqueda
-    And Comprobar detalle cartera datos correctos "alberto.sanchez.tsol@gmail.com"
+    And Click en el primer elemento de la lista
+    Then Validar que el campo "pid_dniFiltro" de tipo "xpath" tiene el valor "50649281S"
     And Cerrar el navegador
 

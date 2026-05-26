@@ -9,4 +9,5 @@ Scenario: EAA PROVIDER - CONSULTIVO - Detalle de presentación de credencial con
     When Seleciono el combo estado "Suspendida"
     When Click en el botón buscar
     And Esperar 5 segundos
+    Then Validar que tiene un error la credencial
 

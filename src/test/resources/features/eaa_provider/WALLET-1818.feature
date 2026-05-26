@@ -10,4 +10,4 @@ Scenario: EAA PROVIDER - CONSULTIVO - Detalle de presentación de credencial con
     When Click en el botón buscar
     And Esperar 5 segundos
     Then Muestra mensaje de error
-
+    Then Validar que se muestra el mensaje de error

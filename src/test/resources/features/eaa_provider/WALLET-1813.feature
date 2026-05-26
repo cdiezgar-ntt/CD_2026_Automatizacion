@@ -10,4 +10,5 @@ Scenario: EAA PROVIDER - CONSULTIVO - Detalle de credencial válida - mostrar re
     And Esperar 5 segundos
     Given Click en el primer valor de la columna ID credencial
     And Esperar 5 segundos
+    Then Validar que el campo "estado" de tipo "xpath" tiene el valor "Valida"
 

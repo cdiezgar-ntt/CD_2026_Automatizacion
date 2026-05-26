@@ -9,3 +9,4 @@ Scenario: EAA PROVIDER - CONSULTIVO - Pantalla inicio - búsqueda de credenciale
     When Rellenar el texto "testprueba123@gmail.com" en el campo de búsqueda email
     When Click en el botón buscar
     And Esperar 5 segundos
+    Then Validar que la busqueda no devuelve resultados
