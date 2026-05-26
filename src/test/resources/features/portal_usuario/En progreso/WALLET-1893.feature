@@ -9,6 +9,7 @@ Scenario: PORTAL USUARIO - REVOCACIÓN CARTERA DIGITAL - Verificar tu identidad 
       And El botón continuar revocación está deshabilitado
       And Los digitos estan deshabilitados
       When El usuario introduce el mail de una cartera válida
+      And El usuario pulsa en Enviar
       # En PRE hay mock y no se comprueba la recepción del mail
       Then El usuario recibe un código de verificación
       And Los digitos estan habilitados

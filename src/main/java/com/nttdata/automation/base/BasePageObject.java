@@ -27,8 +27,8 @@ public class BasePageObject {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
-    protected Map<Elementos_web, String> prop;
-    private final PropertiesReader propertiesReader;
+    protected Map<Elementos_web, String> prop; // ESTO HAY QUE BORRARLO AL TERMINAR EL REFACTOR
+    private static final PropertiesReader propertiesReader = new PropertiesReader();
     private String elementsFile;
 
 
@@ -38,8 +38,7 @@ public class BasePageObject {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         // Se cargan los identificadores de todos los objetos web y se preparan para ser utilizados
-        this.prop = new Properties().read_v2();
-        this.propertiesReader = new PropertiesReader();
+        this.prop = new Properties().read_v2(); // ESTO HAY QUE BORRARLO CUANDO FINALICE EL REFACTOR
     }
 
     protected BasePageObject(String elementsFile) {
@@ -47,7 +46,7 @@ public class BasePageObject {
         this.elementsFile = elementsFile;
     }
 
-    //HELPERS PARA EL REFACTOR
+    //HELPERS PARA EL REFACTOR - HAY QUE BORRAR ESTOS DE AQUI TRAS EL REFACTOR
 
     protected String url(String key) {
         return propertiesReader.get("config/urls.properties", key);
@@ -80,10 +79,15 @@ public class BasePageObject {
         return By.cssSelector(element(key));
     }
 
+    protected By name(Elementos_web key) {
+        return By.name(element(key));
+    }
+
     protected By classname(Elementos_web key) {
         return By.className(element(key));
     }
 
+    // HELPERS BUENOS -- ESTOS SE QUEDAN
     protected String element(String key) {
         if (elementsFile == null) {
             throw new IllegalStateException(
@@ -96,6 +100,10 @@ public class BasePageObject {
 
     protected By id(String key) {
         return By.id(element(key));
+    }
+
+    protected By name(String key) {
+        return By.name(element(key));
     }
 
     protected By xpath(String key) {
@@ -181,7 +189,7 @@ public class BasePageObject {
         WebElement we;
         By localizador;
         try{
-            localizador = id(Elementos_web.valueOf(elmentoWebString));
+            localizador = id(elmentoWebString);
             System.out.println("Esperando a que el elemento sea visible...");
             we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
             //Scrollear hasta el elemento
@@ -213,7 +221,7 @@ public class BasePageObject {
         By localizador;
         switch (tipoSwitch) {
             case "xpath":
-                localizador = xpath(Elementos_web.valueOf(id1));
+                localizador = xpath(id1);
 
                 System.out.println("Esperando a que el elemento sea visible...");
                 we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
@@ -221,22 +229,21 @@ public class BasePageObject {
                 textoElemento = we.getText();
                 break;
             case "classname":
-                localizador = By.className(prop.get(Elementos_web.valueOf(id1)));
+                localizador = classname(id1);
                 System.out.println("Esperando a que el elemento sea visible...");
                 we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
                 System.out.println("Obteniendo texto del elemento...");
                 textoElemento = we.getText();
                 break;
             case "id":
-                localizador = id(Elementos_web.valueOf(id1));
-
+                localizador = id(id1);
                 System.out.println("Esperando a que el elemento sea visible...");
                 we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
                 System.out.println("Obteniendo texto del elemento...");
                 textoElemento = we.getText();
                 break;
             case "tagname":
-                localizador = By.tagName(prop.get(Elementos_web.valueOf(id1)));
+                localizador = tag(id1);
 
                 System.out.println("Esperando a que el elemento sea visible...");
                 we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
@@ -244,7 +251,7 @@ public class BasePageObject {
                 textoElemento = we.getText();
                 break;
             case "name":
-                localizador = By.name(prop.get(Elementos_web.valueOf(id1)));
+                localizador = name(id1);
 
                 System.out.println("Esperando a que el elemento sea visible...");
                 we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));

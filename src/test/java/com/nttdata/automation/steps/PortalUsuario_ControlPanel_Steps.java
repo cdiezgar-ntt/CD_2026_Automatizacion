@@ -236,9 +236,8 @@ public class PortalUsuario_ControlPanel_Steps {
         ExtentReportHook.getTest().info("Obteniendo un email valido...");
         String mainWindow = DriverManager.getDriver().getWindowHandle();
         DriverManager.getDriver().switchTo().newWindow(WindowType.TAB);
-        String url_wp = new Properties().read_v2().get(Elementos_web.abrirWebWalletProvider);
         WP_ControlPanel wallet_provider = new WP_ControlPanel();
-        DriverManager.getDriver().get(url_wp);
+        wallet_provider.cargarWeb();
         new CommonSteps().hacerClickEnElBotonAcceder();
         wallet_provider.clickLinkCarterasActivasVerTodas();
 

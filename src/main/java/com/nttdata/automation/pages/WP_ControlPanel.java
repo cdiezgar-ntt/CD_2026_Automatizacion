@@ -1,6 +1,7 @@
 package com.nttdata.automation.pages;
 
 import com.nttdata.automation.base.BasePageObject;
+import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.utils.Elementos_web;
 import org.openqa.selenium.By;
 
@@ -28,9 +29,14 @@ public class WP_ControlPanel extends BasePageObject {
     private final By linkCarterasActivasVerTodasBy = xpath("wp_pantallaInicio_informacionDestacada_carterasActivas_verTodas");
     private final By linkOcultarUltimoMesBy = xpath("wp_pantallaInicio_OcultarUltimoMes");
     private final By primerCorreoDeLaListaBy = xpath("wp_primerCorreoDeLaListaBy");
+    private final By tituloCarterasActivasBy = tag("wp_carterasActivas_titulo");
 
     public WP_ControlPanel() {
         super("pages/web_wp.properties");
+    }
+
+    public void cargarWeb() {
+        driver.get(url("web_wp"));
     }
 
     /**

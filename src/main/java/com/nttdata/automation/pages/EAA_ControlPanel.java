@@ -6,12 +6,15 @@ import org.openqa.selenium.By;
 
 
 public class EAA_ControlPanel extends BasePageObject {
-    private final By btnBuscarBy = xpath(Elementos_web.wp_pantallaInicio_BotonBuscar);
-    private final By primerElementoListaEAABy = xpath(Elementos_web.eaa_pantallaInicio_PrimerElementoTabla);
-    private final By textBoxEmailBy = xpath(Elementos_web.wp_pantallaInicio_textBoxEmail);
-    private final By totalCarterasByy = xpath(Elementos_web.eaa_totalCarteras);
-    private final By estadoDetalleCredencial = xpath(Elementos_web.eaa_estadoDetalleCredencial);
+    private final By btnBuscarBy = xpath("wp_pantallaInicio_BotonBuscar");
+    private final By primerElementoListaEAABy = xpath("eaa_pantallaInicio_PrimerElementoTabla");
+    private final By textBoxEmailBy = xpath("wp_pantallaInicio_textBoxEmail");
+    private final By totalCarterasByy = xpath("eaa_totalCarteras");
+    private final By estadoDetalleCredencial = xpath("eaa_estadoDetalleCredencial");
 
+    public EAA_ControlPanel() {
+        super("pages/web_eaa.properties");
+    }
     public void clickBtnBuscar() {
         System.out.println(btnBuscarBy);
         pulsar(btnBuscarBy);

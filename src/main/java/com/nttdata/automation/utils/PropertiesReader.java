@@ -5,13 +5,14 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PropertiesReader {
 
-    private final Map<String, Properties> cache = new HashMap<>();
+    private static final Map<String, java.util.Properties> CACHE = new ConcurrentHashMap<>();
 
     public String get(String resourcePath, String key) {
-        java.util.Properties properties = cache.computeIfAbsent(resourcePath, this::load);
+        java.util.Properties properties = CACHE.computeIfAbsent(resourcePath, this::load);
 
         String value = properties.getProperty(key);
 
@@ -27,8 +28,8 @@ public class PropertiesReader {
     private java.util.Properties load(String resourcePath) {
         java.util.Properties properties = new java.util.Properties();
 
-        try (InputStream input = getClass()
-                .getClassLoader()
+        try (InputStream input = Thread.currentThread()
+                .getContextClassLoader()
                 .getResourceAsStream(resourcePath)) {
 
             if (input == null) {
