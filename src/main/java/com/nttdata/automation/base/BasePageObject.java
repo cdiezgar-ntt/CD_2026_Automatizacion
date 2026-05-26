@@ -2,6 +2,8 @@ package com.nttdata.automation.base;
 
 import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.utils.Elementos_web;
+import com.nttdata.automation.utils.PropertiesManager;
+import com.nttdata.automation.utils.PropertiesReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,32 +28,116 @@ public class BasePageObject {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
-    protected Map<Elementos_web, String> prop;
+    protected Map<Elementos_web, String> prop; // ESTO HAY QUE BORRARLO AL TERMINAR EL REFACTOR
+    private static final PropertiesReader propertiesReader = new PropertiesReader();
+    private final String elementsFile;
 
+    // SE SOBRECARGA EL CONSTRUCTOR PARA COMPATIBILIDAD CON LA VALIDACION ACTUALMENTE AUNQUE DEBERÍA DESAPARECER
+    // POR MANTENIBILIDAD. LO NUEVO DEBERÍA HACERSE CON LA VALIDACION GENÉRICA
     public BasePageObject() {
+        this("elements/all_elements.properties");
+    }
+
+
+    protected BasePageObject(String elementsFile) {
         this.driver = DriverManager.getDriver();
-        // Espera explícita genérica de 10 segundos
+
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // Se cargan los identificadores de todos los objetos web y se preparan para ser utilizados
-        this.prop = new Properties().read_v2();
+        this.elementsFile = elementsFile;
 
+        this.prop = new Properties().read_v2(); // ESTO HAY QUE ELIMINARLO CUANDO ESTÉ TODO EL REFACTOR
+    }
+
+    //HELPERS PARA EL REFACTOR - HAY QUE BORRAR ESTOS DE AQUI TRAS EL REFACTOR
+
+    protected String url(String key) {
+        return propertiesReader.get("config/urls.properties", key);
+    }
+
+    protected String element(Elementos_web key) {
+        String value = prop.get(key);
+
+        if (value == null) {
+            throw new IllegalArgumentException("No existe el elemento en properties: " + key);
+        }
+
+        return value;
+    }
+
+    protected By id(Elementos_web key) {
+        return By.id(element(key));
+    }
+
+    protected By xpath(Elementos_web key) {
+        return By.xpath(element(key));
+    }
+
+    protected By tag(Elementos_web key) {
+        return By.tagName(element(key));
+    }
+
+    protected By css(Elementos_web key) {
+        return By.cssSelector(element(key));
+    }
+
+    protected By name(Elementos_web key) {
+        return By.name(element(key));
+    }
+
+    protected By classname(Elementos_web key) {
+        return By.className(element(key));
+    }
+
+    // HELPERS BUENOS -- ESTOS SE QUEDAN
+    protected String element(String key) {
+        if (elementsFile == null) {
+            throw new IllegalStateException(
+                    "Este Page Object no tiene fichero de elementos asociado"
+            );
+        }
+
+        return propertiesReader.get(elementsFile, key);
+    }
+
+    protected By id(String key) {
+        return By.id(element(key));
+    }
+
+    protected By name(String key) {
+        return By.name(element(key));
+    }
+
+    protected By xpath(String key) {
+        return By.xpath(element(key));
+    }
+
+    protected By tag(String key) {
+        return By.tagName(element(key));
+    }
+
+    protected By css(String key) {
+        return By.cssSelector(element(key));
+    }
+
+    protected By classname(String key) {
+        return By.className(element(key));
     }
 
     public void abrirWebPortalUsuario(){
-        driver.get(prop.get(Elementos_web.abrirWebUsuario));
+       driver.get(url("web_usuario"));
     }
 
     public void abrirWebPortalAdministrador_WP(){
-        driver.get(prop.get(Elementos_web.abrirWebWalletProvider));
+        driver.get(url("web_wp"));
     }
 
     public void abrirWebPortalAdministrador_EEAProvider(){
-        driver.get(prop.get(Elementos_web.abrirWebEAAProvider));
+        driver.get(url("web_eaa"));
     }
 
     public void abrirWebPortalAdministrador_PIDProvider(){
-        driver.get(prop.get(Elementos_web.abrirWebPIDProvider));
+        driver.get(url("web_pid"));
     }
 
     private WebElement obtenerElementoClickable(By localizador) {
@@ -105,7 +191,7 @@ public class BasePageObject {
         WebElement we;
         By localizador;
         try{
-            localizador = By.id(prop.get(Elementos_web.valueOf(elmentoWebString)));
+            localizador = id(elmentoWebString);
             System.out.println("Esperando a que el elemento sea visible...");
             we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
             //Scrollear hasta el elemento
@@ -137,7 +223,7 @@ public class BasePageObject {
         By localizador;
         switch (tipoSwitch) {
             case "xpath":
-                localizador = By.xpath(prop.get(Elementos_web.valueOf(id1)));
+                localizador = xpath(id1);
 
                 System.out.println("Esperando a que el elemento sea visible...");
                 we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
@@ -145,22 +231,21 @@ public class BasePageObject {
                 textoElemento = we.getText();
                 break;
             case "classname":
-                localizador = By.className(prop.get(Elementos_web.valueOf(id1)));
+                localizador = classname(id1);
                 System.out.println("Esperando a que el elemento sea visible...");
                 we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
                 System.out.println("Obteniendo texto del elemento...");
                 textoElemento = we.getText();
                 break;
             case "id":
-                localizador = By.id(prop.get(Elementos_web.valueOf(id1)));
-
+                localizador = id(id1);
                 System.out.println("Esperando a que el elemento sea visible...");
                 we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
                 System.out.println("Obteniendo texto del elemento...");
                 textoElemento = we.getText();
                 break;
             case "tagname":
-                localizador = By.tagName(prop.get(Elementos_web.valueOf(id1)));
+                localizador = tag(id1);
 
                 System.out.println("Esperando a que el elemento sea visible...");
                 we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
@@ -168,7 +253,7 @@ public class BasePageObject {
                 textoElemento = we.getText();
                 break;
             case "name":
-                localizador = By.name(prop.get(Elementos_web.valueOf(id1)));
+                localizador = name(id1);
 
                 System.out.println("Esperando a que el elemento sea visible...");
                 we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));

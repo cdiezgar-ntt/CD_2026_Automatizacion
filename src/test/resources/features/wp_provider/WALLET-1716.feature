@@ -7,7 +7,7 @@ Feature: WALLET-1716
   #4. La pantalla muestra las carteras en base a los filtros seleccionados.
 
   #Etiquetas
-  @WALLET-1716 @wallet_provider @inicio
+  @WALLET-1716 @wallet_provider @inicio @Test
   Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - búsqueda de Carteras con filtros
     Given Abrir la web wallet provider
     And Esperar 5 segundos

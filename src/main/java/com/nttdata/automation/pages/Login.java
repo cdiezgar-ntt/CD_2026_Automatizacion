@@ -6,7 +6,11 @@ import org.openqa.selenium.By;
 
 public class Login extends BasePageObject {
 
-    private final By btnAccederBy = By.className(prop.get(Elementos_web.pantallaLogin_BotonAcceder));
+    private final By btnAccederBy =classname("pantallaLogin_BotonAcceder");
+
+    public Login() {
+        super("elements/web_login.properties");
+    }
 
     public void clickBtnAcceder(){
         pulsar(btnAccederBy);
