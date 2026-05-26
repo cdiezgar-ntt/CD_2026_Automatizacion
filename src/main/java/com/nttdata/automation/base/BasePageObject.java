@@ -29,20 +29,19 @@ public class BasePageObject {
     protected WebDriverWait wait;
     protected Map<Elementos_web, String> prop; // ESTO HAY QUE BORRARLO AL TERMINAR EL REFACTOR
     private static final PropertiesReader propertiesReader = new PropertiesReader();
-    private String elementsFile;
+    private final String elementsFile;
 
 
     public BasePageObject() {
-        this.driver = DriverManager.getDriver();
-        // Espera explícita genérica de 10 segundos
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        // Se cargan los identificadores de todos los objetos web y se preparan para ser utilizados
-        this.prop = new Properties().read_v2(); // ESTO HAY QUE BORRARLO CUANDO FINALICE EL REFACTOR
+        this("elements/all_elements.properties");
     }
 
+
     protected BasePageObject(String elementsFile) {
-        this();
+        this.driver = DriverManager.getDriver();
+
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
         this.elementsFile = elementsFile;
     }
 

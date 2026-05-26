@@ -9,7 +9,7 @@ public class Login extends BasePageObject {
     private final By btnAccederBy =classname("pantallaLogin_BotonAcceder");
 
     public Login() {
-        super("pages/web_login.properties");
+        super("elements/web_login.properties");
     }
 
     public void clickBtnAcceder(){

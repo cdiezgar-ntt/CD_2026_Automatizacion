@@ -10,6 +10,6 @@ public class WP_HistoricoRevocacion extends BasePageObject {
     private final By primer_estado_bloque_revocacion = xpath("wp_hitoricoRevocacion_TablaEstado");
 
     public WP_HistoricoRevocacion() {
-        super("pages/web_wp_historico_revocacion.properties");
+        super("elements/web_wp_historico_revocacion.properties");
     }
 }

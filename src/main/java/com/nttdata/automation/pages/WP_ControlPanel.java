@@ -32,7 +32,7 @@ public class WP_ControlPanel extends BasePageObject {
     private final By tituloCarterasActivasBy = tag("wp_carterasActivas_titulo");
 
     public WP_ControlPanel() {
-        super("pages/web_wp.properties");
+        super("elements/web_wp.properties");
     }
 
     public void cargarWeb() {

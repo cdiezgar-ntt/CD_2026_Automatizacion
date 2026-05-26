@@ -12,6 +12,6 @@ public class WP_DetalleCartera  extends BasePageObject {
     private final By infoGeneral_estado = tag("wp_detalleCartera_InformacionGeneral_estado");
 
     public WP_DetalleCartera() {
-        super("pages/web_wp_detalle_cartera.properties");
+        super("elements/web_wp_detalle_cartera.properties");
     }
 }

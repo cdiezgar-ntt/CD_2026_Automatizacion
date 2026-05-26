@@ -10,7 +10,7 @@ public class PropertiesManager {
     private static String pantallaInicioPath;
 
     public PropertiesManager(){
-        pantallaInicioPath = "elements/pages.properties";
+        pantallaInicioPath = "elements/all_elements.properties";
     }
 
     public String readPropertiesPantallaInicio(String clave) {

@@ -38,7 +38,7 @@ public class CIT_PortalUsuario extends BasePageObject {
     private final By enviar = xpath("cit_enviar");
 
     public CIT_PortalUsuario() {
-        super("pages/web_usuario.properties");
+        super("elements/web_usuario.properties");
     }
 
     public String getTituloHome() {

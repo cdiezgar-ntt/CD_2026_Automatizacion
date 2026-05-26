@@ -13,7 +13,7 @@ public class EAA_ControlPanel extends BasePageObject {
     private final By estadoDetalleCredencial = xpath("eaa_estadoDetalleCredencial");
 
     public EAA_ControlPanel() {
-        super("pages/web_eaa.properties");
+        super("elements/web_eaa.properties");
     }
     public void clickBtnBuscar() {
         System.out.println(btnBuscarBy);
