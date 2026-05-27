@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 public class Login extends BasePageObject {
 
     private final By btnAccederBy =classname("pantallaLogin_BotonAcceder");
-    private final By btonAccederDeTodosModosBy = id("proceed-button");
+    private final By btonAccederDeTodosModosBy = id("pantallaLogin_EnviarDeTodosModos");
 
     public Login() {
         super("elements/web_login.properties");

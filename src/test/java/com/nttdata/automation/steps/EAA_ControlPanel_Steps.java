@@ -80,6 +80,5 @@ public class EAA_ControlPanel_Steps {
       String estado_web;
        estado_web =  eaa_cp.obtenerTextoEstadoDetalleCredencial();
        Validator.validarVerdadero(estado_web.contains(estado_esperado),"El estado de la credencial es: " + estado_esperado,true);
-
     }
 }

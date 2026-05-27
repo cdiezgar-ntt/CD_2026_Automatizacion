@@ -38,6 +38,11 @@ public class BasePageObject {
 
     }
 
+    public String currentUrl() {
+        String currentUrl = driver.getCurrentUrl();
+        return (currentUrl == null) ? "" : currentUrl;
+    }
+
     public String url(String key) {
         return propertiesReader.get("config/urls.properties", key);
     }

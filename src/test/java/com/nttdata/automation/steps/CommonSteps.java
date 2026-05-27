@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import com.nttdata.automation.pages.WP_ControlPanel;
 
 
+import javax.swing.text.Utilities;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -49,11 +50,13 @@ public class CommonSteps {
      */
     @Given("Abrir la web EAA provider")
     public void abrirElNavegadorChrome_PortalEAAProvider() {
+        ExtentReportHook.getTest().info("Conectando...");
         login.abrirWebPortalAdministrador_EEAProvider();
-        ExtentReportHook.getTest().info("Conectados a la web");
 
-        //Ahora mismo aparece pagina de información no segura
-        if (DriverManager.getDriver().getCurrentUrl().endsWith("/auth/callback")) {
+        ExtentReportHook.getTest().info("Autenticando...");
+        hacerClickEnElBotonAcceder();
+
+        if (login.currentUrl().endsWith("/auth/callback")) {
             ExtentReportHook.getTest().info("Aparece acceso a pagina no segura. Aceptando acceso...");
             login.clickAccederTodosModos();
         }
@@ -64,8 +67,17 @@ public class CommonSteps {
      */
     @Given("Abrir la web PID provider")
     public void abrirElNavegadorChrome_PortalPIDProvider() {
+        ExtentReportHook.getTest().info("Conectando...");
         login.abrirWebPortalAdministrador_PIDProvider();
-        ExtentReportHook.getTest().info("Conectados a la web");
+
+        ExtentReportHook.getTest().info("Autenticando...");
+        hacerClickEnElBotonAcceder();
+
+        //Ahora mismo aparece pagina de información no segura
+        if (login.currentUrl().endsWith("/auth/callback")) {
+            ExtentReportHook.getTest().info("Aparece acceso a pagina no segura. Aceptando acceso...");
+            login.clickAccederTodosModos();
+        }
     }
 
 
@@ -91,11 +103,6 @@ public class CommonSteps {
         System.out.println("Se va a clicar en acceder");
 
         login.clickBtnAcceder();
-
-        // Espera de 5 segundos para que le de tiempo a elegir el certificado
-//        esperarSegundos();
-//        esperarSegundos();
-//        esperarSegundos();
 
     }
 

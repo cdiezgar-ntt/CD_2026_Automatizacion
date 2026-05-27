@@ -1,5 +1,6 @@
 package com.nttdata.automation.driver;
 
+import com.nttdata.automation.utils.PropertiesReader;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,13 +20,13 @@ public class DriverManager {
 
             ChromeOptions options = new ChromeOptions();
 
-            // Necesario para que funcione la carga del certificado
-            // options.setPageLoadStrategy(PageLoadStrategy.NONE);
-
             // Selección del certificado
+            String certif = new PropertiesReader().get("config/certif.properties","certif_usuario");
+
             Map<String, Object> prefs = new HashMap<>();
             prefs.put("profile.managed_auto_select_certificate_for_urls",
-                    List.of("{\"pattern\":\"https://[*.]redsara.es\",\"filter\":{\"SUBJECT\":{\"CN\":\"EIDAS CERTIFICADO PRUEBAS - 99999999R\"}}}"));
+                    List.of("{\"pattern\":\"https://[*.]redsara.es\",\"filter\":{\"SUBJECT\":{\"CN\":\""+certif
+                            +"\"}}}"));
             options.setExperimentalOption("prefs", prefs);
 
             // Selenium Manager descarga y configura Chrome automáticamente
