@@ -1,25 +1,19 @@
 package com.nttdata.automation.base;
 
 import com.nttdata.automation.driver.DriverManager;
-import com.nttdata.automation.utils.Elementos_web;
-import com.nttdata.automation.utils.PropertiesManager;
 import com.nttdata.automation.utils.PropertiesReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.SourceType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.nttdata.automation.utils.Properties;
 
 //import utils.reports.extentReportHook;
 
-import java.lang.runtime.SwitchBootstraps;
 import java.time.Duration;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
@@ -28,16 +22,12 @@ public class BasePageObject {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
-    protected Map<Elementos_web, String> prop; // ESTO HAY QUE BORRARLO AL TERMINAR EL REFACTOR
     private static final PropertiesReader propertiesReader = new PropertiesReader();
     private final String elementsFile;
 
-    // SE SOBRECARGA EL CONSTRUCTOR PARA COMPATIBILIDAD CON LA VALIDACION ACTUALMENTE AUNQUE DEBERÍA DESAPARECER
-    // POR MANTENIBILIDAD. LO NUEVO DEBERÍA HACERSE CON LA VALIDACION GENÉRICA
     public BasePageObject() {
         this("elements/all_elements.properties");
     }
-
 
     protected BasePageObject(String elementsFile) {
         this.driver = DriverManager.getDriver();
@@ -46,50 +36,12 @@ public class BasePageObject {
 
         this.elementsFile = elementsFile;
 
-        this.prop = new Properties().read_v2(); // ESTO HAY QUE ELIMINARLO CUANDO ESTÉ TODO EL REFACTOR
     }
 
-    //HELPERS PARA EL REFACTOR - HAY QUE BORRAR ESTOS DE AQUI TRAS EL REFACTOR
-
-    protected String url(String key) {
+    public String url(String key) {
         return propertiesReader.get("config/urls.properties", key);
     }
 
-    protected String element(Elementos_web key) {
-        String value = prop.get(key);
-
-        if (value == null) {
-            throw new IllegalArgumentException("No existe el elemento en properties: " + key);
-        }
-
-        return value;
-    }
-
-    protected By id(Elementos_web key) {
-        return By.id(element(key));
-    }
-
-    protected By xpath(Elementos_web key) {
-        return By.xpath(element(key));
-    }
-
-    protected By tag(Elementos_web key) {
-        return By.tagName(element(key));
-    }
-
-    protected By css(Elementos_web key) {
-        return By.cssSelector(element(key));
-    }
-
-    protected By name(Elementos_web key) {
-        return By.name(element(key));
-    }
-
-    protected By classname(Elementos_web key) {
-        return By.className(element(key));
-    }
-
-    // HELPERS BUENOS -- ESTOS SE QUEDAN
     protected String element(String key) {
         if (elementsFile == null) {
             throw new IllegalStateException(
@@ -122,22 +74,6 @@ public class BasePageObject {
 
     protected By classname(String key) {
         return By.className(element(key));
-    }
-
-    public void abrirWebPortalUsuario(){
-       driver.get(url("web_usuario"));
-    }
-
-    public void abrirWebPortalAdministrador_WP(){
-        driver.get(url("web_wp"));
-    }
-
-    public void abrirWebPortalAdministrador_EEAProvider(){
-        driver.get(url("web_eaa"));
-    }
-
-    public void abrirWebPortalAdministrador_PIDProvider(){
-        driver.get(url("web_pid"));
     }
 
     private WebElement obtenerElementoClickable(By localizador) {
@@ -213,7 +149,6 @@ public class BasePageObject {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
         WebElement elemento = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
     }
-
 
     public void validarCampoDeTipo(String id1, String tipo, String valor1) {
 

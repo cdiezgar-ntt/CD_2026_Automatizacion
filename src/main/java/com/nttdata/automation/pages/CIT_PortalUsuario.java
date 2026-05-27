@@ -2,9 +2,7 @@ package com.nttdata.automation.pages;
 
 import com.nttdata.automation.base.BasePageObject;
 import com.nttdata.automation.driver.DriverManager;
-import com.nttdata.automation.utils.Elementos_web;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;

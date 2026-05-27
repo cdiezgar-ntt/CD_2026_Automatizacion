@@ -31,9 +31,7 @@ public class CommonSteps {
      */
     @Given("Abrir la web usuario")
     public void abrirElNavegadorChrome_PortalUsuario() {
-        BasePageObject bpo = new BasePageObject();
-        // Abre la página del propierties);
-        bpo.abrirWebPortalUsuario();
+        login.abrirWebPortalUsuario();
         ExtentReportHook.getTest().info("Conectados a la web");
     }
 
@@ -42,9 +40,7 @@ public class CommonSteps {
      */
     @Given("Abrir la web wallet provider")
     public void abrirElNavegadorChrome_PortalWalletProvider() {
-        BasePageObject bpo = new BasePageObject();
-        // Abre la página del propierties);
-        bpo.abrirWebPortalAdministrador_WP();
+        login.abrirWebPortalAdministrador_WP();
         ExtentReportHook.getTest().info("Conectados a la web");
     }
 
@@ -53,10 +49,14 @@ public class CommonSteps {
      */
     @Given("Abrir la web EAA provider")
     public void abrirElNavegadorChrome_PortalEAAProvider() {
-        BasePageObject bpo = new BasePageObject();
-        // Abre la página del propierties);
-        bpo.abrirWebPortalAdministrador_EEAProvider();
+        login.abrirWebPortalAdministrador_EEAProvider();
         ExtentReportHook.getTest().info("Conectados a la web");
+
+        //Ahora mismo aparece pagina de información no segura
+        if (DriverManager.getDriver().getCurrentUrl().endsWith("/auth/callback")) {
+            ExtentReportHook.getTest().info("Aparece acceso a pagina no segura. Aceptando acceso...");
+            login.clickAccederTodosModos();
+        }
     }
 
     /**
@@ -64,9 +64,7 @@ public class CommonSteps {
      */
     @Given("Abrir la web PID provider")
     public void abrirElNavegadorChrome_PortalPIDProvider() {
-        BasePageObject bpo = new BasePageObject();
-        // Abre la página del propierties);
-        bpo.abrirWebPortalAdministrador_PIDProvider();
+        login.abrirWebPortalAdministrador_PIDProvider();
         ExtentReportHook.getTest().info("Conectados a la web");
     }
 
