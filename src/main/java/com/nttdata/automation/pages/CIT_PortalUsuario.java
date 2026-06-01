@@ -230,6 +230,10 @@ public class CIT_PortalUsuario extends BasePageObject {
         pulsar(radio_firma_basica);
     }
 
+    public void seleccionarAutofirma() {
+        pulsar(radio_autofirma);
+    }
+
     public String obtenerResumenProceso() {
         return obtenerTextosElementosWeb(card_proceso).getFirst();
     }

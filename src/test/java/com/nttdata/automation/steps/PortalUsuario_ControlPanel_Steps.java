@@ -4,11 +4,16 @@ import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.pages.CIT_PortalUsuario;
 import com.nttdata.automation.hooks.ExtentReportHook;
 import com.nttdata.automation.pages.WP_ControlPanel;
+import com.nttdata.automation.utils.Commons;
 import com.nttdata.automation.validation.Validator;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import jnr.a64asm.Ext;
 import org.openqa.selenium.WindowType;
+import org.sikuli.script.FindFailed;
+import org.sikuli.script.Match;
+import org.sikuli.script.Pattern;
+import org.sikuli.script.Screen;
 
 import java.util.List;
 
@@ -307,6 +312,17 @@ public class PortalUsuario_ControlPanel_Steps {
         portal_usuario.clickContinuarRevocacion();
     }
 
+    @When("Acepta la alerta de autofirma")
+    public void aceptarAlertaAutofirma() {
+        ExtentReportHook.getTest().info("Aceptando alerta de navegador...");
+        try {
+            Match abrir_autofirma = new Screen().wait(Commons.getResourcePath("sikuli/Abrir_autofirma.png"));
+            abrir_autofirma.click();
+        } catch (FindFailed e) {
+            ExtentReportHook.getTest().warning("No se ha podido aceptar la alerta del navegador...");
+        }
+    }
+
     @Then("Se carga el paso 1 de la revocación")
     public void comprobarPaso1() {
         String paso = portal_usuario.obtenerPaso();
@@ -378,6 +394,12 @@ public class PortalUsuario_ControlPanel_Steps {
         portal_usuario.seleccionarFirmaBasica();
     }
 
+    @When("El usuario selecciona autofirma")
+    public void seleccionarAutofirma() {
+        ExtentReportHook.getTest().info("Seleccionando firma básica...");
+        portal_usuario.seleccionarAutofirma();
+    }
+
     @Then("Se muestra el resumen del proceso con el resultado de la revocacion")
     public void comprobarResumenProceso() {
         String resultado = portal_usuario.obtenerResumenProceso();
@@ -392,6 +414,8 @@ public class PortalUsuario_ControlPanel_Steps {
         ExtentReportHook.getTest().info("Pulsando en volver a inicio...");
         portal_usuario.clickVolverInicio();
     }
+
+
 
 }
 

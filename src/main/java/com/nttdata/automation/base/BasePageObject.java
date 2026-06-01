@@ -1,6 +1,7 @@
 package com.nttdata.automation.base;
 
 import com.nttdata.automation.driver.DriverManager;
+import com.nttdata.automation.utils.Commons;
 import com.nttdata.automation.utils.PropertiesReader;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -96,12 +97,13 @@ public class BasePageObject {
         }
     }
 
-    protected void aceptarAlertaNavegador() {
+    public void aceptarAlertaNavegador() {
+        Commons.waitNseconds(3);
         Alert alerta = wait.until(ExpectedConditions.alertIsPresent());
         alerta.accept();
     }
 
-    protected void rechazarAlertaNavegador() {
+    public void rechazarAlertaNavegador() {
         Alert alerta = wait.until(ExpectedConditions.alertIsPresent());
         alerta.dismiss();
     }

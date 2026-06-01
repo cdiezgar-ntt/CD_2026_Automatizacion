@@ -11,6 +11,10 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;
 import com.nttdata.automation.pages.WP_ControlPanel;
+import org.sikuli.script.FindFailed;
+import org.sikuli.script.Match;
+import org.sikuli.script.Pattern;
+import org.sikuli.script.Screen;
 
 
 import javax.swing.text.Utilities;
@@ -164,5 +168,23 @@ public class CommonSteps {
         DriverManager.quitDriver();
         System.out.println("Navegador cerrado");
         ExtentReportHook.getTest().info("Navegador cerrado");
+    }
+
+    @When("Selecciona su certificado en autofirma")
+    public void seleccionar_y_firmar() {
+        ExtentReportHook.getTest().info("Seleccionando certificado en autofirma...");
+
+        Screen screen = new Screen();
+
+        try {
+            Match certificado =screen.wait(Commons.getResourcePath("sikuli/certificado_eidas.png"), 30);
+            certificado.click();
+            Match aceptar = screen.wait(Commons.getResourcePath("sikuli/boton_aceptar.png"), 30);
+            aceptar.click();
+        } catch (FindFailed e) {
+            ExtentReportHook.getTest().warning("No ha sido posible seleccionar el certificado. Causa: " + e.getLocalizedMessage());
+            throw new RuntimeException(e);
+        }
+
     }
 }
