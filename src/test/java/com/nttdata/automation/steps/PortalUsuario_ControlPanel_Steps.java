@@ -251,6 +251,12 @@ public class PortalUsuario_ControlPanel_Steps {
 
     }
 
+    @When("El usuario introduce el mail {string}")
+    public void introducirMail(String mail) {
+        ExtentReportHook.getTest().info("Introduciendo el mail...");
+        portal_usuario.introducirEmail(mail);
+    }
+
     @Then("El usuario recibe un código de verificación")
     public void comprobarRecepcionVerificacion() {
         // Pendiente que funcione servicio de envío OTP, no se puede probar
@@ -288,6 +294,18 @@ public class PortalUsuario_ControlPanel_Steps {
     public void validarMensajeError() {
         String mensajeError = portal_usuario.obtenerMensajeError();
         Validator.validarVerdadero(mensajeError.contains("El formato del mail introducido es incorrecto"), "Aparece mensaje de error", true);
+    }
+
+    @When("El usuario pulsa en Continuar Revocación")
+    public void continuarRevocacion() {
+        ExtentReportHook.getTest().info("Pulsando en Continuar Revocación...");
+        portal_usuario.clickContinuarRevocacion();
+    }
+
+    @Then("Se carga el paso 2 de la revocación")
+    public void comprobarPaso2() {
+        String paso = portal_usuario.obtenerPaso();
+        Validator.validarVerdadero(paso.contains("Paso 2 de 3: Aceptar condiciones"), "Se encuentra el paso 2 (" + paso + ")", true);
     }
 
 

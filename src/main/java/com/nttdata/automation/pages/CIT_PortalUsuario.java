@@ -2,6 +2,7 @@ package com.nttdata.automation.pages;
 
 import com.nttdata.automation.base.BasePageObject;
 import com.nttdata.automation.driver.DriverManager;
+import com.nttdata.automation.utils.Commons;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -34,6 +35,7 @@ public class CIT_PortalUsuario extends BasePageObject {
     private final By codigosDigitos = xpath("cit_codigos_digitos");
     private final By alerta = xpath("cit_alerta");
     private final By enviar = xpath("cit_enviar");
+    private final By paso = xpath("cit_paso_revocacion");
 
     public CIT_PortalUsuario() {
         super("elements/web_usuario.properties");
@@ -142,6 +144,8 @@ public class CIT_PortalUsuario extends BasePageObject {
     }
 
     public boolean estaHabilitadoDigitos() {
+        // Forzamos 3 segundos de espera porque sino el refresco no es inmediato
+        Commons.waitNseconds(3);
         List<WebElement> digitos = DriverManager.getDriver().findElements(codigosDigitos);
         return digitos.stream().noneMatch(w -> existeElAtributoEnElElemento(w, "disabled"));
     }
@@ -176,4 +180,7 @@ public class CIT_PortalUsuario extends BasePageObject {
         return obtenerTextosElementosWeb(alerta).getFirst();
     }
 
+    public String obtenerPaso() {
+        return obtenerTextosElementosWeb(paso).getFirst();
+    }
 }
