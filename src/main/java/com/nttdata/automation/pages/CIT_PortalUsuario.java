@@ -37,6 +37,9 @@ public class CIT_PortalUsuario extends BasePageObject {
     private final By enviar = xpath("cit_enviar");
     private final By paso = xpath("cit_paso_revocacion");
     private final By errores_revocacion = xpath("cit_errores_revocacion");
+    private final By check_aceptar_terminos = id("cit_check_aceptarTerminos");
+    private final By boton_confirmar_terminos = xpath("cit_boton_confirmarTerminos");
+    private final By boton_cancelar_terminos = xpath("cit_boton_cancelarTerminos");
 
     public CIT_PortalUsuario() {
         super("elements/web_usuario.properties");
@@ -187,5 +190,25 @@ public class CIT_PortalUsuario extends BasePageObject {
 
     public List<String> obtenerErroresRevocacion() {
         return obtenerTextosElementosWeb(errores_revocacion);
+    }
+
+    public void aceptarTerminosYCondiciones() {
+        pulsar(check_aceptar_terminos);
+    }
+
+    public boolean estaHabilitadoConfirmarTerminos() {
+        return !existeElAtributoEnElElemento(DriverManager.getDriver().findElement(boton_confirmar_terminos), "disabled");
+    }
+
+    public boolean estaHabilitadoCancelarTerminos() {
+        return !existeElAtributoEnElElemento(DriverManager.getDriver().findElement(boton_cancelar_terminos), "disabled");
+    }
+
+    public void confirmarTerminosYCondiciones() {
+        pulsar(boton_confirmar_terminos);
+    }
+
+    public void cancelarTerminosYCondiciones() {
+        pulsar(boton_cancelar_terminos);
     }
 }

@@ -306,10 +306,22 @@ public class PortalUsuario_ControlPanel_Steps {
         portal_usuario.clickContinuarRevocacion();
     }
 
+    @Then("Se carga el paso 1 de la revocación")
+    public void comprobarPaso1() {
+        String paso = portal_usuario.obtenerPaso();
+        Validator.validarVerdadero(paso.contains("Paso 1 de 3: Verifica tu identidad"), "Se encuentra el paso 1 (" + paso + ")", true);
+    }
+
     @Then("Se carga el paso 2 de la revocación")
     public void comprobarPaso2() {
         String paso = portal_usuario.obtenerPaso();
         Validator.validarVerdadero(paso.contains("Paso 2 de 3: Aceptar condiciones"), "Se encuentra el paso 2 (" + paso + ")", true);
+    }
+
+    @Then("Se carga el paso 3 de la revocación")
+    public void comprobarPaso3() {
+        String paso = portal_usuario.obtenerPaso();
+        Validator.validarVerdadero(paso.contains("Paso 3 de 3: Indica motivo revocación"), "Se encuentra el paso 3 (" + paso + ")", true);
     }
 
     @Then("Se muestra error por otp erroneo")
@@ -317,6 +329,34 @@ public class PortalUsuario_ControlPanel_Steps {
         List <String> errores_obtenidos = portal_usuario.obtenerErroresRevocacion();
         Validator.validarVerdadero(errores_obtenidos.stream().anyMatch(k -> k.contains("El código introducido es incorrecto")),
                 "Se muestra error de código incorrecto", true);
+    }
+
+    @When("El usuario marca el check para aceptar terminos y condiciones")
+    public void aceptarTerminos() {
+        ExtentReportHook.getTest().info("Aceptando terminos y condiciones...");
+        portal_usuario.aceptarTerminosYCondiciones();
+    }
+
+    @Then("Se habilita el botón Confirmar de los terminos y condiciones")
+    public void comprobarBotonConfirmarTerminos() {
+        Validator.validarVerdadero(portal_usuario.estaHabilitadoConfirmarTerminos(),"El botón Confirmar de los T&C está habilitado", true);
+    }
+
+    @Then("El botón Cancelar de los terminos y condiciones está habilitado")
+    public void comprobarBotonCancelarTerminos() {
+        Validator.validarVerdadero(portal_usuario.estaHabilitadoCancelarTerminos(),"El botón Cancelar de los T&C está habilitado", true);
+    }
+
+    @When("El usuario confirma los terminos y condiciones")
+    public void confirmarTerminos() {
+        ExtentReportHook.getTest().info("Pulsando en confirmar T&C...");
+        portal_usuario.confirmarTerminosYCondiciones();
+    }
+
+    @When("El usuario cancela los terminos y condiciones")
+    public void cancelarTerminos() {
+        ExtentReportHook.getTest().info("Pulsando en cancelar T&C...");
+        portal_usuario.cancelarTerminosYCondiciones();
     }
 
 
