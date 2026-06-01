@@ -7,6 +7,7 @@ import com.nttdata.automation.pages.WP_ControlPanel;
 import com.nttdata.automation.validation.Validator;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import jnr.a64asm.Ext;
 import org.openqa.selenium.WindowType;
 
 import java.util.List;
@@ -359,6 +360,38 @@ public class PortalUsuario_ControlPanel_Steps {
         portal_usuario.cancelarTerminosYCondiciones();
     }
 
+    @When("El usuario despliega los motivos de revocacion")
+    public void desplegarMotivos() {
+        ExtentReportHook.getTest().info("Desplegando motivos...");
+        portal_usuario.desplegarMotivos();
+    }
+
+    @When("El usuario elige el motivo {string}")
+    public void seleccionarMotivoRevocacion(String motivo) {
+        ExtentReportHook.getTest().info("Seleccionando el motivo " + motivo + "...");
+        portal_usuario.seleccionarMotivo(motivo);
+    }
+
+    @When("El usuario selecciona firma básica")
+    public void seleccionarFirmaBasica() {
+        ExtentReportHook.getTest().info("Seleccionando firma básica...");
+        portal_usuario.seleccionarFirmaBasica();
+    }
+
+    @Then("Se muestra el resumen del proceso con el resultado de la revocacion")
+    public void comprobarResumenProceso() {
+        String resultado = portal_usuario.obtenerResumenProceso();
+        Validator.validarVerdadero(resultado.contains("El proceso de revocación de tu Cartera Digital se ha iniciado correctamente"),
+                "Se muestra 'El proceso de revocación de tu Cartera Digital se ha iniciado correctamente'", true, true);
+        Validator.validarVerdadero(resultado.contains("Todas tus credenciales y accesos han sido desactivados de forma segura"),
+                "Se muestra 'Todas tus credenciales y accesos han sido desactivados de forma segura'", true, true);
+    }
+
+    @When("El usuario pulsa en volver al inicio")
+    public void volverInicio(){
+        ExtentReportHook.getTest().info("Pulsando en volver a inicio...");
+        portal_usuario.clickVolverInicio();
+    }
 
 }
 

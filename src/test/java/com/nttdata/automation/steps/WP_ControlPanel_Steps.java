@@ -1,6 +1,8 @@
 package com.nttdata.automation.steps;
 
 import com.aventstack.extentreports.ExtentTest;
+import com.nttdata.automation.pages.WP_DetalleCartera;
+import com.nttdata.automation.validation.Validator;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -10,10 +12,12 @@ import com.nttdata.automation.hooks.ExtentReportHook;
 public class WP_ControlPanel_Steps {
 
     WP_ControlPanel wp_cp;
+    WP_DetalleCartera wp_dc;
 
     public WP_ControlPanel_Steps() {
         // Inicio la pantalla una sola vez
         wp_cp = new WP_ControlPanel();
+        wp_dc = new WP_DetalleCartera();
     }
 
     public static ExtentTest test = ExtentReportHook.getTest();
@@ -241,5 +245,11 @@ public class WP_ControlPanel_Steps {
         test.info("Primer correo obtenido: " + primerCorreo);
         return primerCorreo;
     }
+
+    @When("El estado de la cartera es {string}")
+    public void validarEstadoCartera(String estado_esperado) {
+        Validator.validarVerdadero(wp_dc.obtenerEstadoCartera().contains(estado_esperado), "La cartera está en el estado: " + estado_esperado,true);
+    }
+
 
 }

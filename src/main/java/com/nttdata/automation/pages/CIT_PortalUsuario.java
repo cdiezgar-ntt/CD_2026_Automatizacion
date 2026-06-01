@@ -40,6 +40,12 @@ public class CIT_PortalUsuario extends BasePageObject {
     private final By check_aceptar_terminos = id("cit_check_aceptarTerminos");
     private final By boton_confirmar_terminos = xpath("cit_boton_confirmarTerminos");
     private final By boton_cancelar_terminos = xpath("cit_boton_cancelarTerminos");
+    private final By desplegable_motivos = tag("cit_desplegableMotivos");
+    private final By lista_motivos = xpath("cit_opcionesDesplegableMotivos");
+    private final By radio_firma_basica = xpath("cit_radioFirmaBasica");
+    private final By radio_autofirma = xpath("cit_radioAutofirma");
+    private final By card_proceso = tag("cit_cardProceso");
+    private final By botonVolverInicio = xpath("cit_volverInicio");
 
     public CIT_PortalUsuario() {
         super("elements/web_usuario.properties");
@@ -211,4 +217,25 @@ public class CIT_PortalUsuario extends BasePageObject {
     public void cancelarTerminosYCondiciones() {
         pulsar(boton_cancelar_terminos);
     }
+
+    public void desplegarMotivos() {
+        pulsar(desplegable_motivos);
+    }
+
+    public void seleccionarMotivo(String motivo) {
+        seleccionarDeLista(lista_motivos, motivo);
+    }
+
+    public void seleccionarFirmaBasica() {
+        pulsar(radio_firma_basica);
+    }
+
+    public String obtenerResumenProceso() {
+        return obtenerTextosElementosWeb(card_proceso).getFirst();
+    }
+
+    public void clickVolverInicio() {
+        pulsar(botonVolverInicio);
+    }
+
 }
