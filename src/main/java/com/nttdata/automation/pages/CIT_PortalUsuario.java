@@ -36,6 +36,7 @@ public class CIT_PortalUsuario extends BasePageObject {
     private final By alerta = xpath("cit_alerta");
     private final By enviar = xpath("cit_enviar");
     private final By paso = xpath("cit_paso_revocacion");
+    private final By errores_revocacion = xpath("cit_errores_revocacion");
 
     public CIT_PortalUsuario() {
         super("elements/web_usuario.properties");
@@ -182,5 +183,9 @@ public class CIT_PortalUsuario extends BasePageObject {
 
     public String obtenerPaso() {
         return obtenerTextosElementosWeb(paso).getFirst();
+    }
+
+    public List<String> obtenerErroresRevocacion() {
+        return obtenerTextosElementosWeb(errores_revocacion);
     }
 }

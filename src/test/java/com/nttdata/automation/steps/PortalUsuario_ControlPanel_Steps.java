@@ -268,9 +268,13 @@ public class PortalUsuario_ControlPanel_Steps {
     }
 
     @When("El usuario introduce el código de verificación recibido")
-    public void introducirCodigoOtp() {
-        // Pendiente que funcione servicio de envío OTP, no se puede probar
+    public void introducirCodigoOtpCorrecto() {
         portal_usuario.escribirOtp("000000");
+    }
+
+    @When("El usuario introduce el código de verificación erróneo")
+    public void introducirCodigoOtpErroneo() {
+        portal_usuario.escribirOtp("999999");
     }
 
     @Then("Se desbloquea el botón continuar revocación")
@@ -306,6 +310,13 @@ public class PortalUsuario_ControlPanel_Steps {
     public void comprobarPaso2() {
         String paso = portal_usuario.obtenerPaso();
         Validator.validarVerdadero(paso.contains("Paso 2 de 3: Aceptar condiciones"), "Se encuentra el paso 2 (" + paso + ")", true);
+    }
+
+    @Then("Se muestra error por otp erroneo")
+    public void comprobarErrorOtp() {
+        List <String> errores_obtenidos = portal_usuario.obtenerErroresRevocacion();
+        Validator.validarVerdadero(errores_obtenidos.stream().anyMatch(k -> k.contains("El código introducido es incorrecto")),
+                "Se muestra error de código incorrecto", true);
     }
 
 

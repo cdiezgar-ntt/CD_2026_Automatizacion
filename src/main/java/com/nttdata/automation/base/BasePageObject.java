@@ -2,9 +2,7 @@ package com.nttdata.automation.base;
 
 import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.utils.PropertiesReader;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -96,6 +94,16 @@ public class BasePageObject {
         } catch (Exception e) {
             throw new RuntimeException("Error al clicar", e);
         }
+    }
+
+    protected void aceptarAlertaNavegador() {
+        Alert alerta = wait.until(ExpectedConditions.alertIsPresent());
+        alerta.accept();
+    }
+
+    protected void rechazarAlertaNavegador() {
+        Alert alerta = wait.until(ExpectedConditions.alertIsPresent());
+        alerta.dismiss();
     }
 
     protected void escribir(By localizador, String contenido) {
@@ -218,13 +226,10 @@ public class BasePageObject {
 
     protected List<String> obtenerTextosElementosWeb(By localizador) {
         try {
-            System.out.println("Esperando a que los elementos sean visibles");
             List <WebElement> we = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(localizador));
             hacerScroll(we.getFirst());
             return we.stream().map(WebElement::getText).collect(Collectors.toList());
         } catch (Exception e) {
-            System.out.println("Excepción al obtener textos: " + e);
-            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
@@ -262,14 +267,12 @@ public class BasePageObject {
     protected boolean existeElAtributoEnElElemento(WebElement we, String atr) {
         try {
             String atr_str = we.getDomAttribute(atr);
-            System.out.println("El atributo " + atr + " tiene el valor " + atr_str);
             return atr_str != null;
         } catch (Exception e) {
-            System.out.println("Excepción: el elemento es nulo");
-            e.printStackTrace();
             return false;
         }
     }
+
 
     private void hacerScroll(WebElement we) {
         new Actions(driver).scrollToElement(we).perform();
