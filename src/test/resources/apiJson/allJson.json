@@ -1,0 +1,14 @@
+{
+  "crear_juan_perez": {
+    "name": "Carlos QA",
+    "job": "Automation Engineer"
+  },
+  "crear_usuario_sin_trabajo": {
+    "name": "Ana Lopez",
+    "job": ""
+  },
+  "actualizar_usuario": {
+    "name": "Carlos Editado",
+    "job": "Lead QA"
+  }
+}

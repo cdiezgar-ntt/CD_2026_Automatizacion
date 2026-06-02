@@ -7,7 +7,7 @@ Feature: WALLET-1713
   #4. Se dirige al usuario a la pantalla de inicio del Portal de Administración.
 
   #Etiquetas
-  @WALLET-1713 @wallet_provider
+  @WALLET-1713 @wallet_provider @wp_descartado
   Scenario: WALLET PROVIDER - EJECUTIVO - Aceptar términos y condiciones - mostrar respuesta al aceptar los términos y condiciones
     Given Abrir la web wallet provider
     And Esperar 5 segundos

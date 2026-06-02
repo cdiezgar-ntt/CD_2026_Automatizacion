@@ -9,7 +9,7 @@ Feature: WALLET-1720-XXXX
   #6. Se dirige al usuario a una nueva pantalla en la que se muestra un mensaje de error y no se muestra el detalle de la Cartera revocada.
 
   #Etiquetas
-  @WALLET-1720 @wallet_provider @noejecutar
+  @WALLET-1720 @wallet_provider @noejecutar @wp_descartado
 Scenario: WALLET PROVIDER - EJECUTIVO - Detalle de Cartera – Cartera revocada - mostrar respuesta de error en el detalle de cartera revocada
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos

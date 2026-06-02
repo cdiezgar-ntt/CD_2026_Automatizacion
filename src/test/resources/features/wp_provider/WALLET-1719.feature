@@ -18,5 +18,5 @@ Feature: WALLET-1719
     When Seleccionar en el combo con id "wp_pantallaInicio_ComboMotivoRevocacion" la opcion con valor "USER_REQUEST"
     When Click en el botón buscar - portal wallet provider
     And Click en el primer elemento de la lista - portal wallet provider
-    And Validar que el campo "wp_detalleCartera_InformacionGeneral_estado" de tipo "xpath" tiene el valor "Revocada"
+    And Validar que el campo "wp_detalleCartera_InformacionGeneral_estado" de tipo "tag" tiene el valor "Revocada"
     And Cerrar el navegador

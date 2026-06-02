@@ -7,7 +7,7 @@ Feature: WALLET-1718
   #4. La pantalla muestra un mensaje de error.
 
   #Etiquetas
-  @WALLET-1718 @wallet_provider
+  @WALLET-1718 @wallet_provider @wp_descartado
 Scenario: WALLET PROVIDER - EJECUTIVO - Pantalla inicio - búsqueda de Carteras con error
 
 

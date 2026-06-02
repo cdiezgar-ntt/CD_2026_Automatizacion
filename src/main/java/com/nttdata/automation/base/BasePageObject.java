@@ -160,6 +160,28 @@ public class BasePageObject {
         }
     }
 
+    public void seleccionComboByxpath(String elmentoWebString, String opcion) {
+        WebElement we;
+        By localizador;
+        try{
+            localizador = xpath(elmentoWebString);
+            System.out.println("Esperando a que el elemento sea visible...");
+            we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
+            //Scrollear hasta el elemento
+            new Actions(driver).scrollToElement(we).perform();
+            System.out.println("Rellenando combobox");
+            Select comboBox = new Select(we);
+            comboBox.selectByValue(opcion);
+            //comboBox.selectByVisibleText(opcion);
+            System.out.println("Combobox seleccionado: " + opcion);
+
+        }catch (Exception e){
+            System.out.println("Excepción al seleccionar combo: " + e);
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
     public void webDriverWaitUntil(int time, String xpath ) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
         WebElement elemento = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
@@ -195,6 +217,14 @@ public class BasePageObject {
                 textoElemento = we.getText();
                 break;
             case "tagname":
+                localizador = tag(id1);
+
+                System.out.println("Esperando a que el elemento sea visible...");
+                we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
+                System.out.println("Obteniendo texto del elemento...");
+                textoElemento = we.getText();
+                break;
+            case "tag":
                 localizador = tag(id1);
 
                 System.out.println("Esperando a que el elemento sea visible...");

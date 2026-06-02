@@ -262,5 +262,22 @@ public class WP_ControlPanel_Steps {
         Validator.validarVerdadero(wp_dc.obtenerEstadoCartera().contains(estado_esperado), "La cartera está en el estado: " + estado_esperado,true);
     }
 
+    @And("Click en el botón revocar cartera - portal wallet provider")
+    public void detalleCarteraRevocarCartera() {
+        System.out.println("Clicando en el botón revocar cartera");
+        test.info("Clicando en el botón revocar cartera");
+        wp_dc.clickBtnDetallesRevocarCartera();
+        System.out.println("Botón revocar cartera clicado");
+        test.info("Botón revocar cartera clicado");
+    }
+
+    @And("Click en el botón confirmar revocación - portal wallet provider detalle de cartera")
+    public void detalleCarteraConfirmarRevocacion() {
+        System.out.println("Clicando en el botón confirmar revocación");
+        test.info("Clicando en el botón confirmar revocación");
+        wp_dc.clickBtnSiRevocar();
+        System.out.println("Botón confirmar revocación clicado");
+        test.info("Botón confirmar revocación clicado");
+    }
 
 }

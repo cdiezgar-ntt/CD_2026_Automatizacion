@@ -6,7 +6,7 @@ Feature: WALLET-1731-XXXXX
   #3. La pantalla muestra un mensaje de error al cargar el archivo por formato inválido.
 
   #Etiquetas
-  @WALLET-1731 @wallet_provider @noejecutar
+  @WALLET-1731 @wallet_provider @noejecutar @wp_descartado
   Scenario: WALLET PROVIDER - EJECUTIVO - Revocación por archivo - error de formato al cargar un archivo
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos

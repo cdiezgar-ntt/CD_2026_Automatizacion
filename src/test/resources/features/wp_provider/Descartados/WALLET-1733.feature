@@ -8,7 +8,7 @@ Feature: WALLET-1733-XXXX
   #5. Se redirige al usuario a la pantalla de detalle de bloque de revocación.
 
   #Etiquetas
-  @WALLET-1733 @wallet_provider @noejecutar
+  @WALLET-1733 @wallet_provider @noejecutar @wp_descartado
   Scenario: WALLET PROVIDER - EJECUTIVO - Histórico de revocación - mostrar respuesta de bloques y detalle del histórico de revocación con error
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos

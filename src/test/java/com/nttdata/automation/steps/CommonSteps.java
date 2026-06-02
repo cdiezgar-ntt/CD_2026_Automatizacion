@@ -11,14 +11,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;
-import com.nttdata.automation.pages.WP_ControlPanel;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Match;
-import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
 
 
-import javax.swing.text.Utilities;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -159,11 +156,25 @@ public class CommonSteps {
      * @param texto: String con el valor a seleccionar en el combo
      */
     @And("Seleccionar en el combo con id {string} la opcion con valor {string}")
-    public void seleccionarElComboMotivoRevocacionConElTexto(String id, String texto) {
+    public void seleccionarElComboConElTexto(String id, String texto) {
         BasePageObject bpo = new BasePageObject();
         System.out.println("Seleccionando el combo Motivo Revocacion con el texto: " + texto);
         bpo.seleccionComboById(id,texto);
         System.out.println("Combo Motivo Revocacion seleccionado con el texto: " + texto);
+    }
+
+    /**
+     * @description Método para seleccionar una opción de un combo, se le pasa el id del combo y el valor a seleccionar
+     * @param xpath: String con el xpath del combo
+     * @param texto: String con el valor a seleccionar en el combo
+     */
+    @And("Seleccionar en el combo con xpath {string} la opcion con valor {string}")
+    public void seleccionarElComboXpathConElTexto(String xpath, String texto) {
+//        BasePageObject bpo = new BasePageObject();
+//        System.out.println("Seleccionando el combo Motivo Revocacion con el texto: " + texto);
+//        bpo.seleccionComboByxpath(xpath,texto);
+//        System.out.println("Combo Motivo Revocacion seleccionado con el texto: " + texto);
+
     }
 
     /**

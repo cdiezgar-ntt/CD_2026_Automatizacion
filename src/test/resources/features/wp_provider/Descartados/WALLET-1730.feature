@@ -8,7 +8,7 @@ Feature: WALLET-1730-XXXX
   #5. Se muestra en la modal un mensaje de error al intentar realizar la revocación por archivo.
 
   #Etiquetas
-  @WALLET-1730 @wallet_provider @noejecutar
+  @WALLET-1730 @wallet_provider @noejecutar @wp_descartado
 Scenario: WALLET PROVIDER - EJECUTIVO - Revocación por archivo - mostrar respuesta de error tras revocación de carteras seleccionadas al cargar un archivo
   Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
   And Esperar 5 segundos

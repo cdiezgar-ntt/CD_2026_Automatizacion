@@ -11,12 +11,12 @@ Feature: WALLET-1721-XXXX
   #Etiquetas
   @WALLET-1721 @wallet_provider @noejecutar
   Scenario: WALLET PROVIDER - EJECUTIVO - Detalle de Cartera – Cartera revocable - mostrar respuesta de detalle de cartera revocable
-    Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
+    Given Abrir la web wallet provider
     And Esperar 5 segundos
     When Click en el botón acceder
     And  Intro en certificado
-    When Añado el texto "XXXXXXXXX" en el campo de búsqueda "revocable" - portal wallet provider
+    When Seleccionar en el combo con id "wp_pantallaInicio_ComboEstado" la opcion con valor "VALID"
     When Click en el botón buscar - portal wallet provider
     And Click en el primer elemento de la lista - portal wallet provider
-    And Comprobar detalle cartera revocada - portal wallet provider
+    And Validar que el campo "wp_detalleCartera_InformacionGeneral_estado" de tipo "tag" tiene el valor "Cartera operativa"
     And Cerrar el navegador

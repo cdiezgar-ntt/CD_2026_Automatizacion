@@ -11,7 +11,7 @@ Feature: WALLET-1729-XXXX
   #8. La pantalla muestra un mensaje de confirmación del proceso de revocación y el usuario puede volver al inicio o ir a la pantalla de detalle de la revocación.
 
   #Etiquetas
-  @WALLET-1729 @wallet_provider @noejecutar
+  @WALLET-1729 @wallet_provider @noejecutar @wp_descartado
   Scenario: WALLET PROVIDER - EJECUTIVO - Revocación por archivo - mostrar respuesta tras revocación de carteras seleccionadas al cargar un archivo
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos

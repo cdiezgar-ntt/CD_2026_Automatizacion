@@ -14,15 +14,19 @@ Feature: WALLET-1722-XXXX
   #Etiquetas
   @WALLET-1722 @wallet_provider @noejecutar
 Scenario: WALLET PROVIDER - EJECUTIVO - Detalle de Cartera – Cartera revocable - revocar cartera a través del detalle de cartera revocable
-    Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
+    Given Abrir la web wallet provider
     And Esperar 5 segundos
     When Click en el botón acceder
     And  Intro en certificado
-    When Añado el texto "XXXXXXXXX" en el campo de búsqueda "revocable" - portal wallet provider
+    When Seleccionar en el combo con id "wp_pantallaInicio_ComboEstado" la opcion con valor "VALID"
     When Click en el botón buscar - portal wallet provider
     And Click en el primer elemento de la lista - portal wallet provider
-    And Comprobar detalle cartera revocada - portal wallet provider
+    #And Validar que el campo "wp_detalleCartera_InformacionGeneral_estado" de tipo "tag" tiene el valor "Cartera operativa"
     And Click en el botón revocar cartera - portal wallet provider
-    And Seleccionar motivo de revocación "Pérdida o robo del dispositivo" - portal wallet provider
-    And Click en el botón confirmar revocación - portal wallet provider
+    #And Seleccionar en el combo con xpath "wp_detalleCartera_RevocacionComboMotivoRevocacion" la opcion con valor "MOBILE_PHONE_LOSS"
+    When El usuario despliega los motivos de revocacion
+    And El usuario elige el motivo "Cambio de datos de identidad"
+    And Click en el botón confirmar revocación - portal wallet provider detalle de cartera
+    And Acepta la alerta de autofirma
+    And Selecciona su certificado en autofirma
     And Cerrar el navegador
