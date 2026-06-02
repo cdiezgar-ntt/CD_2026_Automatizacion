@@ -35,10 +35,14 @@ public class Cartera {
     // TODO actualmente solo está disponible en el entorno de SE porque solo tenemos ese entorno.
     // WARNING depende complemtamente de que estén habilitados los mocks de envío de los OTP móvil y mail
     public void nuevaCartera() {
+
+        //Elegimos el entorno de bruno que ejecuta la coleccion
+        String entorno_bruno = new EnvironmentConfig(new PropertiesReader()).environmentProperty("bruno_environment");
+
         ProcessBuilder pb = new ProcessBuilder(
                 "cmd.exe",
                 "/c",
-                "bru run --env AEAD_SE --env-var email=" + email
+                "bru run --env "+entorno_bruno+" --env-var email=" + email
         );
 
         pb.directory(new File("src/test/resources/bruno_collection"));

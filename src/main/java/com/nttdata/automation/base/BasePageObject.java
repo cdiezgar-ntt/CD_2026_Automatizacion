@@ -2,6 +2,7 @@ package com.nttdata.automation.base;
 
 import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.utils.Commons;
+import com.nttdata.automation.utils.EnvironmentConfig;
 import com.nttdata.automation.utils.PropertiesReader;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -43,7 +44,7 @@ public class BasePageObject {
     }
 
     public String url(String key) {
-        return propertiesReader.get("config/urls.properties", key);
+        return new EnvironmentConfig(propertiesReader).environmentProperty(key);
     }
 
     protected String element(String key) {
