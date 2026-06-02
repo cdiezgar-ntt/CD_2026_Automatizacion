@@ -4,6 +4,7 @@ import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.pages.CIT_PortalUsuario;
 import com.nttdata.automation.hooks.ExtentReportHook;
 import com.nttdata.automation.pages.WP_ControlPanel;
+import com.nttdata.automation.utils.Cartera;
 import com.nttdata.automation.utils.Commons;
 import com.nttdata.automation.validation.Validator;
 import io.cucumber.java.en.Then;
@@ -20,8 +21,10 @@ import java.util.List;
 public class PortalUsuario_ControlPanel_Steps {
 
     public CIT_PortalUsuario portal_usuario;
+    private final Cartera cartera;
 
-    public PortalUsuario_ControlPanel_Steps() {
+    public PortalUsuario_ControlPanel_Steps(Cartera cartera) {
+        this.cartera = cartera;
         // Inicio la pantalla una sola vez
         portal_usuario = new CIT_PortalUsuario();
     }
@@ -232,35 +235,11 @@ public class PortalUsuario_ControlPanel_Steps {
         Validator.validarFalso(portal_usuario.estaHabilitadoDigitos(), "Los digitos estan deshabilitados");
     }
 
-    @When("El usuario introduce el mail de una cartera válida")
-    public void localizarCarteraValida_introducirMail() {
-
-        // Se accede al WP a consultar un mail valido en una nueva pestaña
-        ExtentReportHook.getTest().info("Obteniendo un email valido...");
-        String mainWindow = DriverManager.getDriver().getWindowHandle();
-        DriverManager.getDriver().switchTo().newWindow(WindowType.TAB);
-        WP_ControlPanel wallet_provider = new WP_ControlPanel();
-        wallet_provider.cargarWeb();
-        new CommonSteps().hacerClickEnElBotonAcceder();
-        wallet_provider.clickLinkCarterasActivasVerTodas();
-
-        String email = wallet_provider.obtenerPrimerCorreo();
-        ExtentReportHook.getTest().info("Email obtenido: " + email);
-
-        // Salimos del WP y volvemos a la pestaña
-        DriverManager.getDriver().close();
-        DriverManager.getDriver().switchTo().window(mainWindow);
-
-        // Introducimos el mail encontrado
-        ExtentReportHook.getTest().info("Introduciendo el mail...");
+    @When("El usuario introduce el mail de la cartera")
+    public void introducirMail() {
+        String email = cartera.getEmail();
+        ExtentReportHook.getTest().info("Introduciendo el mail " + email + "...");
         portal_usuario.introducirEmail(email);
-
-    }
-
-    @When("El usuario introduce el mail {string}")
-    public void introducirMail(String mail) {
-        ExtentReportHook.getTest().info("Introduciendo el mail...");
-        portal_usuario.introducirEmail(mail);
     }
 
     @Then("El usuario recibe un código de verificación")
@@ -310,17 +289,6 @@ public class PortalUsuario_ControlPanel_Steps {
     public void continuarRevocacion() {
         ExtentReportHook.getTest().info("Pulsando en Continuar Revocación...");
         portal_usuario.clickContinuarRevocacion();
-    }
-
-    @When("Acepta la alerta de autofirma")
-    public void aceptarAlertaAutofirma() {
-        ExtentReportHook.getTest().info("Aceptando alerta de navegador...");
-        try {
-            Match abrir_autofirma = new Screen().wait(Commons.getResourcePath("sikuli/Abrir_autofirma.png"));
-            abrir_autofirma.click();
-        } catch (FindFailed e) {
-            ExtentReportHook.getTest().warning("No se ha podido aceptar la alerta del navegador...");
-        }
     }
 
     @Then("Se carga el paso 1 de la revocación")
@@ -403,6 +371,7 @@ public class PortalUsuario_ControlPanel_Steps {
     @Then("Se muestra el resumen del proceso con el resultado de la revocacion")
     public void comprobarResumenProceso() {
         String resultado = portal_usuario.obtenerResumenProceso();
+        System.out.println(resultado);
         Validator.validarVerdadero(resultado.contains("El proceso de revocación de tu Cartera Digital se ha iniciado correctamente"),
                 "Se muestra 'El proceso de revocación de tu Cartera Digital se ha iniciado correctamente'", true, true);
         Validator.validarVerdadero(resultado.contains("Todas tus credenciales y accesos han sido desactivados de forma segura"),

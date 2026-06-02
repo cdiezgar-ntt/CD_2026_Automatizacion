@@ -2,6 +2,7 @@ package com.nttdata.automation.steps;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.nttdata.automation.pages.WP_DetalleCartera;
+import com.nttdata.automation.utils.Cartera;
 import com.nttdata.automation.validation.Validator;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -13,8 +14,10 @@ public class WP_ControlPanel_Steps {
 
     WP_ControlPanel wp_cp;
     WP_DetalleCartera wp_dc;
+    private final Cartera cartera;
 
-    public WP_ControlPanel_Steps() {
+    public WP_ControlPanel_Steps(Cartera cartera) {
+        this.cartera = cartera;
         // Inicio la pantalla una sola vez
         wp_cp = new WP_ControlPanel();
         wp_dc = new WP_DetalleCartera();
@@ -60,6 +63,14 @@ public class WP_ControlPanel_Steps {
         System.out.println("Texto '" + texto + "' rellenado en el campo de búsqueda ");
         test.info("Texto '" + texto + "' rellenado en el campo de búsqueda ");
     }
+
+    @Given("El usuario escribe un email existente")
+    public void rellenarMailExistente() {
+        String email = cartera.getEmail();
+        ExtentReportHook.getTest().info("Buscando email " + email + "...");
+        wp_cp.rellenarCampoBusquedaEmail(email);
+    }
+
 
 //
 

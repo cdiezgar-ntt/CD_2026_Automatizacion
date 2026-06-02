@@ -4,6 +4,7 @@ import com.nttdata.automation.base.BasePageObject;
 import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.hooks.ExtentReportHook;
 import com.nttdata.automation.pages.Login;
+import com.nttdata.automation.utils.Cartera;
 import com.nttdata.automation.utils.Commons;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -20,13 +21,18 @@ import org.sikuli.script.Screen;
 import javax.swing.text.Utilities;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 
 public class CommonSteps {
 
     Login login;
 
-    public CommonSteps() {
+    private final Cartera cartera;
+
+    public CommonSteps(Cartera cartera) {
         login = new Login();
+        this.cartera = cartera;
     }
 
     WebDriver driver = DriverManager.getDriver();
@@ -170,6 +176,22 @@ public class CommonSteps {
         ExtentReportHook.getTest().info("Navegador cerrado");
     }
 
+
+    /*----------------------CONTROL DE AUTOFIRMA---------------------
+    * TODO Actualmente lo hace con la Libreria Siculix que depende de interfaz grafica
+    *  */
+
+    @When("Acepta la alerta de autofirma")
+    public void aceptarAlertaAutofirma() {
+        ExtentReportHook.getTest().info("Aceptando alerta de navegador...");
+        try {
+            Match abrir_autofirma = new Screen().wait(Commons.getResourcePath("sikuli/Abrir_autofirma.png"));
+            abrir_autofirma.click();
+        } catch (FindFailed e) {
+            ExtentReportHook.getTest().warning("No se ha podido aceptar la alerta del navegador...");
+        }
+    }
+
     @When("Selecciona su certificado en autofirma")
     public void seleccionar_y_firmar() {
         ExtentReportHook.getTest().info("Seleccionando certificado en autofirma...");
@@ -184,6 +206,21 @@ public class CommonSteps {
         } catch (FindFailed e) {
             ExtentReportHook.getTest().warning("No ha sido posible seleccionar el certificado. Causa: " + e.getLocalizedMessage());
             throw new RuntimeException(e);
+        }
+
+    }
+
+    /*------------------------------CREACIÓN DE CARTERA PARA PRUEBAS------------------------------*/
+    @Given("El usuario dispone de una cartera valida")
+    public void crearCartera() {
+        String email = cartera.getEmail();
+        ExtentReportHook.getTest().info("Creando nueva cartera con email: "+ email+"...");
+        cartera.nuevaCartera();
+        if (cartera.estaCreada()) {
+            ExtentReportHook.getTest().info("La cartera se ha creado correctamente. Esperando 20 segundos...");
+        } else {
+            ExtentReportHook.getTest().warning("No se ha podido crear la cartera");
+            throw new RuntimeException();
         }
 
     }

@@ -44,7 +44,7 @@ public class CIT_PortalUsuario extends BasePageObject {
     private final By lista_motivos = xpath("cit_opcionesDesplegableMotivos");
     private final By radio_firma_basica = xpath("cit_radioFirmaBasica");
     private final By radio_autofirma = xpath("cit_radioAutofirma");
-    private final By card_proceso = tag("cit_cardProceso");
+    private final By card_proceso = xpath("cit_cardProceso");
     private final By botonVolverInicio = xpath("cit_volverInicio");
 
     public CIT_PortalUsuario() {
