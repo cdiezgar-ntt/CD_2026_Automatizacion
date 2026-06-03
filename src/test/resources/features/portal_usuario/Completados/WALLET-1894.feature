@@ -1,6 +1,6 @@
 Feature: WALLET-1894
 
-@portal_usuario @validaciones
+@portal_usuario @revocacion @validaciones
 Scenario Outline: PORTAL USUARIO - REVOCACIÓN CARTERA DIGITAL - Verificar tu identidad - el email introducido no tiene el formato correcto - <email_invalido>
       Given Abrir la web usuario
       Then El usuario visualiza 3 tipos de revocación

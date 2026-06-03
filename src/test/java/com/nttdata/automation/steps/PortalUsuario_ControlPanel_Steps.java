@@ -242,6 +242,12 @@ public class PortalUsuario_ControlPanel_Steps {
         portal_usuario.introducirEmail(email);
     }
 
+    @When("El usuario introduce el mail {string}")
+    public void introducirMail(String email) {
+        ExtentReportHook.getTest().info("Introduciendo el mail " + email + "...");
+        portal_usuario.introducirEmail(email);
+    }
+
     @Then("El usuario recibe un código de verificación")
     public void comprobarRecepcionVerificacion() {
         // Pendiente que funcione servicio de envío OTP, no se puede probar
@@ -314,6 +320,14 @@ public class PortalUsuario_ControlPanel_Steps {
         List <String> errores_obtenidos = portal_usuario.obtenerErroresRevocacion();
         Validator.validarVerdadero(errores_obtenidos.stream().anyMatch(k -> k.contains("El código introducido es incorrecto")),
                 "Se muestra error de código incorrecto", true);
+    }
+
+    //TODO Pendiente que se defina un error a mostrar cuando esto suceda. Temporalmente se crea esto para que el test falle
+    @Then("Se muestra error porque no existe cartera")
+    public void comprobarErroresCarteraNoExiste() {
+        String error_obtenido = portal_usuario.obtenerTextoErrorSuperior();
+        Validator.validarVerdadero(!error_obtenido.isEmpty(),"Se obtiene un error", true);
+        Validator.validarFalso(error_obtenido.contains("Se ha producido un error al realizar la petición."), "El error no es el general");
     }
 
     @When("El usuario marca el check para aceptar terminos y condiciones")

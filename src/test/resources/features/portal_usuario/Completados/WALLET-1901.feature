@@ -1,6 +1,5 @@
 Feature: WALLET-1901
 
-
     Background:
         Given El usuario dispone de una cartera valida
         And Abrir la web usuario
@@ -17,7 +16,7 @@ Feature: WALLET-1901
         And El usuario elige el motivo "Cambio de datos de identidad"
 
 
-    @WALLET-1901
+    @portal_usuario @revocacion @firma
     # Pendiente scenario con firma autofirma
     Scenario: PORTAL USUARIO - REVOCACIÓN CARTERA DIGITAL - Aceptar términos y condiciones - mostrar respuesta al revocar la Cartera correctamente y volver al inicio - Autofirma
         When El usuario selecciona autofirma
@@ -35,7 +34,7 @@ Feature: WALLET-1901
         And Click en el primer elemento de la lista - portal wallet provider
         Then El estado de la cartera es "Revocada"
 
-    @WALLET-1901
+    @portal_usuario @revocacion @firma
     Scenario: PORTAL USUARIO - REVOCACIÓN CARTERA DIGITAL - Aceptar términos y condiciones - mostrar respuesta al revocar la Cartera correctamente y volver al inicio - Firma básica
         When El usuario selecciona firma básica
         Then Se desbloquea el botón continuar revocación

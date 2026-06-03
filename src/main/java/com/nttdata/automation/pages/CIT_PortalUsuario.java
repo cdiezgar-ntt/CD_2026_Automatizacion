@@ -37,6 +37,7 @@ public class CIT_PortalUsuario extends BasePageObject {
     private final By enviar = xpath("cit_enviar");
     private final By paso = xpath("cit_paso_revocacion");
     private final By errores_revocacion = xpath("cit_errores_revocacion");
+    private final By errorSuperior = classname("cit_errorSuperior");
     private final By check_aceptar_terminos = id("cit_check_aceptarTerminos");
     private final By boton_confirmar_terminos = xpath("cit_boton_confirmarTerminos");
     private final By boton_cancelar_terminos = xpath("cit_boton_cancelarTerminos");
@@ -242,4 +243,7 @@ public class CIT_PortalUsuario extends BasePageObject {
         pulsar(botonVolverInicio);
     }
 
+    public String obtenerTextoErrorSuperior() {
+        return obtenerTextosElementosWeb(errorSuperior).getFirst();
+    }
 }

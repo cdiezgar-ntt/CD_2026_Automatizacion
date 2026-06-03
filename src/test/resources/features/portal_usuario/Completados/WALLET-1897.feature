@@ -8,7 +8,7 @@ Feature: WALLET-1897
         When El usuario introduce el código de verificación recibido
         And El usuario pulsa en Continuar Revocación
 
-    @WALLET-1897
+    @portal_usuario @revocacion @terminos_condiciones
     Scenario: PORTAL USUARIO - REVOCACIÓN CARTERA DIGITAL - Aceptar términos y condiciones - mostrar respuesta al aceptar los términos y condiciones
         When El usuario marca el check para aceptar terminos y condiciones
         Then Se habilita el botón Confirmar de los terminos y condiciones

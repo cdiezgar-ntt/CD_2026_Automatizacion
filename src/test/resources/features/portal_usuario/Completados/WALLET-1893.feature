@@ -1,6 +1,6 @@
 Feature: WALLET-1893
 
-@portal_usuario @carlos
+@portal_usuario @revocacion
 Scenario: PORTAL USUARIO - REVOCACIÓN CARTERA DIGITAL - Verificar tu identidad - mostrar respuesta al completar todos los campos del paso 1
       Given Abrir la web usuario
       Then El usuario visualiza 3 tipos de revocación

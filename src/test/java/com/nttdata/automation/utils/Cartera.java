@@ -17,7 +17,7 @@ public class Cartera {
     }
 
     private String generarEmail() {
-        return "carlos_qa_" + Instant.now().toEpochMilli() + "@email.com";
+        return "auto_qa_" + Instant.now().toEpochMilli() + "@email.com";
     }
 
     public void actualizarEmail() {
@@ -60,7 +60,7 @@ public class Cartera {
                 cartera_creada = true;
             }
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             cartera_creada = false;
         }
     }
