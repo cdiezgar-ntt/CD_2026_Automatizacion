@@ -269,6 +269,18 @@ public class BasePageObject {
         );
     }
 
+    /**
+     * Utiliza {@link #seleccionarDeLista(By, String)} en su lugar.
+     *
+     * @deprecated Desde que se implementa el metodo {@link #seleccionarDeLista(By, String)}, que es válido para todos los tipos de localizador
+     * ya que se pasa el By. Este metodo solo es valido para id y además presupone conocer values internos en lugar
+     * de los textos visibles.
+     *
+     * @param elmentoWebString La clave asociada al elemento web
+     * @param opcion El value asociado al option en el identificador
+     */
+
+    @Deprecated
     public void seleccionComboById(String elmentoWebString, String opcion) {
         WebElement we;
         By localizador;
@@ -291,6 +303,16 @@ public class BasePageObject {
         }
     }
 
+    /**
+     * Utiliza {@link #seleccionarDeLista(By, String)} en su lugar.
+     *
+     * @deprecated Desde que se implementa el seleccionar de lista, que es válido para todos los tipos de localizador
+     * ya que se pasa el By. Este metodo solo es valido para xpath y además presupone conocer values internos en lugar
+     * de los textos visibles.
+     *
+     * @param elmentoWebString La clave asociada al elemento web
+     * @param opcion El value asociado al option en el identificador
+     */
     public void seleccionComboByxpath(String elmentoWebString, String opcion) {
         WebElement we;
         By localizador;
@@ -313,10 +335,18 @@ public class BasePageObject {
         }
     }
 
-    public void webDriverWaitUntil(int time, String xpath ) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
-        WebElement elemento = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-    }
+    /**
+     * Se encarga de comparar el texto obtenido contra un texto esperado. Únicamente valida igualdad de textos, por lo
+     * que es muy limitado. Desaparecerá en futuras versiones.
+     *
+     * @deprecated Desde que se implementa la clase Validator, que tiene metodos para validar expresiones agnósticas de
+     * conocer ningún identificador interno de los elementos, ni el tipo de localizador, y que son válidos para todos los
+     * tipos de validaciones, ya que se pasa por parametro una expresion booleana desde el test.
+     *
+     * @param id1 La clave asociada al elemento web
+     * @param tipo El tipo del elemento web. Posibles valores {xpath, classname, id, tagname, name}
+     * @param valor1 Valor esperado del elemento
+     */
 
     public void validarCampoDeTipo(String id1, String tipo, String valor1) {
 
@@ -421,6 +451,15 @@ public class BasePageObject {
         }
     }
 
+    /**
+     * Se encarga de hacer click en un elemento de una lista en función del texto proporcionado. Para listas, tener en
+     * cuenta que antes se debe hacer click en la lista para desplegarla, puesto que si no, se devolverá un timeout por
+     * elemento no visible o no interactuable
+     *
+     * @param localizador El By del elemento proporcionado desde el PageObject particular
+     * @param opcion El texto de la opcion visible en el desplegable. Debe ser exacto.
+     * @throws Exception si el elemento no es visible o interactuable
+     */
     protected void seleccionarDeLista(By localizador, String opcion) {
         try {
             System.out.println("Esperando a que los elementos sean visibles");

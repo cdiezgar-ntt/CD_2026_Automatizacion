@@ -5,6 +5,7 @@ import com.aventstack.extentreports.Status;
 import com.nttdata.automation.reports.ExtentReportManagement;
 import com.nttdata.automation.reports.ScreenRecorder;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
@@ -12,7 +13,9 @@ import java.util.Collection;
 
 public class ExtentReportHook {
 
-    private static final ThreadLocal<ExtentTest> testTL = new ThreadLocal<>();
+    private static final ThreadLocal<ExtentTest> globalTestTL = new ThreadLocal<>();
+    private static final ThreadLocal<ExtentTest> featureTestTL = new ThreadLocal<>();
+
     private static final ThreadLocal<Scenario> scenarioTL = new ThreadLocal<>();
     private static final ThreadLocal<String> featureNameTL = new ThreadLocal<>();
     private static final ThreadLocal<String> scenarioNameTL = new ThreadLocal<>();
@@ -20,6 +23,7 @@ public class ExtentReportHook {
 
     @Before
     public void beforeScenario(Scenario scenario) {
+
         scenarioTL.set(scenario);
 
         String featureName = getFeatureNameFromScenario(scenario);
@@ -30,17 +34,19 @@ public class ExtentReportHook {
         scenarioNameTL.set(scenarioName);
         casePathTL.set(casePath);
 
-        ExtentTest currentTest = ExtentReportManagement.createTest(scenario.getName());
+        ExtentTest globalTest = ExtentReportManagement.createTest(scenario.getName());
+        ExtentTest featureTest = ExtentReportManagement.createFeatureTest(featureName, scenario.getName());
 
-        // Obtener tags
         Collection<String> tags = scenario.getSourceTagNames();
 
-        // Asignar cada tag como categoría
         for (String tag : tags) {
-            currentTest.assignCategory(tag.replace("@", ""));
+            String category = tag.replace("@", "");
+            globalTest.assignCategory(category);
+            featureTest.assignCategory(category);
         }
 
-        testTL.set(currentTest);
+        globalTestTL.set(globalTest);
+        featureTestTL.set(featureTest);
 
         System.out.println("Inicio escenario: " + scenario.getName());
         System.out.println("Feature: " + featureName);
@@ -50,28 +56,41 @@ public class ExtentReportHook {
 
     @After
     public void afterScenario(Scenario scenario) {
-        ExtentTest currentTest = getTest();
+        ExtentTest globalTest = getTest();
+        ExtentTest featureTest = getFeatureTest();
 
-        if (currentTest == null) {
-            throw new IllegalStateException("ExtentTest no inicializado para: " + scenario.getName());
+        if (globalTest == null) {
+            throw new IllegalStateException("ExtentTest global no inicializado para: " + scenario.getName());
+        }
+
+        if (featureTest == null) {
+            throw new IllegalStateException("ExtentTest por feature no inicializado para: " + scenario.getName());
         }
 
         if (scenario.isFailed()) {
-            String img = ScreenRecorder.takeScreenShot(getCasePath(), "Escenario_fallido");
+            String screenshotBase64 = ScreenRecorder.takeScreenShotBase64();
 
-            if (!img.isEmpty()) {
-                currentTest.fail("Escenario fallido: " + scenario.getName())
-                        .addScreenCaptureFromPath(img);
+            if (screenshotBase64 != null && !screenshotBase64.isEmpty()) {
+                globalTest.fail("Escenario fallido: " + scenario.getName())
+                        .addScreenCaptureFromBase64String(screenshotBase64, "Captura fallo");
+
+                featureTest.fail("Escenario fallido: " + scenario.getName())
+                        .addScreenCaptureFromBase64String(screenshotBase64, "Captura fallo");
             } else {
-                currentTest.log(Status.FAIL, "Escenario fallido: " + scenario.getName());
+                globalTest.log(Status.FAIL, "Escenario fallido: " + scenario.getName());
+                featureTest.log(Status.FAIL, "Escenario fallido: " + scenario.getName());
             }
+
         } else {
-            currentTest.log(Status.PASS, "Escenario pasado: " + scenario.getName());
+            globalTest.log(Status.PASS, "Escenario pasado: " + scenario.getName());
+            featureTest.log(Status.PASS, "Escenario pasado: " + scenario.getName());
         }
 
+        ExtentReportManagement.addBugsSectionToReports();
         ExtentReportManagement.flush();
 
-        testTL.remove();
+        globalTestTL.remove();
+        featureTestTL.remove();
         scenarioTL.remove();
         featureNameTL.remove();
         scenarioNameTL.remove();
@@ -79,15 +98,23 @@ public class ExtentReportHook {
     }
 
     public static ExtentTest getTest() {
-        return testTL.get();
+        return globalTestTL.get();
     }
 
-    public static String getCasePath() {
-        return casePathTL.get();
+    public static ExtentTest getFeatureTest() {
+        return featureTestTL.get();
     }
 
     public static Scenario getScenario() {
         return scenarioTL.get();
+    }
+
+    public static String getFeatureName() {
+        return featureNameTL.get();
+    }
+
+    public static String getCasePath() {
+        return casePathTL.get();
     }
 
     private static String getFeatureNameFromScenario(Scenario scenario) {
@@ -100,6 +127,49 @@ public class ExtentReportHook {
         if (value == null || value.trim().isEmpty()) {
             return "sin_nombre";
         }
+
         return value.replaceAll("[^a-zA-Z0-9._-]", "_");
     }
+
+    public static void logInfo(String message) {
+        if (getTest() != null) {
+            getTest().log(Status.INFO, message);
+        }
+
+        if (getFeatureTest() != null) {
+            getFeatureTest().log(Status.INFO, message);
+        }
+    }
+
+    public static void logPass(String message) {
+        if (getTest() != null) {
+            getTest().log(Status.PASS, message);
+        }
+
+        if (getFeatureTest() != null) {
+            getFeatureTest().log(Status.PASS, message);
+        }
+    }
+
+    public static void logFail(String message) {
+        if (getTest() != null) {
+            getTest().log(Status.FAIL, message);
+        }
+
+        if (getFeatureTest() != null) {
+            getFeatureTest().log(Status.FAIL, message);
+        }
+    }
+
+    public static void logWarn(String message) {
+        if (getTest() != null) {
+            getTest().log(Status.WARNING, message);
+        }
+
+        if (getFeatureTest() != null) {
+            getFeatureTest().log(Status.WARNING, message);
+        }
+    }
+
+
 }

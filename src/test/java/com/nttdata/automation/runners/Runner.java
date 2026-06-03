@@ -14,7 +14,7 @@ import io.cucumber.junit.CucumberOptions;
                 "com.nttdata.automation.steps",       // Dónde está el código Java de los pasos
                 "com.nttdata.automation.hooks"        // Dónde están los Hooks (@Before, @After)
         },
-        tags = "@Test",
+        tags = "@home",
         plugin = {"pretty", "html:target/cucumber-report.html"},
         monochrome = true
 )
