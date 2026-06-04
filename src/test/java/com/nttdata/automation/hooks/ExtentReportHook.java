@@ -5,7 +5,6 @@ import com.aventstack.extentreports.Status;
 import com.nttdata.automation.reports.ExtentReportManagement;
 import com.nttdata.automation.reports.ScreenRecorder;
 import io.cucumber.java.After;
-import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
@@ -86,8 +85,8 @@ public class ExtentReportHook {
             featureTest.log(Status.PASS, "Escenario pasado: " + scenario.getName());
         }
 
-        ExtentReportManagement.addBugsSectionToReports();
         ExtentReportManagement.flush();
+
 
         globalTestTL.remove();
         featureTestTL.remove();
@@ -107,6 +106,10 @@ public class ExtentReportHook {
 
     public static Scenario getScenario() {
         return scenarioTL.get();
+    }
+
+    public static String getScenarioName() {
+        return scenarioNameTL.get();
     }
 
     public static String getFeatureName() {

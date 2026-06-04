@@ -85,6 +85,7 @@ public class ExtentReportManagement {
 
     public static synchronized void flush() {
         if (globalExtent != null) {
+
             globalExtent.flush();
         }
 
@@ -176,90 +177,5 @@ public class ExtentReportManagement {
         return value.replaceAll("[^a-zA-Z0-9._-]", "_");
     }
 
-    public static synchronized void addBugsSectionToReports() {
-        if (!BugRegistry.hasBugs()) {
-            return;
-        }
 
-        addBugsSection(getInstance(), "🐞 Bugs");
-
-        for (ExtentReports report : featureReports.values()) {
-            addBugsSection(report, "🐞 Bugs");
-        }
-
-        flush();
-    }
-
-    private static void addBugsSection(ExtentReports extent, String title) {
-        ExtentTest bugsTest = extent.createTest(title);
-        bugsTest.assignCategory("BUGS");
-
-        StringBuilder rows = new StringBuilder();
-
-        for (BugRegistry.BugEntry bug : BugRegistry.getBugs()) {
-            String evidenceCell = "Sin evidencia";
-
-            if (bug.evidenceBase64() != null && !bug.evidenceBase64().isEmpty()) {
-                evidenceCell = """
-                    <a href="data:image/png;base64,%s"
-                       download="bug_evidence.png"
-                       style="display:inline-block;
-                              padding:5px 10px;
-                              background:#16a34a;
-                              color:white;
-                              text-decoration:none;
-                              border-radius:4px;
-                              font-size:12px;">
-                        Descargar evidencia
-                    </a>
-                    """.formatted(bug.evidenceBase64());
-            }
-
-            rows.append("""
-                <tr>
-                    <td>%s</td>
-                    <td>%s</td>
-                    <td>%s</td>
-                    <td>%s</td>
-                </tr>
-                """.formatted(
-                    escapeHtml(bug.feature()),
-                    escapeHtml(bug.scenario()),
-                    escapeHtml(bug.step()),
-                    evidenceCell
-            ));
-        }
-
-        String table = """
-            <h3>🐞 Bugs detectados</h3>
-            <table style="width:100%%; border-collapse:collapse;">
-                <thead>
-                    <tr>
-                        <th style="border:1px solid #374151; padding:8px;">Feature</th>
-                        <th style="border:1px solid #374151; padding:8px;">Escenario</th>
-                        <th style="border:1px solid #374151; padding:8px;">Paso fallido</th>
-                        <th style="border:1px solid #374151; padding:8px;">Evidencia</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    %s
-                </tbody>
-            </table>
-            """.formatted(rows.toString());
-
-        bugsTest.fail(table);
-    }
-
-    private static String escapeHtml(String value) {
-        if (value == null) {
-            return "";
-        }
-
-        return value
-                .replace("&", "&amp;")
-                .replace("<", "&lt;")
-                .replace(">", "&gt;")
-                .replace("\"", "&quot;")
-                .replace("'", "&#39;");
-    }
 }

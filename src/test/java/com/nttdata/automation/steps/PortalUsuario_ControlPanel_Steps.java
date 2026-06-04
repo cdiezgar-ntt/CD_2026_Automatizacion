@@ -102,7 +102,7 @@ public class PortalUsuario_ControlPanel_Steps {
     @Then("El usuario ve una sección de preguntas frecuentes")
     public void revisarSeccionPreguntasFrecuentes() {
         boolean preguntas_frecuentes = portal_usuario.existeSeccionPreguntasFrecuentes();
-        Validator.validarVerdadero(preguntas_frecuentes, "Preguntas_frecuentes", true);
+        Validator.validarVerdadero(preguntas_frecuentes, "Existe una sección de preguntas frecuentes", true, true);
     }
 
     @Then("Hay al menos una pregunta frecuente")

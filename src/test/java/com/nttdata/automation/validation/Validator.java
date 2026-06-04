@@ -84,31 +84,5 @@ public class Validator {
 
         ExtentReportHook.getTest().fail(msg);
     }
-    private static void pass(String msg) {
-        ExtentTest globalTest = ExtentReportHook.getTest();
-        ExtentTest featureTest = ExtentReportHook.getFeatureTest();
 
-        if (globalTest != null) {
-            globalTest.pass(msg);
-        }
-
-        if (featureTest != null) {
-            featureTest.pass(msg);
-        }
-    }
-
-    private static void fail(String msg) {
-        ExtentTest globalTest = ExtentReportHook.getTest();
-        ExtentTest featureTest = ExtentReportHook.getFeatureTest();
-
-        if (globalTest != null) {
-            globalTest.fail(msg);
-            globalTest.assignCategory("BUGS");
-        }
-
-        if (featureTest != null) {
-            featureTest.fail(msg);
-            featureTest.assignCategory("BUGS");
-        }
-    }
 }

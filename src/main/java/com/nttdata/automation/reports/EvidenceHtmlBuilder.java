@@ -12,20 +12,21 @@ public class EvidenceHtmlBuilder {
         String dataUrl = normalizeBase64DataUrl(imgBase64);
 
         return """
-                <div class="row mb-3">
-                    <div class="col-md-3">
-                        <a href="%s" data-featherlight="image"
-                           class="btn btn-primary btn-sm">
-                            🔍 Ver evidencia
-                        </a>
-                        <a href="%s" download="%s.png"
-                           class="btn btn-success btn-sm">
-                            ⬇ Descargar
-                        </a>
-
-                    </div>
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <div class="d-flex gap-2">
+                    <a href="%s" data-featherlight="image"
+                       class="btn btn-primary btn-sm">
+                        🔍 Ver evidencia
+                    </a>
+                    <a href="%s" download="%s.png"
+                       class="btn btn-success btn-sm">
+                        ⬇ Descargar
+                    </a>
                 </div>
-                """.formatted(
+            </div>
+        </div>
+        """.formatted(
                 dataUrl,
                 dataUrl,
                 safeFileName);
