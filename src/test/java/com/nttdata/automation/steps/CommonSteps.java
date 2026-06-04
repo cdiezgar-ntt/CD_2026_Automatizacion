@@ -4,6 +4,7 @@ import com.nttdata.automation.base.BasePageObject;
 import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.hooks.ExtentReportHook;
 import com.nttdata.automation.pages.Login;
+import com.nttdata.automation.reports.Report;
 import com.nttdata.automation.utils.Cartera;
 import com.nttdata.automation.utils.Commons;
 import io.cucumber.java.en.And;
@@ -18,8 +19,6 @@ import org.sikuli.script.Screen;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.IOException;
 
 public class CommonSteps {
 
@@ -40,7 +39,7 @@ public class CommonSteps {
     @Given("Abrir la web usuario")
     public void abrirElNavegadorChrome_PortalUsuario() {
         login.abrirWebPortalUsuario();
-        ExtentReportHook.getTest().info("Conectados a la web");
+        Report.info("Conectados a la web");
     }
 
     /**
@@ -49,7 +48,7 @@ public class CommonSteps {
     @Given("Abrir la web wallet provider")
     public void abrirElNavegadorChrome_PortalWalletProvider() {
         login.abrirWebPortalAdministrador_WP();
-        ExtentReportHook.getTest().info("Conectados a la web");
+        Report.info("Conectados a la web");
     }
 
     /**
@@ -57,14 +56,14 @@ public class CommonSteps {
      */
     @Given("Abrir la web EAA provider")
     public void abrirElNavegadorChrome_PortalEAAProvider() {
-        ExtentReportHook.getTest().info("Conectando...");
+        Report.info("Conectando...");
         login.abrirWebPortalAdministrador_EEAProvider();
 
-        ExtentReportHook.getTest().info("Autenticando...");
+        Report.info("Autenticando...");
         hacerClickEnElBotonAcceder();
 
         if (login.currentUrl().endsWith("/auth/callback")) {
-            ExtentReportHook.getTest().info("Aparece acceso a pagina no segura. Aceptando acceso...");
+            Report.info("Aparece acceso a pagina no segura. Aceptando acceso...");
             login.clickAccederTodosModos();
         }
     }
@@ -74,15 +73,15 @@ public class CommonSteps {
      */
     @Given("Abrir la web PID provider")
     public void abrirElNavegadorChrome_PortalPIDProvider() {
-        ExtentReportHook.getTest().info("Conectando...");
+        Report.info("Conectando...");
         login.abrirWebPortalAdministrador_PIDProvider();
 
-        ExtentReportHook.getTest().info("Autenticando...");
+        Report.info("Autenticando...");
         hacerClickEnElBotonAcceder();
 
         //Ahora mismo aparece pagina de información no segura
         if (login.currentUrl().endsWith("/auth/callback")) {
-            ExtentReportHook.getTest().info("Aparece acceso a pagina no segura. Aceptando acceso...");
+            Report.info("Aparece acceso a pagina no segura. Aceptando acceso...");
             login.clickAccederTodosModos();
         }
     }
@@ -94,9 +93,9 @@ public class CommonSteps {
     @And("Esperar 5 segundos")
     public void esperarSegundos() {
         try {
-            ExtentReportHook.getTest().info("Esperando 5 segundos");
+            Report.info("Esperando 5 segundos");
             Commons.wait5seconds();
-            //ExtentReportHook.getTest().info("Espera finalizada");
+            //Report.info("Espera finalizada");
         } catch (InterruptedException e) {
             System.out.println("Excepción en la espera:" + e);
         }
@@ -147,7 +146,7 @@ public class CommonSteps {
         BasePageObject bpo = new BasePageObject();
         System.out.println("El tipo es: " +tipo);
         bpo.validarCampoDeTipo(id, tipo, valor);
-        ExtentReportHook.getTest().info("El campo `" + id + "` ha sido validado con el valor `" + valor + "`");
+        Report.info("El campo `" + id + "` ha sido validado con el valor `" + valor + "`");
     }
 
     /**
@@ -184,7 +183,7 @@ public class CommonSteps {
     public void cerrarElNavegador() {
         DriverManager.quitDriver();
         System.out.println("Navegador cerrado");
-        ExtentReportHook.getTest().info("Navegador cerrado");
+        Report.info("Navegador cerrado");
     }
 
 
@@ -194,7 +193,7 @@ public class CommonSteps {
 
     @When("Acepta la alerta de autofirma")
     public void aceptarAlertaAutofirma() {
-        ExtentReportHook.getTest().info("Aceptando alerta de navegador...");
+        Report.info("Aceptando alerta de navegador...");
         try {
             Match abrir_autofirma = new Screen().wait(Commons.getResourcePath("sikuli/Abrir_autofirma.png"));
             abrir_autofirma.click();
@@ -205,7 +204,7 @@ public class CommonSteps {
 
     @When("Selecciona su certificado en autofirma")
     public void seleccionar_y_firmar() {
-        ExtentReportHook.getTest().info("Seleccionando certificado en autofirma...");
+        Report.info("Seleccionando certificado en autofirma...");
 
         Screen screen = new Screen();
 
@@ -225,10 +224,10 @@ public class CommonSteps {
     @Given("El usuario dispone de una cartera valida")
     public void crearCartera() {
         String email = cartera.getEmail();
-        ExtentReportHook.getTest().info("Creando nueva cartera con email: "+ email+"...");
+        Report.info("Creando nueva cartera con email: "+ email+"...");
         cartera.nuevaCartera();
         if (cartera.estaCreada()) {
-            ExtentReportHook.getTest().info("La cartera se ha creado correctamente. Esperando 20 segundos...");
+            Report.info("La cartera se ha creado correctamente. Esperando 20 segundos...");
         } else {
             ExtentReportHook.getTest().warning("No se ha podido crear la cartera");
             throw new RuntimeException();

@@ -1,8 +1,5 @@
 package com.nttdata.automation.validation;
-
-import com.aventstack.extentreports.MediaEntityBuilder;
-import com.nttdata.automation.hooks.ExtentReportHook;
-import com.nttdata.automation.reports.ScreenRecorder;
+import com.nttdata.automation.reports.*;
 import org.junit.Assert;
 
 public class Validator {
@@ -21,8 +18,10 @@ public class Validator {
             logPass(msg, conCaptura);
         } catch (AssertionError error) {
             logFail(msg, conCaptura);
-            //Comentar si se quiere que una validación detenga el test
-            if (bloqueante) throw error;
+
+            if (bloqueante) {
+                throw error;
+            }
         }
     }
 
@@ -34,52 +33,57 @@ public class Validator {
         validarFalso(exp, msg, bloqueante, bloqueante);
     }
 
-    public static void validarFalso(Boolean exp, String msg, boolean conCaptura , boolean bloqueante) {
+    public static void validarFalso(Boolean exp, String msg, boolean conCaptura, boolean bloqueante) {
         try {
             Assert.assertFalse(exp);
             logPass(msg, conCaptura);
         } catch (AssertionError error) {
             logFail(msg, conCaptura);
-            //Comentar si se quiere que una validación detenga el test
-            if (bloqueante) throw error;
+
+            if (bloqueante) {
+                throw error;
+            }
         }
     }
 
     private static void logPass(String msg, boolean conCaptura) {
-        if (conCaptura) {
-            String img = ScreenRecorder.takeScreenShot(
-                    ExtentReportHook.getCasePath(),
-                    "Evidencia_ok"
-            );
+        TestReporter reporter = TestExecutionContext.getReporter();
 
-            if (!img.isEmpty()) {
-                ExtentReportHook.getTest().pass(
-                        msg,
-                        MediaEntityBuilder.createScreenCaptureFromPath(img).build()
+        if (conCaptura) {
+            String imgBase64 = ScreenRecorder.takeScreenShotBase64();
+
+            if (imgBase64 != null && !imgBase64.isEmpty()) {
+                String html = EvidenceHtmlBuilder.buildEvidenceButtons(
+                        imgBase64,
+                        "Evidencia OK"
                 );
+
+                reporter.pass(msg + html);
                 return;
             }
         }
 
-        ExtentReportHook.getTest().pass(msg);
+        reporter.pass(msg);
     }
 
     private static void logFail(String msg, boolean conCaptura) {
-        if (conCaptura) {
-            String img = ScreenRecorder.takeScreenShot(
-                    ExtentReportHook.getCasePath(),
-                    "Evidencia_error"
-            );
+        TestReporter reporter = TestExecutionContext.getReporter();
 
-            if (!img.isEmpty()) {
-                ExtentReportHook.getTest().fail(
-                        msg,
-                        MediaEntityBuilder.createScreenCaptureFromPath(img).build()
+        if (conCaptura) {
+            String imgBase64 = ScreenRecorder.takeScreenShotBase64();
+
+            if (imgBase64 != null && !imgBase64.isEmpty()) {
+                String html = EvidenceHtmlBuilder.buildEvidenceButtons(
+                        imgBase64,
+                        "Evidencia ERROR"
                 );
+
+                reporter.fail(msg + html);
                 return;
             }
         }
 
-        ExtentReportHook.getTest().fail(msg);
+        reporter.fail(msg);
     }
+
 }

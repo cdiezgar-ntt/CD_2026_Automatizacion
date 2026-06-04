@@ -3,12 +3,12 @@
     <configuration>
         <theme>dark</theme>
         <documentTitle>NTT DATA Automation Report</documentTitle>
-        <reportName>Cucumber Execution Results</reportName>
+        <reportName>Resultados de Ejecución - Cucumber</reportName>
         <encoding>UTF-8</encoding>
         <protocol>HTTPS</protocol>
         <timelineEnabled>true</timelineEnabled>
         <thumbnailForBase64>false</thumbnailForBase64>
-        <offlineMode>true</offlineMode>
+        <offlineMode>false</offlineMode>
         <timeStampFormat>dd/MM/yyyy HH:mm:ss</timeStampFormat>
     </configuration>
 </extentreports>

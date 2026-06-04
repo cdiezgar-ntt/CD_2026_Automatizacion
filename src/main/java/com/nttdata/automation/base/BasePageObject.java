@@ -1,6 +1,7 @@
 package com.nttdata.automation.base;
 
 import com.nttdata.automation.driver.DriverManager;
+import com.nttdata.automation.reports.Report;
 import com.nttdata.automation.utils.Commons;
 import com.nttdata.automation.utils.EnvironmentConfig;
 import com.nttdata.automation.utils.PropertiesReader;
@@ -86,7 +87,9 @@ public class BasePageObject {
      * @return La url de la ventana/pestaña activa en el contexto actual del navegador levantado por el Driver.
      */
     public String currentUrl() {
+        Report.info("Obteniendo la url actual...");
         String currentUrl = driver.getCurrentUrl();
+        Report.info("Url: " + currentUrl);
         return (currentUrl == null) ? "" : currentUrl;
     }
 
@@ -194,6 +197,7 @@ public class BasePageObject {
      * @return El Elemento web listo para interactuar con el
      */
     private WebElement obtenerElementoClickable(By localizador) {
+        Report.info("Esperando que el elemento " + localizador + " sea clickable...");
         return wait.until(ExpectedConditions.elementToBeClickable(localizador));
     }
 
@@ -205,6 +209,7 @@ public class BasePageObject {
      *                    Es importante que el localizador que se pase devuelva un único elemento para que haga click en el
      */
     protected void pulsar(By localizador) {
+        Report.info("Se va a pulsar en: " + localizador);
         pulsar(obtenerElementoClickable(localizador));
     }
 
@@ -221,9 +226,10 @@ public class BasePageObject {
      */
     public void pulsar(WebElement we) {
         try {
-            new Actions(driver).scrollToElement(we).perform();
+            hacerScroll(we);
             we.click();
         } catch (Exception e) {
+            Report.fail("No se ha podido pulsar en el elemento. Causa: " + e.getMessage());
             throw new RuntimeException("Error al clicar", e);
         }
     }
@@ -246,17 +252,12 @@ public class BasePageObject {
     protected void escribir(WebElement we, String contenido) {
 
         try {
-
-            new Actions(driver)
-                    .scrollToElement(we)
-                    .perform();
-
+            hacerScroll(we);
             we.clear();
-
             we.sendKeys(contenido);
 
         } catch (Exception e) {
-
+            Report.fail("No se ha podido escribir el contenido. Causa: "+e.getMessage());
             throw new RuntimeException(
                     "Error al escribir el contenido: " + contenido, e
             );
@@ -269,6 +270,18 @@ public class BasePageObject {
         );
     }
 
+    /**
+     * Utiliza {@link #seleccionarDeLista(By, String)} en su lugar.
+     *
+     * @deprecated Desde que se implementa el metodo {@link #seleccionarDeLista(By, String)}, que es válido para todos los tipos de localizador
+     * ya que se pasa el By. Este metodo solo es valido para id y además presupone conocer values internos en lugar
+     * de los textos visibles.
+     *
+     * @param elmentoWebString La clave asociada al elemento web
+     * @param opcion El value asociado al option en el identificador
+     */
+
+    @Deprecated
     public void seleccionComboById(String elmentoWebString, String opcion) {
         WebElement we;
         By localizador;
@@ -291,6 +304,16 @@ public class BasePageObject {
         }
     }
 
+    /**
+     * Utiliza {@link #seleccionarDeLista(By, String)} en su lugar.
+     *
+     * @deprecated Desde que se implementa el seleccionar de lista, que es válido para todos los tipos de localizador
+     * ya que se pasa el By. Este metodo solo es valido para xpath y además presupone conocer values internos en lugar
+     * de los textos visibles.
+     *
+     * @param elmentoWebString La clave asociada al elemento web
+     * @param opcion El value asociado al option en el identificador
+     */
     public void seleccionComboByxpath(String elmentoWebString, String opcion) {
         WebElement we;
         By localizador;
@@ -313,10 +336,18 @@ public class BasePageObject {
         }
     }
 
-    public void webDriverWaitUntil(int time, String xpath ) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
-        WebElement elemento = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-    }
+    /**
+     * Se encarga de comparar el texto obtenido contra un texto esperado. Únicamente valida igualdad de textos, por lo
+     * que es muy limitado. Desaparecerá en futuras versiones.
+     *
+     * @deprecated Desde que se implementa la clase Validator, que tiene metodos para validar expresiones agnósticas de
+     * conocer ningún identificador interno de los elementos, ni el tipo de localizador, y que son válidos para todos los
+     * tipos de validaciones, ya que se pasa por parametro una expresion booleana desde el test.
+     *
+     * @param id1 La clave asociada al elemento web
+     * @param tipo El tipo del elemento web. Posibles valores {xpath, classname, id, tagname, name}
+     * @param valor1 Valor esperado del elemento
+     */
 
     public void validarCampoDeTipo(String id1, String tipo, String valor1) {
 
@@ -415,29 +446,37 @@ public class BasePageObject {
         try {
             List <WebElement> we = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(localizador));
             hacerScroll(we.getFirst());
+            List <String> textos = we.stream().map(WebElement::getText).toList();
             return we.stream().map(WebElement::getText).collect(Collectors.toList());
         } catch (Exception e) {
+            Report.fail("No se han encontrado textos asociados. Causa: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * Se encarga de hacer click en un elemento de una lista en función del texto proporcionado. Para listas, tener en
+     * cuenta que antes se debe hacer click en la lista para desplegarla, puesto que si no, se devolverá un timeout por
+     * elemento no visible o no interactuable
+     *
+     * @param localizador El By del elemento proporcionado desde el PageObject particular
+     * @param opcion El texto de la opcion visible en el desplegable. Debe ser exacto.
+     * @throws Exception si el elemento no es visible o interactuable
+     */
     protected void seleccionarDeLista(By localizador, String opcion) {
         try {
-            System.out.println("Esperando a que los elementos sean visibles");
-
             List <WebElement> we = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(localizador));
             List <WebElement> we_filtrados = we.stream().filter(e -> e.getText().contentEquals(opcion)).toList();
 
             if (we_filtrados.size() > 1) {
-                System.out.println("La lista tiene más de un elemento, se pulsará en el primero...");
+                Report.warn("La lista tiene más de un elemento. Por defecto se va a pulsar en el primero...");
             }
 
             WebElement we_a_pulsar = wait.until(ExpectedConditions.elementToBeClickable(we_filtrados.getFirst()));
             we_a_pulsar.click();
 
         } catch (Exception e) {
-            System.out.println("Excepción al seleccionar de la lista la opción " +opcion+ ":" + e);
-            e.printStackTrace();
+            Report.fail("No se ha podido pulsar en el elemento. Causa:" + e.getMessage());
             throw new RuntimeException(e);
         }
     }

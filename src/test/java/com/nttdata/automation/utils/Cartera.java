@@ -1,7 +1,6 @@
 package com.nttdata.automation.utils;
 
-import com.nttdata.automation.hooks.ExtentReportHook;
-import lombok.Getter;
+import com.nttdata.automation.reports.Report;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,9 +35,12 @@ public class Cartera {
     // WARNING depende complemtamente de que estén habilitados los mocks de envío de los OTP móvil y mail
     public void nuevaCartera() {
 
+        Report.info("Creando nueva cartera para la prueba con email: " + email);
+
         //Elegimos el entorno de bruno que ejecuta la coleccion
         String entorno_bruno = new EnvironmentConfig(new PropertiesReader()).environmentProperty("bruno_environment");
 
+        Report.info("Ejecutando colección de Bruno para generar la cartera...");
         ProcessBuilder pb = new ProcessBuilder(
                 "cmd.exe",
                 "/c",
@@ -55,13 +57,14 @@ public class Cartera {
 
             if (exitCode != 0) {
                 cartera_creada = false;
-                System.out.println(exitCode);
+                Report.warn("Se ha ejecutado la colección pero ha devuelto el código de error " + exitCode);
             } else {
                 cartera_creada = true;
+                Report.pass("Cartera creada correctamente");
             }
         } catch (IOException | InterruptedException e) {
-            System.out.println(e.getMessage());
-            cartera_creada = false;
+            Report.fail("Problema encontrado en la ejecución de la coleccion. Causa: " + e.getMessage());
+            throw new RuntimeException("Error al generar la cartera", e);
         }
     }
 }
