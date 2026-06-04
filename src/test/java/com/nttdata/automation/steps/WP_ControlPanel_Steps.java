@@ -1,7 +1,7 @@
 package com.nttdata.automation.steps;
 
-import com.aventstack.extentreports.ExtentTest;
 import com.nttdata.automation.pages.WP_DetalleCartera;
+import com.nttdata.automation.reports.Report;
 import com.nttdata.automation.utils.Cartera;
 import com.nttdata.automation.validation.Validator;
 import io.cucumber.java.en.And;
@@ -23,9 +23,6 @@ public class WP_ControlPanel_Steps {
         wp_dc = new WP_DetalleCartera();
     }
 
-    public static ExtentTest test = ExtentReportHook.getTest();
-
-
     /**
      * Step Wallet Provider:
      * <p>Llama al método clickBtnBuscar() de la clase WP_ControlPanel para hacer click en el botón "Buscar" de la pantalla de inicio del Control Panel del Wallet Provider</p>
@@ -34,7 +31,7 @@ public class WP_ControlPanel_Steps {
     public void hacerClickEnElBotonBuscar() {
         wp_cp.clickBtnBuscar();
         System.out.println("Botón buscar clickeado");
-        test.info("Botón buscar clickeado");
+        Report.info("Botón buscar clickeado");
     }
 
     /**
@@ -44,10 +41,10 @@ public class WP_ControlPanel_Steps {
     @And("Click en el primer elemento de la lista - portal wallet provider")
     public void clickEnElPrimerElementoDeLaLista() {
         System.out.println("Clicando en el primer elemento de la lista");
-        test.info("Clicando en el primer elemento de la lista");
+        Report.info("Clicando en el primer elemento de la lista");
         wp_cp.clickPrimerElementoLista();
         System.out.println("Primer elemento de la lista clicado");
-        test.info("Primer elemento de la lista clicado");
+        Report.info("Primer elemento de la lista clicado");
     }
 
     /**
@@ -58,10 +55,10 @@ public class WP_ControlPanel_Steps {
     @Given("Rellenar el texto {string} en el campo de busqueda email - portal wallet provider")
     public void rellenarElTextoEnElCampoDeBusquedaEmail(String texto) {
         System.out.println("Rellenando el campo de búsqueda email con el texto: " + texto);
-        test.info("Rellenando el campo de búsqueda email con el texto: " + texto);
+        Report.info("Rellenando el campo de búsqueda email con el texto: " + texto);
         wp_cp.rellenarCampoBusquedaEmail(texto);
         System.out.println("Texto '" + texto + "' rellenado en el campo de búsqueda ");
-        test.info("Texto '" + texto + "' rellenado en el campo de búsqueda ");
+        Report.info("Texto '" + texto + "' rellenado en el campo de búsqueda ");
     }
 
     @Given("El usuario escribe un email existente")
@@ -77,109 +74,109 @@ public class WP_ControlPanel_Steps {
 //    @And("Rellenar el texto {string} en el campo de busqueda IdCartera")
 //    public void rellenarElTextoEnElCampoDeBusquedaIdCartera(String texto) {
 //        System.out.println("Rellenando el campo de búsqueda IdCartera con el texto: " + texto);
-//        test.info("Rellenando el campo de búsqueda IdCartera con el texto: " + texto);
+//        Report.info("Rellenando el campo de búsqueda IdCartera con el texto: " + texto);
 //        wp_cp.rellenarCampoBusquedaIdCartera(texto);
 //        System.out.println("Texto '" + texto + "' rellenado en el campo de búsqueda ");
-//        test.info("Texto '" + texto + "' rellenado en el campo de búsqueda ");
+//        Report.info("Texto '" + texto + "' rellenado en el campo de búsqueda ");
 //    }
 //
 //    @And("Rellenar el texto {string} en el campo de busqueda Telefono")
 //    public void rellenarElTextoEnElCampoDeBusquedaTelefono(String texto) {
 //        System.out.println("Rellenando el campo de búsqueda Telefono con el texto: " + texto);
-//        test.info("Rellenando el campo de búsqueda Telefono con el texto: " + texto);
+//        Report.info("Rellenando el campo de búsqueda Telefono con el texto: " + texto);
 //        wp_cp.rellenarCampoBusquedaTelefono(texto);
 //        System.out.println("Texto '" + texto + "' rellenado en el campo de búsqueda ");
-//        test.info("Texto '" + texto + "' rellenado en el campo de búsqueda ");
+//        Report.info("Texto '" + texto + "' rellenado en el campo de búsqueda ");
 //    }
 //
 //    @And("Seleccionar el combo Estado con el texto {string}")
 //    public void seleccionarElComboEstadoConElTexto(String texto) {
 //        System.out.println("Seleccionando el combo Estado con el texto: " + texto);
-//        test.info("Seleccionando el combo Estado con el texto: " + texto);
+//        Report.info("Seleccionando el combo Estado con el texto: " + texto);
 //        wp_cp.seleccionarComboEstado(texto);
 //        System.out.println("Combo Estado seleccionado con el texto: " + texto);
-//        test.info("Combo Estado seleccionado con el texto: " + texto);
+//        Report.info("Combo Estado seleccionado con el texto: " + texto);
 //    }
 //
 //    @And("Seleccionar el combo Rango Fechas Activacion con el texto {string}")
 //    public void seleccionarElComboRangoFechasActivacionConElTexto(String texto) {
 //        System.out.println("Seleccionando el combo Rango Fechas Activacion con el texto: " + texto);
-//        test.info("Seleccionando el combo Rango Fechas Activacion con el texto: " + texto);
+//        Report.info("Seleccionando el combo Rango Fechas Activacion con el texto: " + texto);
 //        wp_cp.seleccionarComboRangoFechasActivacion(texto);
 //        System.out.println("Combo Rango Fechas Activacion seleccionado con el texto: " + texto);
-//        test.info("Combo Rango Fechas Activacion seleccionado con el texto: " + texto);
+//        Report.info("Combo Rango Fechas Activacion seleccionado con el texto: " + texto);
 //    }
 //
 //    @And("Seleccionar el combo Rango Fechas Revocacion con el texto {string}")
 //    public void seleccionarElComboRangoFechasRevocacionConElTexto(String texto) {
 //        System.out.println("Seleccionando el combo Rango Fechas Revocacion con el texto: " + texto);
-//        test.info("Seleccionando el combo Rango Fechas Revocacion con el texto: " + texto);
+//        Report.info("Seleccionando el combo Rango Fechas Revocacion con el texto: " + texto);
 //        wp_cp.seleccionarComboRangoFechasRevocacion(texto);
 //        System.out.println("Combo Rango Fechas Revocacion seleccionado con el texto: " + texto);
-//        test.info("Combo Rango Fechas Revocacion seleccionado con el texto: " + texto);
+//        Report.info("Combo Rango Fechas Revocacion seleccionado con el texto: " + texto);
 //    }
 //
 //    @And("Seleccionar el combo Motivo Revocacion con el texto {string}")
 //    public void seleccionarElComboMotivoRevocacionConElTexto(String texto) {
 //        System.out.println("Seleccionando el combo Motivo Revocacion con el texto: " + texto);
-//        test.info("Seleccionando el combo Motivo Revocacion con el texto: " + texto);
+//        Report.info("Seleccionando el combo Motivo Revocacion con el texto: " + texto);
 //        wp_cp.seleccionarComboMotivoRevocacion(texto);
 //        System.out.println("Combo Motivo Revocacion seleccionado con el texto: " + texto);
-//        test.info("Combo Motivo Revocacion seleccionado con el texto: " + texto);
+//        Report.info("Combo Motivo Revocacion seleccionado con el texto: " + texto);
 //    }
 //
 //    @And("Seleccionar el combo Medio Solicitud Revocacion con el texto {string}")
 //    public void seleccionarElComboMedioSolicitudRevocacionConElTexto(String texto) {
 //        System.out.println("Seleccionando el combo Medio Solicitud Revocacion con el texto: " + texto);
-//        test.info("Seleccionando el combo Medio Solicitud Revocacion con el texto: " + texto);
+//        Report.info("Seleccionando el combo Medio Solicitud Revocacion con el texto: " + texto);
 //        wp_cp.seleccionarComboMedioSolicitudRevocacion(texto);
 //        System.out.println("Combo Medio Solicitud Revocacion seleccionado con el texto: " + texto);
-//        test.info("Combo Medio Solicitud Revocacion seleccionado con el texto: " + texto);
+//        Report.info("Combo Medio Solicitud Revocacion seleccionado con el texto: " + texto);
 //    }
 //
 //    @And("Click en el checkbox Mostrar Solo Mis Revocaciones")
 //    public void clickEnElCheckboxMostrarSoloMisRevocaciones() {
 //        System.out.println("Clicando en el checkbox Mostrar Solo Mis Revocaciones");
-//        test.info("Clicando en el checkbox Mostrar Solo Mis Revocaciones");
+//        Report.info("Clicando en el checkbox Mostrar Solo Mis Revocaciones");
 //        wp_cp.clickCheckMostrarSoloMisRevocaciones();
 //        System.out.println("Checkbox Mostrar Solo Mis Revocaciones clicado");
-//        test.info("Checkbox Mostrar Solo Mis Revocaciones clicado");
+//        Report.info("Checkbox Mostrar Solo Mis Revocaciones clicado");
 //    }
 //
 //    @And("Click en el link Mostrar Busqueda Avanzada")
 //    public void clickEnElLinkMostrarBusquedaAvanzada() {
 //        System.out.println("Clicando en el link Mostrar Busqueda Avanzada");
-//        test.info("Clicando en el link Mostrar Busqueda Avanzada");
+//        Report.info("Clicando en el link Mostrar Busqueda Avanzada");
 //        wp_cp.clickLinkMostrarBusquedaAvanzada();
 //        System.out.println("Link Mostrar Busqueda Avanzada clicado");
-//        test.info("Link Mostrar Busqueda Avanzada clicado");
+//        Report.info("Link Mostrar Busqueda Avanzada clicado");
 //    }
 //
 //    @And("Click en el link Ocultar Busqueda Avanzada")
 //    public void clickEnElLinkOcultarBusquedaAvanzada() {
 //        System.out.println("Clicando en el link Ocultar Busqueda Avanzada");
-//        test.info("Clicando en el link Ocultar Busqueda Avanzada");
+//        Report.info("Clicando en el link Ocultar Busqueda Avanzada");
 //        wp_cp.clickLinkOcultarBusquedaAvanzada();
 //        System.out.println("Link Ocultar Busqueda Avanzada clicado");
-//        test.info("Link Ocultar Busqueda Avanzada clicado");
+//        Report.info("Link Ocultar Busqueda Avanzada clicado");
 //    }
 //
 //    @And("Seleccionar el combo Sistema Operativo con el texto {string}")
 //    public void seleccionarElComboSistemaOperativoConElTexto(String texto) {
 //        System.out.println("Seleccionando el combo Sistema Operativo con el texto: " + texto);
-//        test.info("Seleccionando el combo Sistema Operativo con el texto: " + texto);
+//        Report.info("Seleccionando el combo Sistema Operativo con el texto: " + texto);
 //        wp_cp.seleccionarComboSistemaOperativo(texto);
 //        System.out.println("Combo Sistema Operativo seleccionado con el texto: " + texto);
-//        test.info("Combo Sistema Operativo seleccionado con el texto: " + texto);
+//        Report.info("Combo Sistema Operativo seleccionado con el texto: " + texto);
 //    }
 //
 //    @And("Seleccionar el combo Version TC con el texto {string}")
 //    public void seleccionarElComboVersionTCConElTexto(String texto) {
 //        System.out.println("Seleccionando el combo Version TC con el texto: " + texto);
-//        test.info("Seleccionando el combo Version TC con el texto: " + texto);
+//        Report.info("Seleccionando el combo Version TC con el texto: " + texto);
 //        wp_cp.seleccionarComboVersionTC(texto);
 //        System.out.println("Combo Version TC seleccionado con el texto: " + texto);
-//        test.info("Combo Version TC seleccionado con el texto: " + texto);
+//        Report.info("Combo Version TC seleccionado con el texto: " + texto);
 //    }
 //
 
@@ -190,10 +187,10 @@ public class WP_ControlPanel_Steps {
     @And("Click en el link Historico Revocaciones - portal wallet provider")
     public void clickEnElLinkHistoricoRevocaciones() {
         System.out.println("Clicando en el link Historico Revocaciones");
-        test.info("Clicando en el link Historico Revocaciones");
+        Report.info("Clicando en el link Historico Revocaciones");
         wp_cp.clickLinkHistoricoRevocaciones();
         System.out.println("Link Historico Revocaciones clicado");
-        test.info("Link Historico Revocaciones clicado");
+        Report.info("Link Historico Revocaciones clicado");
     }
 
     /**
@@ -203,10 +200,10 @@ public class WP_ControlPanel_Steps {
     @And("Click en el botón ver todas carteras activadas ultimo mes - portal wallet provider")
     public void clickEnElLinkCarterasActivadasVerTodas() {
         System.out.println("Clicando en el link Carteras Activadas Ver Todas");
-        test.info("Clicando en el link Carteras Activadas Ver Todas");
+        Report.info("Clicando en el link Carteras Activadas Ver Todas");
         wp_cp.clickLinkCarterasActivadasVerTodas();
         System.out.println("Link Carteras Activadas Ver Todas clicado");
-        test.info("Link Carteras Activadas Ver Todas clicado");
+        Report.info("Link Carteras Activadas Ver Todas clicado");
     }
 
     /**
@@ -216,10 +213,10 @@ public class WP_ControlPanel_Steps {
     @And("Click en el botón ver todas carteras revocadas ultimo mes - portal wallet provider")
     public void clickEnElLinkCarterasRevocadasVerTodas() {
         System.out.println("Clicando en el link Carteras Revocadas Ver Todas");
-        test.info("Clicando en el link Carteras Revocadas Ver Todas");
+        Report.info("Clicando en el link Carteras Revocadas Ver Todas");
         wp_cp.clickLinkCarterasRevocadasVerTodas();
         System.out.println("Link Carteras Revocadas Ver Todas clicado");
-        test.info("Link Carteras Revocadas Ver Todas clicado");
+        Report.info("Link Carteras Revocadas Ver Todas clicado");
     }
 
     /**
@@ -229,19 +226,19 @@ public class WP_ControlPanel_Steps {
     @And("Click en el botón ver todas carteras activas ultimo mes - portal wallet provider")
     public void clickEnElLinkCarterasActivasVerTodas() {
         System.out.println("Clicando en el link Carteras Activas Ver Todas");
-        test.info("Clicando en el link Carteras Activas Ver Todas");
+        Report.info("Clicando en el link Carteras Activas Ver Todas");
         wp_cp.clickLinkCarterasActivasVerTodas();
         System.out.println("Link Carteras Activas Ver Todas clicado");
-        test.info("Link Carteras Activas Ver Todas clicado");
+        Report.info("Link Carteras Activas Ver Todas clicado");
     }
 
 //    @And("Click en el link Ocultar Ultimo Mes")
 //    public void clickEnElLinkOcultarUltimoMes() {
 //        System.out.println("Clicando en el link Ocultar Ultimo Mes");
-//        test.info("Clicando en el link Ocultar Ultimo Mes");
+//        Report.info("Clicando en el link Ocultar Ultimo Mes");
 //        wp_cp.clickLinkOcultarUltimoMes();
 //        System.out.println("Link Ocultar Ultimo Mes clicado");
-//        test.info("Link Ocultar Ultimo Mes clicado");
+//        Report.info("Link Ocultar Ultimo Mes clicado");
 //    }
 
     /**
@@ -253,7 +250,7 @@ public class WP_ControlPanel_Steps {
     public String obtenerPrimerCorreo() {
         String primerCorreo = wp_cp.obtenerPrimerCorreo();
         System.out.println("Primer correo obtenido: " + primerCorreo);
-        test.info("Primer correo obtenido: " + primerCorreo);
+        Report.info("Primer correo obtenido: " + primerCorreo);
         return primerCorreo;
     }
 
@@ -265,19 +262,19 @@ public class WP_ControlPanel_Steps {
     @And("Click en el botón revocar cartera - portal wallet provider")
     public void detalleCarteraRevocarCartera() {
         System.out.println("Clicando en el botón revocar cartera");
-        test.info("Clicando en el botón revocar cartera");
+        Report.info("Clicando en el botón revocar cartera");
         wp_dc.clickBtnDetallesRevocarCartera();
         System.out.println("Botón revocar cartera clicado");
-        test.info("Botón revocar cartera clicado");
+        Report.info("Botón revocar cartera clicado");
     }
 
     @And("Click en el botón confirmar revocación - portal wallet provider detalle de cartera")
     public void detalleCarteraConfirmarRevocacion() {
         System.out.println("Clicando en el botón confirmar revocación");
-        test.info("Clicando en el botón confirmar revocación");
+        Report.info("Clicando en el botón confirmar revocación");
         wp_dc.clickBtnSiRevocar();
         System.out.println("Botón confirmar revocación clicado");
-        test.info("Botón confirmar revocación clicado");
+        Report.info("Botón confirmar revocación clicado");
     }
 
 }

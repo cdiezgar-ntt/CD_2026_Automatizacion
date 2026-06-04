@@ -4,12 +4,10 @@ import com.aventstack.extentreports.ExtentTest;
 import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.hooks.ExtentReportHook;
 import com.nttdata.automation.pages.EAA_ControlPanel;
-import com.nttdata.automation.pages.WP_ControlPanel;
+import com.nttdata.automation.reports.Report;
 import com.nttdata.automation.validation.Validator;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 
 public class EAA_ControlPanel_Steps {
 
@@ -51,7 +49,7 @@ public class EAA_ControlPanel_Steps {
     //validar que se accede al control panel mediante la url
     public void validarPantallaControlPanel() {
         System.out.println("Obteniendo url...");
-        ExtentReportHook.getTest().info("Obteniendo url...");
+        Report.info("Obteniendo url...");
         String url = (DriverManager.getDriver().getCurrentUrl() == null) ? "" : DriverManager.getDriver().getCurrentUrl();
         Validator.validarVerdadero(url.endsWith("/control-panel/"), "Se ha accedido a la url de revocación presencial: " + url, true);
     }
@@ -60,7 +58,7 @@ public class EAA_ControlPanel_Steps {
     @Then("Validar que el numero de credenciales tenga un numero mayor que 0")
     public void validarBusquedaCredencialesSinFiltro(){
         System.out.println("validando que hay coincidencias en la búsqueda");
-        ExtentReportHook.getTest().info("validando que hay coincidencias en la búsqueda");
+        Report.info("validando que hay coincidencias en la búsqueda");
         int total = eaa_cp.obtenerTotalCarteras();
         Validator.validarVerdadero(total > 0,"Hay varias carteras", true);
     }

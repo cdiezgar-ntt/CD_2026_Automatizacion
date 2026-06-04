@@ -3,7 +3,9 @@ package com.nttdata.automation.hooks;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.nttdata.automation.reports.ExtentReportManagement;
+import com.nttdata.automation.reports.ExtentTestReporter;
 import com.nttdata.automation.reports.ScreenRecorder;
+import com.nttdata.automation.reports.TestExecutionContext;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -36,6 +38,7 @@ public class ExtentReportHook {
         ExtentTest globalTest = ExtentReportManagement.createTest(scenario.getName());
         ExtentTest featureTest = ExtentReportManagement.createFeatureTest(featureName, scenario.getName());
 
+
         Collection<String> tags = scenario.getSourceTagNames();
 
         for (String tag : tags) {
@@ -46,6 +49,8 @@ public class ExtentReportHook {
 
         globalTestTL.set(globalTest);
         featureTestTL.set(featureTest);
+
+        TestExecutionContext.setReporter(new ExtentTestReporter());
 
         System.out.println("Inicio escenario: " + scenario.getName());
         System.out.println("Feature: " + featureName);
@@ -94,6 +99,8 @@ public class ExtentReportHook {
         featureNameTL.remove();
         scenarioNameTL.remove();
         casePathTL.remove();
+
+        TestExecutionContext.clear();
     }
 
     public static ExtentTest getTest() {

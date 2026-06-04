@@ -1,6 +1,7 @@
 package com.nttdata.automation.base;
 
 import com.nttdata.automation.driver.DriverManager;
+import com.nttdata.automation.reports.Report;
 import com.nttdata.automation.utils.Commons;
 import com.nttdata.automation.utils.EnvironmentConfig;
 import com.nttdata.automation.utils.PropertiesReader;
@@ -86,7 +87,9 @@ public class BasePageObject {
      * @return La url de la ventana/pestaña activa en el contexto actual del navegador levantado por el Driver.
      */
     public String currentUrl() {
+        Report.info("Obteniendo la url actual...");
         String currentUrl = driver.getCurrentUrl();
+        Report.info("Url: " + currentUrl);
         return (currentUrl == null) ? "" : currentUrl;
     }
 
@@ -194,6 +197,7 @@ public class BasePageObject {
      * @return El Elemento web listo para interactuar con el
      */
     private WebElement obtenerElementoClickable(By localizador) {
+        Report.info("Esperando que el elemento " + localizador + " sea clickable...");
         return wait.until(ExpectedConditions.elementToBeClickable(localizador));
     }
 
@@ -205,6 +209,7 @@ public class BasePageObject {
      *                    Es importante que el localizador que se pase devuelva un único elemento para que haga click en el
      */
     protected void pulsar(By localizador) {
+        Report.info("Se va a pulsar en: " + localizador);
         pulsar(obtenerElementoClickable(localizador));
     }
 
@@ -221,9 +226,10 @@ public class BasePageObject {
      */
     public void pulsar(WebElement we) {
         try {
-            new Actions(driver).scrollToElement(we).perform();
+            hacerScroll(we);
             we.click();
         } catch (Exception e) {
+            Report.fail("No se ha podido pulsar en el elemento. Causa: " + e.getMessage());
             throw new RuntimeException("Error al clicar", e);
         }
     }
@@ -246,17 +252,12 @@ public class BasePageObject {
     protected void escribir(WebElement we, String contenido) {
 
         try {
-
-            new Actions(driver)
-                    .scrollToElement(we)
-                    .perform();
-
+            hacerScroll(we);
             we.clear();
-
             we.sendKeys(contenido);
 
         } catch (Exception e) {
-
+            Report.fail("No se ha podido escribir el contenido. Causa: "+e.getMessage());
             throw new RuntimeException(
                     "Error al escribir el contenido: " + contenido, e
             );
@@ -445,8 +446,10 @@ public class BasePageObject {
         try {
             List <WebElement> we = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(localizador));
             hacerScroll(we.getFirst());
+            List <String> textos = we.stream().map(WebElement::getText).toList();
             return we.stream().map(WebElement::getText).collect(Collectors.toList());
         } catch (Exception e) {
+            Report.fail("No se han encontrado textos asociados. Causa: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -462,21 +465,18 @@ public class BasePageObject {
      */
     protected void seleccionarDeLista(By localizador, String opcion) {
         try {
-            System.out.println("Esperando a que los elementos sean visibles");
-
             List <WebElement> we = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(localizador));
             List <WebElement> we_filtrados = we.stream().filter(e -> e.getText().contentEquals(opcion)).toList();
 
             if (we_filtrados.size() > 1) {
-                System.out.println("La lista tiene más de un elemento, se pulsará en el primero...");
+                Report.warn("La lista tiene más de un elemento. Por defecto se va a pulsar en el primero...");
             }
 
             WebElement we_a_pulsar = wait.until(ExpectedConditions.elementToBeClickable(we_filtrados.getFirst()));
             we_a_pulsar.click();
 
         } catch (Exception e) {
-            System.out.println("Excepción al seleccionar de la lista la opción " +opcion+ ":" + e);
-            e.printStackTrace();
+            Report.fail("No se ha podido pulsar en el elemento. Causa:" + e.getMessage());
             throw new RuntimeException(e);
         }
     }

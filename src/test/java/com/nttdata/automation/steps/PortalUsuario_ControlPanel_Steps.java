@@ -2,19 +2,11 @@ package com.nttdata.automation.steps;
 
 import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.pages.CIT_PortalUsuario;
-import com.nttdata.automation.hooks.ExtentReportHook;
-import com.nttdata.automation.pages.WP_ControlPanel;
+import com.nttdata.automation.reports.Report;
 import com.nttdata.automation.utils.Cartera;
-import com.nttdata.automation.utils.Commons;
 import com.nttdata.automation.validation.Validator;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import jnr.a64asm.Ext;
-import org.openqa.selenium.WindowType;
-import org.sikuli.script.FindFailed;
-import org.sikuli.script.Match;
-import org.sikuli.script.Pattern;
-import org.sikuli.script.Screen;
 
 import java.util.List;
 
@@ -52,21 +44,21 @@ public class PortalUsuario_ControlPanel_Steps {
     @When("El usuario pulsa en consultar oficina")
     public void consultarOficina() {
         System.out.println("Pulsando en Comprobar oficina...");
-        ExtentReportHook.logInfo("Pulsando en Comprobar oficina...");
+        Report.info("Pulsando en Comprobar oficina...");
         portal_usuario.clickEnConsultarOficina();
     }
 
     @Then("El usuario accede a una pantalla con las oficinas")
     public void validarPantallaOficinas() {
         System.out.println("Obteniendo url...");
-        ExtentReportHook.logInfo("Obteniendo url...");
+        Report.info("Obteniendo url...");
         String url = (DriverManager.getDriver().getCurrentUrl() == null) ? "" : DriverManager.getDriver().getCurrentUrl();
         Validator.validarVerdadero(url.endsWith("/revocacion-presencial"), "Se ha accedido a la url de revocación presencial: " + url, true);
     }
 
     @Then("El usuario visualiza oficinas")
     public void validarOficinas() {
-        ExtentReportHook.logInfo("Obteniendo información de oficinas...");
+        Report.info("Obteniendo información de oficinas...");
         String textoOficinas = portal_usuario.getTextoOficinas();
         Validator.validarVerdadero(textoOficinas.toLowerCase().contains("oficina"), "Se muestra al menos una oficina");
     }
@@ -74,7 +66,7 @@ public class PortalUsuario_ControlPanel_Steps {
     @Then("Existe un botón para cambiar a varios idiomas")
     public void validarBotonIdiomas() {
         System.out.println("Obteniendo texto de boton idiomas...");
-        ExtentReportHook.logInfo("Obteniendo texto de boton idiomas...");
+        Report.info("Obteniendo texto de boton idiomas...");
         String textoBotonIdiomas = portal_usuario.getTextoBotonIdiomas();
         Validator.validarVerdadero(textoBotonIdiomas.contains("Español"), "Existe un texto para cambiar de idiomas con la opción Español por defecto");
     }
@@ -82,7 +74,7 @@ public class PortalUsuario_ControlPanel_Steps {
     @When("El usuario cambia al idioma {string}")
     public void cambiarAIdioma(String idioma) {
         System.out.println("Seleccionando idioma " + idioma);
-        ExtentReportHook.logInfo("Seleccionando idioma " + idioma);
+        Report.info("Seleccionando idioma " + idioma);
         portal_usuario.pulsarBotonIdioma();
         portal_usuario.seleccionarIdioma(idioma);
     }
@@ -129,13 +121,13 @@ public class PortalUsuario_ControlPanel_Steps {
 
     @When("El usuario despliega las preguntas frecuentes")
     public void desplegarPreguntaFrecuente() {
-        ExtentReportHook.logInfo("Desplegando preguntas frecuentes...");
+        Report.info("Desplegando preguntas frecuentes...");
         portal_usuario.clickPreguntasFrecuentes();
     }
 
     @When("El usuario pliega las preguntas frecuentes")
     public void plegarPreguntaFrecuente() {
-        ExtentReportHook.logInfo("Plegando preguntas frecuentes...");
+        Report.info("Plegando preguntas frecuentes...");
         portal_usuario.clickPreguntasFrecuentes();
     }
 
@@ -169,31 +161,31 @@ public class PortalUsuario_ControlPanel_Steps {
 
     @When("El usuario pulsa en accesibilidad")
     public void pulsarAccesibilidad() {
-        ExtentReportHook.logInfo("Pulsando accesibilidad...");
+        Report.info("Pulsando accesibilidad...");
         portal_usuario.clickAccesibilidad();
     }
 
     @When("El usuario pulsa en mapa web")
     public void pulsarMapaWeb() {
-        ExtentReportHook.logInfo("Pulsando Mapa Web...");
+        Report.info("Pulsando Mapa Web...");
         portal_usuario.clickMapaWeb();
     }
 
     @When("El usuario pulsa en aviso legal")
     public void pulsarAvisoLegal() {
-        ExtentReportHook.logInfo("Pulsando Aviso Legal...");
+        Report.info("Pulsando Aviso Legal...");
         portal_usuario.clickAvisoLegal();
     }
 
     @When("El usuario pulsa en politica de privacidad")
     public void pulsarPoliticaPrivacidad() {
-        ExtentReportHook.logInfo("Pulsando Política de Privacidad");
+        Report.info("Pulsando Política de Privacidad");
         portal_usuario.clickPoliticaPrivacidad();
     }
 
     @When("El usuario pulsa en política de cookies")
     public void pulsarPoliticaCookies() {
-        ExtentReportHook.logInfo("Pulsando Política de cookies");
+        Report.info("Pulsando Política de cookies");
         portal_usuario.clickPoliticaCookies();
     }
 
@@ -206,13 +198,13 @@ public class PortalUsuario_ControlPanel_Steps {
 
     @When("El usuario vuelve a la home")
     public void volverHome() {
-        ExtentReportHook.logInfo("Volviendo a la home...");
+        Report.info("Volviendo a la home...");
         portal_usuario.clickVolver();
     }
 
     @When("El usuario pulsa en Revocar Cartera Digital")
     public void pulsarRevocarCarteraDigital() {
-        ExtentReportHook.logInfo("Pulsando en revocar cartera digital...");
+        Report.info("Pulsando en revocar cartera digital...");
         portal_usuario.clickRevocarCarteraDigital();
     }
 
@@ -238,13 +230,13 @@ public class PortalUsuario_ControlPanel_Steps {
     @When("El usuario introduce el mail de la cartera")
     public void introducirMail() {
         String email = cartera.getEmail();
-        ExtentReportHook.logInfo("Introduciendo el mail " + email + "...");
+        Report.info("Introduciendo el mail " + email + "...");
         portal_usuario.introducirEmail(email);
     }
 
     @When("El usuario introduce el mail {string}")
     public void introducirMail(String email) {
-        ExtentReportHook.logInfo("Introduciendo el mail " + email + "...");
+        Report.info("Introduciendo el mail " + email + "...");
         portal_usuario.introducirEmail(email);
     }
 
@@ -275,13 +267,13 @@ public class PortalUsuario_ControlPanel_Steps {
 
     @When("El usuario pulsa en Enviar")
     public void confirmarRevocacion() {
-        ExtentReportHook.logInfo("Pulsando en 'Enviar'...");
+        Report.info("Pulsando en 'Enviar'...");
         portal_usuario.clickEnviar();
     }
 
     @When("El usuario introduce el email invalido {string}")
     public void introducirEmailInvalido(String email_invalido) {
-        ExtentReportHook.logInfo("Escribiendo email invalido: " + email_invalido);
+        Report.info("Escribiendo email invalido: " + email_invalido);
         portal_usuario.introducirEmail(email_invalido);
     }
 
@@ -293,7 +285,7 @@ public class PortalUsuario_ControlPanel_Steps {
 
     @When("El usuario pulsa en Continuar Revocación")
     public void continuarRevocacion() {
-        ExtentReportHook.logInfo("Pulsando en Continuar Revocación...");
+        Report.info("Pulsando en Continuar Revocación...");
         portal_usuario.clickContinuarRevocacion();
     }
 
@@ -332,7 +324,7 @@ public class PortalUsuario_ControlPanel_Steps {
 
     @When("El usuario marca el check para aceptar terminos y condiciones")
     public void aceptarTerminos() {
-        ExtentReportHook.logInfo("Aceptando terminos y condiciones...");
+        Report.info("Aceptando terminos y condiciones...");
         portal_usuario.aceptarTerminosYCondiciones();
     }
 
@@ -348,37 +340,37 @@ public class PortalUsuario_ControlPanel_Steps {
 
     @When("El usuario confirma los terminos y condiciones")
     public void confirmarTerminos() {
-        ExtentReportHook.logInfo("Pulsando en confirmar T&C...");
+        Report.info("Pulsando en confirmar T&C...");
         portal_usuario.confirmarTerminosYCondiciones();
     }
 
     @When("El usuario cancela los terminos y condiciones")
     public void cancelarTerminos() {
-        ExtentReportHook.logInfo("Pulsando en cancelar T&C...");
+        Report.info("Pulsando en cancelar T&C...");
         portal_usuario.cancelarTerminosYCondiciones();
     }
 
     @When("El usuario despliega los motivos de revocacion")
     public void desplegarMotivos() {
-        ExtentReportHook.logInfo("Desplegando motivos...");
+        Report.info("Desplegando motivos...");
         portal_usuario.desplegarMotivos();
     }
 
     @When("El usuario elige el motivo {string}")
     public void seleccionarMotivoRevocacion(String motivo) {
-        ExtentReportHook.logInfo("Seleccionando el motivo " + motivo + "...");
+        Report.info("Seleccionando el motivo " + motivo + "...");
         portal_usuario.seleccionarMotivo(motivo);
     }
 
     @When("El usuario selecciona firma básica")
     public void seleccionarFirmaBasica() {
-        ExtentReportHook.logInfo("Seleccionando firma básica...");
+        Report.info("Seleccionando firma básica...");
         portal_usuario.seleccionarFirmaBasica();
     }
 
     @When("El usuario selecciona autofirma")
     public void seleccionarAutofirma() {
-        ExtentReportHook.logInfo("Seleccionando firma básica...");
+        Report.info("Seleccionando firma básica...");
         portal_usuario.seleccionarAutofirma();
     }
 
@@ -394,7 +386,7 @@ public class PortalUsuario_ControlPanel_Steps {
 
     @When("El usuario pulsa en volver al inicio")
     public void volverInicio(){
-        ExtentReportHook.logInfo("Pulsando en volver a inicio...");
+        Report.info("Pulsando en volver a inicio...");
         portal_usuario.clickVolverInicio();
     }
 

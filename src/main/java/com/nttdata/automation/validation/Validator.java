@@ -1,9 +1,5 @@
 package com.nttdata.automation.validation;
-
-import com.aventstack.extentreports.ExtentTest;
-import com.nttdata.automation.hooks.ExtentReportHook;
-import com.nttdata.automation.reports.EvidenceHtmlBuilder;
-import com.nttdata.automation.reports.ScreenRecorder;
+import com.nttdata.automation.reports.*;
 import org.junit.Assert;
 
 public class Validator {
@@ -51,6 +47,8 @@ public class Validator {
     }
 
     private static void logPass(String msg, boolean conCaptura) {
+        TestReporter reporter = TestExecutionContext.getReporter();
+
         if (conCaptura) {
             String imgBase64 = ScreenRecorder.takeScreenShotBase64();
 
@@ -60,14 +58,17 @@ public class Validator {
                         "Evidencia OK"
                 );
 
-                ExtentReportHook.getTest().pass(msg + html);
+                reporter.pass(msg + html);
                 return;
             }
         }
 
-        ExtentReportHook.getTest().pass(msg);
+        reporter.pass(msg);
     }
+
     private static void logFail(String msg, boolean conCaptura) {
+        TestReporter reporter = TestExecutionContext.getReporter();
+
         if (conCaptura) {
             String imgBase64 = ScreenRecorder.takeScreenShotBase64();
 
@@ -77,12 +78,12 @@ public class Validator {
                         "Evidencia ERROR"
                 );
 
-                ExtentReportHook.getTest().fail(msg + html);
+                reporter.fail(msg + html);
                 return;
             }
         }
 
-        ExtentReportHook.getTest().fail(msg);
+        reporter.fail(msg);
     }
 
 }

@@ -1,8 +1,5 @@
 package com.nttdata.automation.utils;
 
-import com.nttdata.automation.hooks.ExtentReportHook;
-import lombok.Getter;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.Instant;

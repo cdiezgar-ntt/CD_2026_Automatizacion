@@ -1,7 +1,6 @@
 package com.nttdata.automation.steps;
 
 import com.aventstack.extentreports.ExtentTest;
-import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.hooks.ExtentReportHook;
 import com.nttdata.automation.pages.PID_ControlPanel;
 import com.nttdata.automation.validation.Validator;
