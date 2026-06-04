@@ -370,7 +370,7 @@ public class PortalUsuario_ControlPanel_Steps {
 
     @When("El usuario selecciona autofirma")
     public void seleccionarAutofirma() {
-        Report.info("Seleccionando firma básica...");
+        Report.info("Seleccionando autofirma...");
         portal_usuario.seleccionarAutofirma();
     }
 
