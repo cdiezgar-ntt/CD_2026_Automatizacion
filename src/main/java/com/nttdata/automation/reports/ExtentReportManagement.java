@@ -65,7 +65,7 @@ public class ExtentReportManagement {
         cleanReportsOnce();
 
         return featureReports.computeIfAbsent(featureName, name -> {
-            String featureReportPath = FEATURE_REPORTS_FOLDER + "/" + sanitize(name) + "_report.html";
+            String featureReportPath = FEATURE_REPORTS_FOLDER + "/" + sanitize(name) + ".html";
 
             System.out.println("Inicializando ExtentReports para feature: " + name);
             System.out.println("Ruta report feature: " + featureReportPath);

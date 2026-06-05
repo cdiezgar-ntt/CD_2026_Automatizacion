@@ -1,4 +1,6 @@
 package com.nttdata.automation.validation;
+import com.nttdata.automation.jira_integration.XrayResultCollector;
+import com.nttdata.automation.jira_integration.XrayTestContext;
 import com.nttdata.automation.reports.*;
 import org.junit.Assert;
 
@@ -20,6 +22,8 @@ public class Validator {
             logFail(msg, conCaptura);
 
             if (bloqueante) {
+                String testKey = XrayTestContext.getCurrentTestKey();
+                XrayResultCollector.markBlocked(testKey);
                 throw error;
             }
         }
@@ -41,6 +45,8 @@ public class Validator {
             logFail(msg, conCaptura);
 
             if (bloqueante) {
+                String testKey = XrayTestContext.getCurrentTestKey();
+                XrayResultCollector.markBlocked(testKey);
                 throw error;
             }
         }
@@ -67,6 +73,13 @@ public class Validator {
     }
 
     private static void logFail(String msg, boolean conCaptura) {
+
+        String currentTestKey = XrayTestContext.getCurrentTestKey();
+
+        if (currentTestKey != null && !currentTestKey.isBlank()) {
+            XrayResultCollector.markFail(currentTestKey);
+        }
+
         TestReporter reporter = TestExecutionContext.getReporter();
 
         if (conCaptura) {
