@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 //import utils.reports.extentReportHook;
 
 import java.time.Duration;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
@@ -23,12 +23,12 @@ import static org.junit.Assert.assertEquals;
  * Clase base de todos los page objects, que implementa métodos con acciones transversales sobre las páginas web,
  * tales como escribir, pulsar, obtener textos. Esta clase hace tiene una instancia del Web Driver que levanta DriverManager,
  * y por tanto tendra acceso directo a las funcionalidades de selenium para la realización de acciones sobre las páginas web.
- *
+ * <p>
  * El BasePageObject es, en ultima instancia, la clase que realiza las acciones sobre las páginas web, y puede entenderse como
  * la capa capa directa que implementa las acciones. Tiene además, esperas implícitas al implementar mecanismos que hacen uso
  * de las ExpectedConditions a través del WebDriverWait, haciéndolo lo más robusto posible ante esperas derivadas de lentitud de
  * carga de elementos.
- *
+ * <p>
  * Todos los PageObject específicos del proyecto en cuestión obtentrán acceso a los métodos internos por herencia directa.
  *
  * @author QA_CD2026
@@ -217,12 +217,11 @@ public class BasePageObject {
      * Metodo que se encarga de ejecutar un clíck en el elemento web proporcionado. Ejecuta un scroll hasta el elemento
      * previamente.
      *
+     * @param we El elemento web sobre el que se quiere pulsar
+     * @throws Exception Si el elemento no es interactuable en el momento de ejecutar el click
      * @warning No realiza ninguna espera implicita, por lo que la pulsión es inmediata, sea o no interactuable
      * el elemento proporcionado. Se aconseja el uso de pulsar(By localizador) en su lugar, ya que este primero,
      * llama a pulsar(we) con el elemento que localiza con la espera implícita.
-     *
-     * @param we El elemento web sobre el que se quiere pulsar
-     * @throws Exception Si el elemento no es interactuable en el momento de ejecutar el click
      */
     public void pulsar(WebElement we) {
         try {
@@ -257,7 +256,7 @@ public class BasePageObject {
             we.sendKeys(contenido);
 
         } catch (Exception e) {
-            Report.fail("No se ha podido escribir el contenido. Causa: "+e.getMessage());
+            Report.fail("No se ha podido escribir el contenido. Causa: " + e.getMessage());
             throw new RuntimeException(
                     "Error al escribir el contenido: " + contenido, e
             );
@@ -273,19 +272,18 @@ public class BasePageObject {
     /**
      * Utiliza {@link #seleccionarDeLista(By, String)} en su lugar.
      *
+     * @param elmentoWebString La clave asociada al elemento web
+     * @param opcion           El value asociado al option en el identificador
      * @deprecated Desde que se implementa el metodo {@link #seleccionarDeLista(By, String)}, que es válido para todos los tipos de localizador
      * ya que se pasa el By. Este metodo solo es valido para id y además presupone conocer values internos en lugar
      * de los textos visibles.
-     *
-     * @param elmentoWebString La clave asociada al elemento web
-     * @param opcion El value asociado al option en el identificador
      */
 
     @Deprecated
     public void seleccionComboById(String elmentoWebString, String opcion) {
         WebElement we;
         By localizador;
-        try{
+        try {
             localizador = id(elmentoWebString);
             System.out.println("Esperando a que el elemento sea visible...");
             we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
@@ -297,7 +295,7 @@ public class BasePageObject {
             //comboBox.selectByVisibleText(opcion);
             System.out.println("Combobox seleccionado: " + opcion);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Excepción al seleccionar combo: " + e);
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -307,17 +305,16 @@ public class BasePageObject {
     /**
      * Utiliza {@link #seleccionarDeLista(By, String)} en su lugar.
      *
+     * @param elmentoWebString La clave asociada al elemento web
+     * @param opcion           El value asociado al option en el identificador
      * @deprecated Desde que se implementa el seleccionar de lista, que es válido para todos los tipos de localizador
      * ya que se pasa el By. Este metodo solo es valido para xpath y además presupone conocer values internos en lugar
      * de los textos visibles.
-     *
-     * @param elmentoWebString La clave asociada al elemento web
-     * @param opcion El value asociado al option en el identificador
      */
     public void seleccionComboByxpath(String elmentoWebString, String opcion) {
         WebElement we;
         By localizador;
-        try{
+        try {
             localizador = xpath(elmentoWebString);
             System.out.println("Esperando a que el elemento sea visible...");
             we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
@@ -329,7 +326,7 @@ public class BasePageObject {
             //comboBox.selectByVisibleText(opcion);
             System.out.println("Combobox seleccionado: " + opcion);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Excepción al seleccionar combo: " + e);
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -340,13 +337,12 @@ public class BasePageObject {
      * Se encarga de comparar el texto obtenido contra un texto esperado. Únicamente valida igualdad de textos, por lo
      * que es muy limitado. Desaparecerá en futuras versiones.
      *
+     * @param id1    La clave asociada al elemento web
+     * @param tipo   El tipo del elemento web. Posibles valores {xpath, classname, id, tagname, name}
+     * @param valor1 Valor esperado del elemento
      * @deprecated Desde que se implementa la clase Validator, que tiene metodos para validar expresiones agnósticas de
      * conocer ningún identificador interno de los elementos, ni el tipo de localizador, y que son válidos para todos los
      * tipos de validaciones, ya que se pasa por parametro una expresion booleana desde el test.
-     *
-     * @param id1 La clave asociada al elemento web
-     * @param tipo El tipo del elemento web. Posibles valores {xpath, classname, id, tagname, name}
-     * @param valor1 Valor esperado del elemento
      */
 
     public void validarCampoDeTipo(String id1, String tipo, String valor1) {
@@ -407,10 +403,9 @@ public class BasePageObject {
                 throw new IllegalArgumentException("Tipo de localizador no reconocido: " + tipo);
         }
         // Validar
-        try{
+        try {
             assertEquals("El campo no coincide", valor1, textoElemento);
-        }
-        catch (AssertionError e){
+        } catch (AssertionError e) {
             System.out.println("Error de validación: " + e.getMessage());
             throw e;
         }
@@ -420,11 +415,9 @@ public class BasePageObject {
     /**
      * Se encarga de exponer un listado con los textos que hay contenidos dentro del conjunto de elementos web
      * representados por el localizador, a todos los niveles.
-     *
+     * <p>
      * Si el localizador solo representase un elemento web, su texto seria accesible de forma inmediata con getFirst() de la
      * clase java.util.List.
-     *
-     *
      *
      * @param localizador El By que representa el listado de objetos web asociados, o el objeto web asociado.
      * @return La lista de textos contenidos en cada uno de los objetos web expuestos por el localizador
@@ -444,12 +437,21 @@ public class BasePageObject {
      */
     protected List<String> obtenerTextosElementosWeb(By localizador) {
         try {
-            List <WebElement> we = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(localizador));
+            List<WebElement> we = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(localizador));
             hacerScroll(we.getFirst());
-            List <String> textos = we.stream().map(WebElement::getText).toList();
+            List<String> textos = we.stream().map(WebElement::getText).toList();
             return we.stream().map(WebElement::getText).collect(Collectors.toList());
         } catch (Exception e) {
             Report.fail("No se han encontrado textos asociados. Causa: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String obtenerTextoElementoWeb(WebElement w) {
+        try {
+            return w.getText();
+        } catch (Exception e) {
+            Report.fail("No se ha podido obtener el texto. Causa: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -460,13 +462,13 @@ public class BasePageObject {
      * elemento no visible o no interactuable
      *
      * @param localizador El By del elemento proporcionado desde el PageObject particular
-     * @param opcion El texto de la opcion visible en el desplegable. Debe ser exacto.
+     * @param opcion      El texto de la opcion visible en el desplegable. Debe ser exacto.
      * @throws Exception si el elemento no es visible o interactuable
      */
     protected void seleccionarDeLista(By localizador, String opcion) {
         try {
-            List <WebElement> we = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(localizador));
-            List <WebElement> we_filtrados = we.stream().filter(e -> e.getText().contentEquals(opcion)).toList();
+            List<WebElement> we = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(localizador));
+            List<WebElement> we_filtrados = we.stream().filter(e -> e.getText().contentEquals(opcion)).toList();
 
             if (we_filtrados.size() > 1) {
                 Report.warn("La lista tiene más de un elemento. Por defecto se va a pulsar en el primero...");
@@ -485,7 +487,7 @@ public class BasePageObject {
         try {
             WebElement we = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
             return we.isDisplayed();
-        } catch(Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
@@ -509,6 +511,57 @@ public class BasePageObject {
         String dato = driver.findElement(localizador).getText();
         System.out.println("El dato guardado es: " + dato);
         return dato;
+    }
+
+
+    protected TablaDatos obtenerTablaDeDatos(By tableLocator) {
+
+        WebElement table = wait.until(ExpectedConditions.visibilityOfElementLocated(tableLocator));
+
+        List<String> headers = table.findElements(By.cssSelector("thead th"))
+                .stream()
+                .map(WebElement::getText)
+                .map(String::trim)
+                .toList();
+
+        List<WebElement> rows = table.findElements(By.cssSelector("tbody tr"));
+
+        List<Map<String, WebElement>> filas = rows.stream()
+                .map(row -> {
+                    List<WebElement> cells = row.findElements(By.tagName("td"));
+
+                    Map<String, WebElement> fila = new LinkedHashMap<>();
+
+                    for (int i = 0; i < headers.size(); i++) {
+                        if (cells.size() > i) {
+                            fila.put(headers.get(i), cells.get(i));
+                        }
+                    }
+
+                    return fila;
+                })
+                .toList();
+
+        return new TablaDatos(headers, filas);
+    }
+
+    protected List<String> obtenerTextosColumnaTabla(By locator, String columna) {
+        return obtenerTablaDeDatos(locator).getTextosColumna(columna);
+    }
+
+    protected List<WebElement> obtenerEnlacesColumnaTabla(By locator, String columna) {
+        return obtenerTablaDeDatos(locator).getColumna(columna)
+                .stream()
+                .map(celda -> celda.findElement(By.tagName("a")))
+                .toList();
+    }
+
+    protected String obtenerTextoCeldaTabla(By locator, int filaIndex, String columna) {
+        return obtenerTablaDeDatos(locator).getTextoCelda(filaIndex, columna);
+    }
+
+    protected WebElement obtenerElementoCeldaTabla(By locator, int filaIndex, String columna, By childLocator) {
+        return obtenerTablaDeDatos(locator).getElementoCelda(filaIndex, columna, childLocator);
     }
 
 }

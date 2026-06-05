@@ -8,6 +8,9 @@ import com.nttdata.automation.reports.Report;
 import com.nttdata.automation.validation.Validator;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+import java.util.List;
 
 public class EAA_ControlPanel_Steps {
 
@@ -45,14 +48,14 @@ public class EAA_ControlPanel_Steps {
         test.info("Texto '" + texto + "' rellenado en el campo de búsqueda ");
     }
 */
-    @Then("Validar que se accede al panel de control")
+    @Then("Validar que se accede al panel de control de EAA")
     //validar que se accede al control panel mediante la url
     public void validarPantallaControlPanel() {
-        System.out.println("Obteniendo url...");
-        Report.info("Obteniendo url...");
-        String url = (DriverManager.getDriver().getCurrentUrl() == null) ? "" : DriverManager.getDriver().getCurrentUrl();
-        Validator.validarVerdadero(url.endsWith("/control-panel/"), "Se ha accedido a la url de revocación presencial: " + url, true);
-    }
+        String url = eaa_cp.currentUrl();
+        Validator.validarVerdadero(url.contains("eaa") && url.contains("control-panel"), "Se ha accedido al panel de eaa. La url contiene 'eaa' y 'control-panel'");
+        String titulo_pagina = eaa_cp.obtenerTituloPortal();
+        Validator.validarVerdadero(titulo_pagina.contains("Portal EAA Provider"), "El titulo del portal es 'Portal EAA Provider'");
+ }
 
 
     @Then("Validar que el numero de credenciales tenga un numero mayor que 0")
@@ -75,8 +78,21 @@ public class EAA_ControlPanel_Steps {
 
     @Then("Validar el estado de la credencial {string}")
     public void validarEstadoDetalleCredencial(String estado_esperado){
-      String estado_web;
+       String estado_web;
        estado_web =  eaa_cp.obtenerTextoEstadoDetalleCredencial();
        Validator.validarVerdadero(estado_web.contains(estado_esperado),"El estado de la credencial es: " + estado_esperado,true);
     }
+
+    @Then("Se muestra un listado de credenciales")
+    public void comprobarListadoCredenciales() {
+        List<String> credenciales = eaa_cp.obtenerIdsCredenciales();
+        Validator.validarVerdadero(!credenciales.isEmpty(), "El listado contiene credenciales: " + credenciales);
+    }
+
+    @When("El usuario pulsa en buscar")
+    public void buscar() {
+        Report.info("Pulsando en buscar...");
+        eaa_cp.clickEnBuscar();
+    }
+
 }
