@@ -5,8 +5,10 @@ import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.hooks.ExtentReportHook;
 import com.nttdata.automation.pages.Login;
 import com.nttdata.automation.reports.Report;
+import com.nttdata.automation.utils.CSV_Manager;
 import com.nttdata.automation.utils.Cartera;
 import com.nttdata.automation.utils.Commons;
+import com.nttdata.automation.validation.Validator;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -19,6 +21,7 @@ import org.sikuli.script.Screen;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 public class CommonSteps {
 
@@ -234,4 +237,39 @@ public class CommonSteps {
         }
 
     }
+
+    @Then("Se muestra un listado de carteras")
+    public void comprobarListadoCredenciales() {
+        BasePageObject bpo = new BasePageObject();
+        List<String> credenciales = bpo.obtenerIdsCarteras();
+        Validator.validarVerdadero(!credenciales.isEmpty(), "El listado contiene credenciales: " + credenciales);
+    }
+
+    private String idExtraido = "12246356";
+
+    @And("Actualizo variable idExtraido")
+    public void actualizarVariableIdExtraido() {
+        int numero = (int) (Math.random() * 100) + 1;
+        idExtraido = String.valueOf(numero);
+        System.out.println("La variable idExtraido se ha actualizado con el valor: " + idExtraido);
+    }
+
+    @Given("Inicializo el archivo CSV con la cabecera")
+    public void inicializarCsv() {
+        // Llama al método interno sin pasar parámetros externos
+        CSV_Manager.inicializarArchivo();
+    }
+
+    @Then("guardo el id extraido en el archivo CSV revocacion")
+    public void guardarIdEnCsv() {
+        // Pasa el ID dinámico que extrajo Selenium al gestor del archivo
+        CSV_Manager.anadirId(idExtraido);
+    }
+
+    @Then("guardo el listado extraido en el archivo CSV revocacion")
+    public void guardarListadoEnCsv() {
+        // Pasa el ID dinámico que extrajo Selenium al gestor del archivo
+        CSV_Manager.guardarListaIds();
+    }
+
 }

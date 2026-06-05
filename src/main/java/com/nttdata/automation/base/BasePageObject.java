@@ -564,4 +564,9 @@ public class BasePageObject {
         return obtenerTablaDeDatos(locator).getElementoCelda(filaIndex, columna, childLocator);
     }
 
+    public List<String> obtenerIdsCarteras() {
+        By tabla_credenciales = tag("eaa_tabla_credenciales");
+        return obtenerTextosColumnaTabla(tabla_credenciales, "ID Cartera");
+    }
+
 }
