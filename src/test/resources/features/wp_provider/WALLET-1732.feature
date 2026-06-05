@@ -14,7 +14,7 @@ Feature: WALLET-1732
     And Esperar 5 segundos
     When Click en el botón acceder
     And  Intro en certificado
-    When Click en el link Historico Revocaciones - portal wallet provider
+    When Click en el link Historico Revocaciones
     And Esperar 5 segundos
     And Validar que el campo "wp_historicoRevocacion_titulo" de tipo "xpath" tiene el valor "Histórico revocación"
     And Validar que el campo "wp_hitoricoRevocacion_TablaEstado" de tipo "xpath" tiene el valor "Revocada"

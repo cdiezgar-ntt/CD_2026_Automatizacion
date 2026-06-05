@@ -13,7 +13,7 @@ Feature: WALLET-1715
     And Esperar 5 segundos
     When Click en el botón acceder
     And  Intro en certificado
-    When Click en el botón buscar - portal wallet provider
+    When Click en el botón buscar
     And Obtener primer correo
     #And Click en el primer elemento de la lista - portal wallet provider
     And Cerrar el navegador

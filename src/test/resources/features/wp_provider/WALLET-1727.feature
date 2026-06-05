@@ -12,16 +12,15 @@ Feature: WALLET-1727
   #Etiquetas
   @WALLET-1727 @wallet_provider
   Scenario: WALLET PROVIDER - EJECUTIVO - Revocar carteras seleccionadas - mostrar respuesta tras revocación de carteras seleccionadas
-
-    Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
+    Given Abrir la web wallet provider
     And Esperar 5 segundos
     When Click en el botón acceder
     And  Intro en certificado
-    When Añado el texto "XXXXXXXXX" en el campo de búsqueda "revocables" - portal wallet provider
+    When Añado el texto "XXXXXXXXX" en el campo de búsqueda "revocables"
     When Click en el botón buscar - portal wallet provider
-    And Click en la primera cartera de la lista - portal wallet provider
-    And Click en la segunda cartera de la lista - portal wallet provider
-    And Click en la tercera cartera de la lista - portal wallet provider
+    And Click en la primera cartera de la lista
+    And Click en la segunda cartera de la lista
+    And Click en la tercera cartera de la lista
     When Click en el botón revocar - portal wallet provider
     And Seleccionar motivo de revocación "Motivo de revocación 1" - portal wallet provider
     And Click en el botón confirmar revocación - portal wallet provider

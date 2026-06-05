@@ -27,7 +27,7 @@ public class WP_ControlPanel_Steps {
      * Step Wallet Provider:
      * <p>Llama al método clickBtnBuscar() de la clase WP_ControlPanel para hacer click en el botón "Buscar" de la pantalla de inicio del Control Panel del Wallet Provider</p>
      */
-    @When("Click en el botón buscar - portal wallet provider")
+    @When("Click en el botón buscar")
     public void hacerClickEnElBotonBuscar() {
         wp_cp.clickBtnBuscar();
         System.out.println("Botón buscar clickeado");
@@ -38,7 +38,7 @@ public class WP_ControlPanel_Steps {
      * Step Wallet Provider:
      * <p>Llama al método clickPrimerElementoLista() de la clase WP_ControlPanel para hacer click en el primer elemento de la lista de resultados de búsqueda de la pantalla de inicio del Control Panel del Wallet Provider</p>
      */
-    @And("Click en el primer elemento de la lista - portal wallet provider")
+    @And("Click en el primer elemento de la lista")
     public void clickEnElPrimerElementoDeLaLista() {
         System.out.println("Clicando en el primer elemento de la lista");
         Report.info("Clicando en el primer elemento de la lista");
@@ -52,7 +52,7 @@ public class WP_ControlPanel_Steps {
      * <p>Llama al método rellenarCampoBusquedaEmail(String textoBusqueda) de la clase WP_ControlPanel para rellenar el campo de búsqueda por email de la pantalla de inicio del Control Panel del Wallet Provider con el texto pasado como parámetro</p>
      * @param texto: String con el texto a introducir en el campo de búsqueda por email
      */
-    @Given("Rellenar el texto {string} en el campo de busqueda email - portal wallet provider")
+    @Given("Rellenar el texto {string} en el campo de busqueda email")
     public void rellenarElTextoEnElCampoDeBusquedaEmail(String texto) {
         System.out.println("Rellenando el campo de búsqueda email con el texto: " + texto);
         Report.info("Rellenando el campo de búsqueda email con el texto: " + texto);
@@ -184,7 +184,7 @@ public class WP_ControlPanel_Steps {
      * Step Wallet Provider:
      * <p>Llama al método clickLinkHistoricoRevocaciones() de la clase WP_ControlPanel para hacer click en el link "Historico Revocaciones" de la pantalla de inicio del Control Panel del Wallet Provider</p>
      */
-    @And("Click en el link Historico Revocaciones - portal wallet provider")
+    @And("Click en el link Historico Revocaciones")
     public void clickEnElLinkHistoricoRevocaciones() {
         System.out.println("Clicando en el link Historico Revocaciones");
         Report.info("Clicando en el link Historico Revocaciones");
@@ -197,7 +197,7 @@ public class WP_ControlPanel_Steps {
      * Step Wallet Provider:
      * <p>Llama al método clickLinkCarterasActivadasVerTodas() de la clase WP_ControlPanel para hacer click en el link "Carteras Activadas Ver Todas" de la pantalla de inicio del Control Panel del Wallet Provider</p>
      */
-    @And("Click en el botón ver todas carteras activadas ultimo mes - portal wallet provider")
+    @And("Click en el botón ver todas carteras activadas ultimo mes")
     public void clickEnElLinkCarterasActivadasVerTodas() {
         System.out.println("Clicando en el link Carteras Activadas Ver Todas");
         Report.info("Clicando en el link Carteras Activadas Ver Todas");
@@ -210,7 +210,7 @@ public class WP_ControlPanel_Steps {
      * Step Wallet Provider:
      * <p>Llama al método clickLinkCarterasRevocadasVerTodas() de la clase WP_ControlPanel para hacer click en el link "Carteras Revocadas Ver Todas" de la pantalla de inicio del Control Panel del Wallet Provider</p>
      */
-    @And("Click en el botón ver todas carteras revocadas ultimo mes - portal wallet provider")
+    @And("Click en el botón ver todas carteras revocadas ultimo mes")
     public void clickEnElLinkCarterasRevocadasVerTodas() {
         System.out.println("Clicando en el link Carteras Revocadas Ver Todas");
         Report.info("Clicando en el link Carteras Revocadas Ver Todas");
@@ -223,7 +223,7 @@ public class WP_ControlPanel_Steps {
      * Step Wallet Provider:
      * <p>Llama al método clickLinkCarterasActivasVerTodas() de la clase WP_ControlPanel para hacer click en el link "Carteras Activas Ver Todas" de la pantalla de inicio del Control Panel del Wallet Provider</p>
      */
-    @And("Click en el botón ver todas carteras activas ultimo mes - portal wallet provider")
+    @And("Click en el botón ver todas carteras activas ultimo mes")
     public void clickEnElLinkCarterasActivasVerTodas() {
         System.out.println("Clicando en el link Carteras Activas Ver Todas");
         Report.info("Clicando en el link Carteras Activas Ver Todas");
@@ -259,7 +259,7 @@ public class WP_ControlPanel_Steps {
         Validator.validarVerdadero(wp_dc.obtenerEstadoCartera().contains(estado_esperado), "La cartera está en el estado: " + estado_esperado,true);
     }
 
-    @And("Click en el botón revocar cartera - portal wallet provider")
+    @And("Click en el botón revocar cartera")
     public void detalleCarteraRevocarCartera() {
         System.out.println("Clicando en el botón revocar cartera");
         Report.info("Clicando en el botón revocar cartera");
@@ -268,7 +268,7 @@ public class WP_ControlPanel_Steps {
         Report.info("Botón revocar cartera clicado");
     }
 
-    @And("Click en el botón confirmar revocación - portal wallet provider detalle de cartera")
+    @And("Click en el botón confirmar revocación")
     public void detalleCarteraConfirmarRevocacion() {
         System.out.println("Clicando en el botón confirmar revocación");
         Report.info("Clicando en el botón confirmar revocación");
@@ -276,5 +276,11 @@ public class WP_ControlPanel_Steps {
         System.out.println("Botón confirmar revocación clicado");
         Report.info("Botón confirmar revocación clicado");
     }
+
+//    @When("el usuario sube el archivo CSV {string}")
+//    public void elUsuarioSubeElArchivoCSV(String ruta) {
+//        wp_cp.cargarArchivoCSV_wp(ruta);
+//
+//    }
 
 }

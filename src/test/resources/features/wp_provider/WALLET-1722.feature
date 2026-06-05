@@ -19,14 +19,14 @@ Scenario: WALLET PROVIDER - EJECUTIVO - Detalle de Cartera – Cartera revocable
     When Click en el botón acceder
     And  Intro en certificado
     When Seleccionar en el combo con id "wp_pantallaInicio_ComboEstado" la opcion con valor "VALID"
-    When Click en el botón buscar - portal wallet provider
-    And Click en el primer elemento de la lista - portal wallet provider
+    When Click en el botón buscar
+    And Click en el primer elemento de la lista
     #And Validar que el campo "wp_detalleCartera_InformacionGeneral_estado" de tipo "tag" tiene el valor "Cartera operativa"
-    And Click en el botón revocar cartera - portal wallet provider
+    And Click en el botón revocar cartera
     #And Seleccionar en el combo con xpath "wp_detalleCartera_RevocacionComboMotivoRevocacion" la opcion con valor "MOBILE_PHONE_LOSS"
     When El usuario despliega los motivos de revocacion
     And El usuario elige el motivo "Cambio de datos de identidad"
-    And Click en el botón confirmar revocación - portal wallet provider detalle de cartera
+    And Click en el botón confirmar revocación
     And Acepta la alerta de autofirma
     And Selecciona su certificado en autofirma
     And Cerrar el navegador

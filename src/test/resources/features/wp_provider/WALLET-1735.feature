@@ -14,12 +14,12 @@ Feature: WALLET-1735
   #Etiquetas
   @WALLET-1735 @wallet_provider
   Scenario: WALLET PROVIDER - EJECUTIVO - Histórico de revocación - reintentar revocar carteras fallidas en el detalle de histórico de revocación
-    Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
+    Given Abrir la web wallet provider
     And Esperar 5 segundos
     When Click en el botón acceder
     And  Intro en certificado
-    When Click en botón historico de revocacion - portal wallet provider
-    And Click en en boton accion del bloque error - portal wallet provider
-    And Navega a pantalla de detalle de bloque de revocacion - portal wallet provider
-    And Click en el boton reintentar revocar - portal wallet provider
+    When Click en botón historico de revocacion
+    And Click en en boton accion del bloque error
+    And Navega a pantalla de detalle de bloque de revocacion
+    And Click en el boton reintentar revocar
     And Cerrar el navegador

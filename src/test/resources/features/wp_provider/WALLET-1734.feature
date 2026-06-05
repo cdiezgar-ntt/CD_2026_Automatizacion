@@ -9,12 +9,16 @@ Feature: WALLET-1734
 
   #Etiquetas
   @WALLET-1734 @wallet_provider
-Scenario: WALLET PROVIDER - EJECUTIVO - Histórico de revocación - mostrar respuesta de bloques y detalle del histórico de revocación en proceso
-    Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
+  Scenario: WALLET PROVIDER - EJECUTIVO - Histórico de revocación - mostrar respuesta de bloques y detalle del histórico de revocación en proceso
+    Given Abrir la web wallet provider
     And Esperar 5 segundos
     When Click en el botón acceder
     And  Intro en certificado
-    When Click en botón historico de revocacion - portal wallet provider
-    And Click en en boton accion del bloque en proceso - portal wallet provider
-    And Navega a pantalla de detalle de bloque de revocacion - portal wallet provider
+    When Click en el link Historico Revocaciones
+    And Esperar 5 segundos
+    And Validar que el campo "wp_historicoRevocacion_titulo" de tipo "xpath" tiene el valor "Histórico revocación"
+    And Validar que el campo "wp_hitoricoRevocacion_TablaEstado" de tipo "xpath" tiene el valor "Revocada"
+    And Click en el primer elemento de la lista
+    And Validar que el campo "wp_detalleHistoricoRevocacion_titulo" de tipo "xpath" tiene el valor "Detalle bloque revocación"
+    And Validar que el campo "wp_detalleHitoricoRevocacion_TablaEstado" de tipo "tag" tiene el valor "Revocada"
     And Cerrar el navegador

@@ -10,7 +10,7 @@ Feature: WALLET-1728-XXXXX
   #7. La modal mostrará un mensaje de error en el caso de que alguna de las Carteras haya dado error al revocarla y el usuario tendrá la opción de ver el resumen de revocación o de volver al inicio.
 
   #Etiquetas
-  @WALLET-1728 @wallet_provider @noejecutar
+  @WALLET-1728 @wallet_provider @noejecutar @wp_descartado
 Scenario: WALLET PROVIDER - EJECUTIVO - Revocar carteras seleccionadas - mostrar respuesta de error tras revocación de carteras seleccionadas
     Given Abrir la web "https://pre-wp-cd.redsara.es/control-panel/"
     And Esperar 5 segundos
