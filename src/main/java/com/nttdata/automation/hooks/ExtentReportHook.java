@@ -2,6 +2,9 @@ package com.nttdata.automation.hooks;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import com.nttdata.automation.jira_integration.XrayResultCollector;
+import com.nttdata.automation.jira_integration.XrayStatus;
+import com.nttdata.automation.jira_integration.XrayTestContext;
 import com.nttdata.automation.reports.ExtentReportManagement;
 import com.nttdata.automation.reports.ExtentTestReporter;
 import com.nttdata.automation.reports.ScreenRecorder;
@@ -51,6 +54,7 @@ public class ExtentReportHook {
         featureTestTL.set(featureTest);
 
         TestExecutionContext.setReporter(new ExtentTestReporter());
+        XrayTestContext.setCurrentTestKey(featureName);
 
         System.out.println("Inicio escenario: " + scenario.getName());
         System.out.println("Feature: " + featureName);
@@ -71,7 +75,16 @@ public class ExtentReportHook {
             throw new IllegalStateException("ExtentTest por feature no inicializado para: " + scenario.getName());
         }
 
+        XrayStatus scenarioStatus = XrayTestContext.getCurrentScenarioStatus();
+
+        if (scenarioStatus == XrayStatus.FAIL) {
+            XrayResultCollector.markFail(getFeatureName());
+        } else if (scenario.isFailed()) {
+            XrayResultCollector.markBlocked(getFeatureName());
+        }
+
         if (scenario.isFailed()) {
+
             String screenshotBase64 = ScreenRecorder.takeScreenShotBase64();
 
             if (screenshotBase64 != null && !screenshotBase64.isEmpty()) {
@@ -101,6 +114,8 @@ public class ExtentReportHook {
         casePathTL.remove();
 
         TestExecutionContext.clear();
+        XrayTestContext.clear();
+
     }
 
     public static ExtentTest getTest() {
