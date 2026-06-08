@@ -514,6 +514,15 @@ public class BasePageObject {
     }
 
 
+    /**
+     * Permite obtener una tabla de datos de la que se pueden extraer varias propiedades, valores de elementos, por filas, por columnas, por celdas...
+     * Concretamente busca el localizador, y de el extrae las cabeceras por el selector css "thead th", y las filas por "tbody tr". De cada fila,
+     * crea una lista de celdas con los principales "td".
+     * TODO revisar si hay que hacer alguna modificación en la extraccion de los td, creo que coge todos y solo deberia coger los primeros del tr
+     *
+     * @param tableLocator El By que localiza univocamente la tabla de datos a consultar
+     * @return Una instancia de la clase TablaDatos que contiene metodos diversos para obtener datos de celdas, columnas...
+     */
     protected TablaDatos obtenerTablaDeDatos(By tableLocator) {
 
         WebElement table = wait.until(ExpectedConditions.visibilityOfElementLocated(tableLocator));
@@ -545,28 +554,31 @@ public class BasePageObject {
         return new TablaDatos(headers, filas);
     }
 
+    /**
+     * Obtiene todos los textos de una columna en una tabla por su localizador
+     * @param locator El localizador By de la tabla
+     * @param columna La columna de la que se quieren obtener los textos
+     * @return Un listado con los textos de la tabla
+     */
     protected List<String> obtenerTextosColumnaTabla(By locator, String columna) {
         return obtenerTablaDeDatos(locator).getTextosColumna(columna);
     }
 
-    protected List<WebElement> obtenerEnlacesColumnaTabla(By locator, String columna) {
-        return obtenerTablaDeDatos(locator).getColumna(columna)
-                .stream()
-                .map(celda -> celda.findElement(By.tagName("a")))
-                .toList();
-    }
-
+    /**
+     * Obtiene el texto en una celda específica de la tabla por su fila
+     * @param locator El localizador By de la tabla
+     * @param filaIndex La fila donde se encuentra el dato que se quiere extraer
+     * @param columna La columna de la que se quiere obtener el texto
+     * @return El texto en la celda
+     */
     protected String obtenerTextoCeldaTabla(By locator, int filaIndex, String columna) {
         return obtenerTablaDeDatos(locator).getTextoCelda(filaIndex, columna);
-    }
-
-    protected WebElement obtenerElementoCeldaTabla(By locator, int filaIndex, String columna, By childLocator) {
-        return obtenerTablaDeDatos(locator).getElementoCelda(filaIndex, columna, childLocator);
     }
 
     public List<String> obtenerIdsCarteras() {
         By tabla_credenciales = tag("eaa_tabla_credenciales");
         return obtenerTextosColumnaTabla(tabla_credenciales, "ID Cartera");
     }
+
 
 }
