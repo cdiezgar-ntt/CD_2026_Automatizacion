@@ -3,6 +3,8 @@ package com.nttdata.automation.pages;
 import com.nttdata.automation.base.BasePageObject;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 public class WP_ControlPanel extends BasePageObject {
 
     // Localizadores de los elementos de la pantalla de inicio del Control Panel del Wallet Provider
@@ -199,6 +201,10 @@ public class WP_ControlPanel extends BasePageObject {
     }
 
 
+    public List<String> obtenerIdsCarteras() {
+        By tabla_credenciales = tag("wp_tabla_credenciales");
+        return obtenerTextosColumnaTabla(tabla_credenciales, "ID Cartera");
+    }
 
 
 }

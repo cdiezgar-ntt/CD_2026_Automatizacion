@@ -2,6 +2,7 @@ package com.nttdata.automation.utils;
 
 import com.nttdata.automation.base.BasePageObject;
 import com.nttdata.automation.pages.EAA_ControlPanel;
+import com.nttdata.automation.pages.WP_ControlPanel;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -43,8 +44,8 @@ public class CSV_Manager {
     }
 
     public static void guardarListaIds() {
-        BasePageObject bpo = new BasePageObject();
-        List<String> ids = bpo.obtenerIdsCarteras();
+        WP_ControlPanel wp = new WP_ControlPanel();
+        List<String> ids = wp.obtenerIdsCarteras();
         // Validamos que la lista contenga elementos
         if (ids == null || ids.isEmpty()) {
             System.out.println("Advertencia: La lista de IDs está vacía. Nada que escribir.");

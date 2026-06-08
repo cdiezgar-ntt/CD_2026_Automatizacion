@@ -4,6 +4,7 @@ import com.nttdata.automation.base.BasePageObject;
 import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.hooks.ExtentReportHook;
 import com.nttdata.automation.pages.Login;
+import com.nttdata.automation.pages.WP_ControlPanel;
 import com.nttdata.automation.reports.Report;
 import com.nttdata.automation.utils.CSV_Manager;
 import com.nttdata.automation.utils.Cartera;
@@ -240,8 +241,8 @@ public class CommonSteps {
 
     @Then("Se muestra un listado de carteras")
     public void comprobarListadoCredenciales() {
-        BasePageObject bpo = new BasePageObject();
-        List<String> credenciales = bpo.obtenerIdsCarteras();
+        WP_ControlPanel wp = new WP_ControlPanel();
+        List<String> credenciales = wp.obtenerIdsCarteras();
         Validator.validarVerdadero(!credenciales.isEmpty(), "El listado contiene credenciales: " + credenciales);
     }
 

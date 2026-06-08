@@ -575,10 +575,5 @@ public class BasePageObject {
         return obtenerTablaDeDatos(locator).getTextoCelda(filaIndex, columna);
     }
 
-    public List<String> obtenerIdsCarteras() {
-        By tabla_credenciales = tag("eaa_tabla_credenciales");
-        return obtenerTextosColumnaTabla(tabla_credenciales, "ID Cartera");
-    }
-
 
 }
