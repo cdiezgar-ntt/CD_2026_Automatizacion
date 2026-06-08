@@ -20,3 +20,5 @@ buildNumber.properties
 
 # Ignoro la coleccion de bruno
 src/test/resources/bruno_collection/*
+# Ignoro apks
+src/test/resources/apps/*

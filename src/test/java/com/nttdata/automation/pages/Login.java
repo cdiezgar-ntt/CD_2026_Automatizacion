@@ -36,6 +36,8 @@ public class Login extends BasePageObject {
         driver.get(url("web_pid"));
     }
 
-
+    public boolean apareceInicioNoSeguro() {
+        return esVisibleEnPantalla(btonAccederDeTodosModosBy);
+    }
 
 }

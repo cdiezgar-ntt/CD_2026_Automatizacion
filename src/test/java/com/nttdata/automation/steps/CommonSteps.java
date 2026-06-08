@@ -66,7 +66,7 @@ public class CommonSteps {
         Report.info("Autenticando...");
         hacerClickEnElBotonAcceder();
 
-        if (login.currentUrl().endsWith("/auth/callback")) {
+        if (login.apareceInicioNoSeguro()) {
             Report.info("Aparece acceso a pagina no segura. Aceptando acceso...");
             login.clickAccederTodosModos();
         }
@@ -84,7 +84,7 @@ public class CommonSteps {
         hacerClickEnElBotonAcceder();
 
         //Ahora mismo aparece pagina de información no segura
-        if (login.currentUrl().endsWith("/auth/callback")) {
+        if (login.apareceInicioNoSeguro()) {
             Report.info("Aparece acceso a pagina no segura. Aceptando acceso...");
             login.clickAccederTodosModos();
         }
