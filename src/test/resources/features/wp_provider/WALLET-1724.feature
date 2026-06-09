@@ -15,10 +15,10 @@ Feature: WALLET-1724
     And  Intro en certificado
     When Click en el botón ver todas carteras activas ultimo mes
     And Esperar 5 segundos
-    And Validar que el campo "wp_carterasActivas_titulo" de tipo "xpath" tiene el valor "Carteras activas"
+    And Validar que el campo carteras activas titulo tiene el valor "Carteras activas"
     When Click en el botón buscar
     And Click en el primer elemento de la lista
-    And Validar que el campo "wp_detalleCartera_titulo" de tipo "xpath" tiene el valor "Detalle cartera"
-    And Validar que el campo "wp_detalleCartera_InformacionGeneral_estado" de tipo "xpath" tiene el valor "Cartera operativa"
+    And Validar que el campo detalle cartera titulo tiene el valor "Detalle cartera"
+    And Validar que el campo detalle cartera informacion general estado tiene el valor "Cartera operativa"
     And Cerrar el navegador
 

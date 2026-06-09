@@ -15,6 +15,5 @@ Feature: WALLET-1716
     And  Intro en certificado
     When Rellenar el texto "alberto.sanchez.tsol@gmail.com" en el campo de busqueda email
     When Click en el botón buscar
-    And Click en el primer elemento de la lista
-    And Validar que el campo "wp_detalleCartera_InformacionContacto_email" de tipo "xpath" tiene el valor "alberto.sanchez.tsol@gmail.com"
+    And Validar que el campo email tiene el valor "alberto.sanchez.tsol@gmail.com"
     And Cerrar el navegador

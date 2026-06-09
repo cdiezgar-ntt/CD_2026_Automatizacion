@@ -139,32 +139,7 @@ public class CommonSteps {
         }
     }
 
-    /**
-     * @description Método para validar que un campo de la pantalla tiene un valor concreto, se le pasa el id del campo, el tipo (input, select o textarea) y el valor a validar
-     * @param id: String con el id del campo a validar
-     * @param tipo: String con el tipo del campo a validar (input, select o textarea)
-     * @param valor: String con el valor a validar en el campo
-     */
-    @Then("Validar que el campo {string} de tipo {string} tiene el valor {string}")
-    public void validarQueElCampoTieneElValor(String id, String tipo, String valor) {
-        BasePageObject bpo = new BasePageObject();
-        System.out.println("El tipo es: " +tipo);
-        bpo.validarCampoDeTipo(id, tipo, valor);
-        Report.info("El campo `" + id + "` ha sido validado con el valor `" + valor + "`");
-    }
 
-    /**
-     * @description Método para seleccionar una opción de un combo, se le pasa el id del combo y el valor a seleccionar
-     * @param id: String con el id del combo
-     * @param texto: String con el valor a seleccionar en el combo
-     */
-    @And("Seleccionar en el combo con id {string} la opcion con valor {string}")
-    public void seleccionarElComboConElTexto(String id, String texto) {
-        BasePageObject bpo = new BasePageObject();
-        System.out.println("Seleccionando el combo Motivo Revocacion con el texto: " + texto);
-        bpo.seleccionComboById(id,texto);
-        System.out.println("Combo Motivo Revocacion seleccionado con el texto: " + texto);
-    }
 
     /**
      * @description Método para seleccionar una opción de un combo, se le pasa el id del combo y el valor a seleccionar

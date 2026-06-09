@@ -269,38 +269,7 @@ public class BasePageObject {
         );
     }
 
-    /**
-     * Utiliza {@link #seleccionarDeLista(By, String)} en su lugar.
-     *
-     * @param elmentoWebString La clave asociada al elemento web
-     * @param opcion           El value asociado al option en el identificador
-     * @deprecated Desde que se implementa el metodo {@link #seleccionarDeLista(By, String)}, que es válido para todos los tipos de localizador
-     * ya que se pasa el By. Este metodo solo es valido para id y además presupone conocer values internos en lugar
-     * de los textos visibles.
-     */
 
-    @Deprecated
-    public void seleccionComboById(String elmentoWebString, String opcion) {
-        WebElement we;
-        By localizador;
-        try {
-            localizador = id(elmentoWebString);
-            System.out.println("Esperando a que el elemento sea visible...");
-            we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
-            //Scrollear hasta el elemento
-            new Actions(driver).scrollToElement(we).perform();
-            System.out.println("Rellenando combobox");
-            Select comboBox = new Select(we);
-            comboBox.selectByValue(opcion);
-            //comboBox.selectByVisibleText(opcion);
-            System.out.println("Combobox seleccionado: " + opcion);
-
-        } catch (Exception e) {
-            System.out.println("Excepción al seleccionar combo: " + e);
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-    }
 
     /**
      * Utiliza {@link #seleccionarDeLista(By, String)} en su lugar.

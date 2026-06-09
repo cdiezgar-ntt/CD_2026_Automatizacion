@@ -2,6 +2,10 @@ package com.nttdata.automation.pages;
 
 import com.nttdata.automation.base.BasePageObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -30,6 +34,28 @@ public class WP_ControlPanel extends BasePageObject {
     private final By linkOcultarUltimoMesBy = xpath("wp_pantallaInicio_OcultarUltimoMes");
     private final By primerCorreoDeLaListaBy = xpath("wp_primerCorreoDeLaListaBy");
     private final By tituloCarterasActivasBy = tag("wp_carterasActivas_titulo");
+    private final By tituloSinResultadosBy = xpath("wp_pantallaInicio_SinResultados");
+    private final By wp_pantallaInicio_SinResultados_descripcionBy = xpath("wp_pantallaInicio_SinResultados_descripcion");
+    private final By wp_informacionGeneralEstadoBy = tag("wp_carterasActivas_titulo");
+
+    private final By wp_detalleCartera_tituloBy = tag("wp_detalleCartera_titulo");
+    private final By wp_detalleCartera_InformacionContacto_emailBy = tag("wp_detalleCartera_InformacionContacto_email");
+    private final By wp_detalleCartera_InformacionContacto_telefonoBy = tag("wp_detalleCartera_InformacionContacto_telefono");
+    private final By wp_detalleCartera_InformacionGeneral_estadoBy = tag("wp_detalleCartera_InformacionGeneral_estado");
+    private final By wp_detalleCartera_RevocarCarteraBy = tag("wp_detalleCartera_RevocarCartera");
+    private final By wp_detalleCartera_RevocacionComboMotivoRevocacionBy = xpath("wp_detalleCartera_RevocacionComboMotivoRevocacion");
+    private final By wp_detalleCartera_Boton_SiRevocarBy = tag("wp_detalleCartera_Boton_SiRevocar");
+    private final By wp_tabla_credencialesBy = tag("wp_tabla_credenciales");
+    private final By wp_carterasActivas_tituloBy = xpath("wp_carterasActivas_titulo");
+    private final By wp_carterasActivadas_tituloBy = xpath("wp_carterasActivadas_titulo");
+    private final By wp_carterasRevocadas_tituloBy = xpath("wp_carterasRevocadas_titulo");
+    private final By wp_historicoRevocacion_tituloBy = xpath("wp_historicoRevocacion_titulo");
+    private final By wp_historicoRevocacion_TablaIdBy = tag("wp_historicoRevocacion_TablaId");
+    private final By wp_hitoricoRevocacion_TablaEstadoBy = xpath("wp_hitoricoRevocacion_TablaEstado");
+    private final By wp_detalleHistoricoRevocacion_tituloBy = xpath("wp_detalleHistoricoRevocacion_titulo");
+    private final By wp_detalleHitoricoRevocacion_TablaEstadoBy = xpath("wp_detalleHitoricoRevocacion_TablaEstado");
+
+
 
     public WP_ControlPanel() {
         super("elements/web_wp.properties");
@@ -206,5 +232,103 @@ public class WP_ControlPanel extends BasePageObject {
         return obtenerTextosColumnaTabla(tabla_credenciales, "ID Cartera");
     }
 
+    public String obtenerTextoTextboxEmail(){
+        return obtenerTextosElementosWeb(textBoxEmailBy).getFirst();
+    }
+
+    public String obtenerTextoSinResultados(){
+        return obtenerTextosElementosWeb(tituloSinResultadosBy).getFirst();
+    }
+
+    public String obtenerTextoSinResultadosDescripcion(){
+        return obtenerTextosElementosWeb(wp_pantallaInicio_SinResultados_descripcionBy).getFirst();
+    }
+
+    public String obtenerTextoInformacionGeneralEstado(){
+        return obtenerTextosElementosWeb(wp_detalleCartera_InformacionGeneral_estadoBy).getFirst();
+    }
+
+    public String obtenerTextoCarterasActivasTitulo(){
+        return obtenerTextosElementosWeb(wp_carterasActivas_tituloBy).getFirst();
+    }
+
+    public String obtenerTextoDetalleCarteraTitulo(){
+        return obtenerTextosElementosWeb(wp_detalleCartera_tituloBy).getFirst();
+    }
+
+    public String obtenerTextoDetalleCarteraEstado(){
+        return obtenerTextosElementosWeb(wp_detalleCartera_InformacionGeneral_estadoBy).getFirst();
+    }
+
+    public String obtenerTextoCarterasActivadasTitulo(){
+        return obtenerTextosElementosWeb(wp_carterasActivadas_tituloBy).getFirst();
+    }
+
+    public String obtenerTextoCarterasRevocadasTitulo(){
+        return obtenerTextosElementosWeb(wp_carterasRevocadas_tituloBy).getFirst();
+    }
+
+    public String obtenerTextoHistoricoRevocacionTitulo(){
+        return obtenerTextosElementosWeb(wp_historicoRevocacion_tituloBy).getFirst();
+    }
+
+    public String obtenerTextoHistoricoRevocacionEstado(){
+        return obtenerTextosElementosWeb(wp_hitoricoRevocacion_TablaEstadoBy).getFirst();
+    }
+
+    public String obtenerTextoDetalleHistoricoRevocacionTitulo(){
+        return obtenerTextosElementosWeb(wp_detalleHistoricoRevocacion_tituloBy).getFirst();
+    }
+
+    public String obtenerTextoDetalleHistoricoRevocacionEstado(){
+        return obtenerTextosElementosWeb(wp_detalleCartera_InformacionGeneral_estadoBy).getFirst();
+    }
+
+    /**
+     * Utiliza {@link #seleccionarDeLista(By, String)} en su lugar.
+     * @param opcion           El value asociado al option en el identificador
+     * @deprecated Desde que se implementa el metodo {@link #seleccionarDeLista(By, String)}, que es válido para todos los tipos de localizador
+     * ya que se pasa el By. Este metodo solo es valido para id y además presupone conocer values internos en lugar
+     * de los textos visibles.
+     */
+    public void seleccionComboEstado(String opcion) {
+        WebElement we;
+        try {
+            System.out.println("Esperando a que el elemento sea visible...");
+            we = wait.until(ExpectedConditions.visibilityOfElementLocated(comboEstadoBy));
+            //Scrollear hasta el elemento
+            new Actions(driver).scrollToElement(we).perform();
+            System.out.println("Rellenando combobox");
+            Select comboBox = new Select(we);
+            comboBox.selectByValue(opcion);
+            //comboBox.selectByVisibleText(opcion);
+            System.out.println("Combobox seleccionado: " + opcion);
+
+        } catch (Exception e) {
+            System.out.println("Excepción al seleccionar combo: " + e);
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void seleccionMotivoRevocacion(String opcion) {
+        WebElement we;
+        try {
+            System.out.println("Esperando a que el elemento sea visible...");
+            we = wait.until(ExpectedConditions.visibilityOfElementLocated(wp_detalleCartera_RevocacionComboMotivoRevocacionBy));
+            //Scrollear hasta el elemento
+            new Actions(driver).scrollToElement(we).perform();
+            System.out.println("Rellenando combobox");
+            Select comboBox = new Select(we);
+            comboBox.selectByValue(opcion);
+            //comboBox.selectByVisibleText(opcion);
+            System.out.println("Combobox seleccionado: " + opcion);
+
+        } catch (Exception e) {
+            System.out.println("Excepción al seleccionar combo: " + e);
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 
 }

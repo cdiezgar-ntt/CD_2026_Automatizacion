@@ -18,7 +18,7 @@ Scenario: WALLET PROVIDER - EJECUTIVO - Detalle de Cartera – Cartera revocable
     And Esperar 5 segundos
     When Click en el botón acceder
     And  Intro en certificado
-    When Seleccionar en el combo con id "wp_pantallaInicio_ComboEstado" la opcion con valor "VALID"
+    When Seleccionar en el combo con estado la opcion con valor "VALID"
     When Click en el botón buscar
     And Click en el primer elemento de la lista
     #And Validar que el campo "wp_detalleCartera_InformacionGeneral_estado" de tipo "tag" tiene el valor "Cartera operativa"

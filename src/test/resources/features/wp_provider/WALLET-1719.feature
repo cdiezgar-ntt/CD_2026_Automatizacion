@@ -15,8 +15,8 @@ Feature: WALLET-1719
     And Esperar 5 segundos
     When Click en el botón acceder
     And  Intro en certificado
-    When Seleccionar en el combo con id "wp_pantallaInicio_ComboMotivoRevocacion" la opcion con valor "USER_REQUEST"
+    When Seleccionar en el combo motivo revocacion la opcion con valor "USER_REQUEST"
     When Click en el botón buscar
     And Click en el primer elemento de la lista
-    And Validar que el campo "wp_detalleCartera_InformacionGeneral_estado" de tipo "tag" tiene el valor "Revocada"
+    And Validar que el campo informacion general estado tiene el valor "Revocada"
     And Cerrar el navegador

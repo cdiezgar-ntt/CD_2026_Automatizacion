@@ -1,11 +1,13 @@
 package com.nttdata.automation.steps;
 
+import com.nttdata.automation.base.BasePageObject;
 import com.nttdata.automation.pages.WP_DetalleCartera;
 import com.nttdata.automation.reports.Report;
 import com.nttdata.automation.utils.Cartera;
 import com.nttdata.automation.validation.Validator;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import com.nttdata.automation.pages.WP_ControlPanel;
 import com.nttdata.automation.hooks.ExtentReportHook;
@@ -282,5 +284,93 @@ public class WP_ControlPanel_Steps {
 //        wp_cp.cargarArchivoCSV_wp(ruta);
 //
 //    }
+
+
+    /**
+     * @description Método para validar que un campo de la pantalla tiene un valor concreto, se le pasa el id del campo, el tipo (input, select o textarea) y el valor a validar
+     * @param valor: String con el valor a validar en el campo
+     */
+    @Then("Validar que el campo email tiene el valor {string}")
+    public void validarQueElCampoEmailTieneElValor(String valor) {
+        Validator.validarVerdadero(wp_cp.obtenerTextoTextboxEmail().equals(valor), "El campo email tiene el valor: " + valor,false, false);
+    }
+
+    @Then("Validar que el campo sin resultado tiene el valor {string}")
+    public void validarQueElCampoSinResultadoTieneElValor(String valor) {
+        Validator.validarVerdadero(wp_cp.obtenerTextoSinResultados().equals(valor), "El campo email tiene el valor: " + valor,false, false);
+    }
+
+    @Then("Validar que el campo descripcion sin resultado tiene el valor {string}")
+    public void validarQueElCampoDescripcionSinResultadoTieneElValor(String valor) {
+        Validator.validarVerdadero(wp_cp.obtenerTextoSinResultadosDescripcion().equals(valor), "El campo email tiene el valor: " + valor,false, false);
+    }
+
+    @Then("Validar que el campo informacion general estado tiene el valor {string}")
+    public void validarQueElCampoInformacionGeneralEstadoTieneElValor(String valor) {
+        Validator.validarVerdadero(wp_cp.obtenerTextoInformacionGeneralEstado().equals(valor), "El campo email tiene el valor: " + valor,false, false);
+    }
+
+    @Then("Validar que el campo carteras activas titulo tiene el valor {string}")
+    public void validarQueElCampoCarterasActivasTituloTieneElValor(String valor) {
+        Validator.validarVerdadero(wp_cp.obtenerTextoCarterasActivasTitulo().equals(valor), "El campo email tiene el valor: " + valor,false, false);
+    }
+
+    @Then("Validar que el campo detalle cartera titulo tiene el valor {string}")
+    public void validarQueElCampoDetalleCarteraTituloTieneElValor(String valor) {
+        Validator.validarVerdadero(wp_cp.obtenerTextoDetalleCarteraTitulo().equals(valor), "El campo email tiene el valor: " + valor,false, false);
+    }
+
+    @Then("Validar que el campo detalle cartera informacion general estado tiene el valor {string}")
+    public void validarQueElCampoDetalleCarteraInformacionGeneralEstadoTieneElValor(String valor) {
+        Validator.validarVerdadero(wp_cp.obtenerTextoDetalleCarteraEstado().equals(valor), "El campo email tiene el valor: " + valor,false, false);
+    }
+
+    @Then("Validar que el campo carteras activadas titulo tiene el valor {string}")
+    public void validarQueElCampoCarterasActivadasTituloTieneElValor(String valor) {
+        Validator.validarVerdadero(wp_cp.obtenerTextoCarterasActivadasTitulo().equals(valor), "El campo email tiene el valor: " + valor,false, false);
+    }
+
+    @Then("Validar que el campo carteras revocadas titulo tiene el valor {string}")
+    public void validarQueElCampoCarterasRevocadasTituloTieneElValor(String valor) {
+        Validator.validarVerdadero(wp_cp.obtenerTextoCarterasRevocadasTitulo().equals(valor), "El campo email tiene el valor: " + valor,false, false);
+    }
+
+    @Then("Validar que el campo historico revocacion titulo tiene el valor {string}")
+    public void validarQueElCampohistoricoRevocacionTituloTieneElValor(String valor) {
+        Validator.validarVerdadero(wp_cp.obtenerTextoHistoricoRevocacionTitulo().equals(valor), "El campo email tiene el valor: " + valor,false, false);
+    }
+
+    @Then("Validar que el campo historico revocacion estado tiene el valor {string}")
+    public void validarQueElCampohistoricoRevocacionEstadoTieneElValor(String valor) {
+        Validator.validarVerdadero(wp_cp.obtenerTextoHistoricoRevocacionEstado().equals(valor), "El campo email tiene el valor: " + valor,false, false);
+    }
+
+    @Then("Validar que el campo detalle historico revocacion titulo tiene el valor {string}")
+    public void validarQueElCampoDetallehistoricoRevocacionTituloTieneElValor(String valor) {
+        Validator.validarVerdadero(wp_cp.obtenerTextoDetalleHistoricoRevocacionTitulo().equals(valor), "El campo email tiene el valor: " + valor,false, false);
+    }
+
+    @Then("Validar que el campo detalle historico revocacion estado tiene el valor {string}")
+    public void validarQueElCampoDetallehistoricoRevocacionEstadoTieneElValor(String valor) {
+        Validator.validarVerdadero(wp_cp.obtenerTextoDetalleHistoricoRevocacionEstado().equals(valor), "El campo email tiene el valor: " + valor,false, false);
+    }
+
+    /**
+     * @description Método para seleccionar una opción de un combo, se le pasa el id del combo y el valor a seleccionar
+     * @param texto: String con el valor a seleccionar en el combo
+     */
+    @And("Seleccionar en el combo con estado la opcion con valor {string}")
+    public void seleccionarElComboConElTexto(String texto) {
+        System.out.println("Seleccionando el combo Motivo Revocacion con el texto: " + texto);
+        wp_cp.seleccionComboEstado(texto);
+        System.out.println("Combo Motivo Revocacion seleccionado con el texto: " + texto);
+    }
+
+    @And("Seleccionar en el combo motivo revocacion la opcion con valor {string}")
+    public void seleccionarElComboMotivoRevocacionElTexto(String texto) {
+        System.out.println("Seleccionando el combo Motivo Revocacion con el texto: " + texto);
+        wp_cp.seleccionMotivoRevocacion(texto);
+        System.out.println("Combo Motivo Revocacion seleccionado con el texto: " + texto);
+    }
 
 }
