@@ -44,21 +44,6 @@ public class BasePageObject {
     private final String elementsFile;
 
     /**
-     * Utiliza {@link #BasePageObject(String)} en su lugar.
-     *
-     * @deprecated Desde la versión que implementa ficheros propios con los localizadores de los elementos para cada página.
-     * Este constructor se crea para dar soporte a los métodos de Validación que se utilizan desde los ficheros '.feature', pero
-     * estos se tendrán que ir adaptando para usar la clase Validator en lugar de mezclar responsabilidades y propiedades del page
-     * en los '.feature'
-     *
-     */
-
-    @Deprecated
-    public BasePageObject() {
-        this("elements/all_elements.properties");
-    }
-
-    /**
      * Otorga acceso al pageobject que lo herede para realizar las acciones primitivas sobre los elementos declarados en el fichero
      * '.properties' que se pase por parámetro.
      *
@@ -269,118 +254,6 @@ public class BasePageObject {
         );
     }
 
-
-
-    /**
-     * Utiliza {@link #seleccionarDeLista(By, String)} en su lugar.
-     *
-     * @param elmentoWebString La clave asociada al elemento web
-     * @param opcion           El value asociado al option en el identificador
-     * @deprecated Desde que se implementa el seleccionar de lista, que es válido para todos los tipos de localizador
-     * ya que se pasa el By. Este metodo solo es valido para xpath y además presupone conocer values internos en lugar
-     * de los textos visibles.
-     */
-    public void seleccionComboByxpath(String elmentoWebString, String opcion) {
-        WebElement we;
-        By localizador;
-        try {
-            localizador = xpath(elmentoWebString);
-            System.out.println("Esperando a que el elemento sea visible...");
-            we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
-            //Scrollear hasta el elemento
-            new Actions(driver).scrollToElement(we).perform();
-            System.out.println("Rellenando combobox");
-            Select comboBox = new Select(we);
-            comboBox.selectByValue(opcion);
-            //comboBox.selectByVisibleText(opcion);
-            System.out.println("Combobox seleccionado: " + opcion);
-
-        } catch (Exception e) {
-            System.out.println("Excepción al seleccionar combo: " + e);
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Se encarga de comparar el texto obtenido contra un texto esperado. Únicamente valida igualdad de textos, por lo
-     * que es muy limitado. Desaparecerá en futuras versiones.
-     *
-     * @param id1    La clave asociada al elemento web
-     * @param tipo   El tipo del elemento web. Posibles valores {xpath, classname, id, tagname, name}
-     * @param valor1 Valor esperado del elemento
-     * @deprecated Desde que se implementa la clase Validator, que tiene metodos para validar expresiones agnósticas de
-     * conocer ningún identificador interno de los elementos, ni el tipo de localizador, y que son válidos para todos los
-     * tipos de validaciones, ya que se pasa por parametro una expresion booleana desde el test.
-     */
-
-    public void validarCampoDeTipo(String id1, String tipo, String valor1) {
-
-        String tipoSwitch = tipo.toLowerCase().trim();
-        String textoElemento = "";
-        WebElement we;
-        By localizador;
-        switch (tipoSwitch) {
-            case "xpath":
-                localizador = xpath(id1);
-
-                System.out.println("Esperando a que el elemento sea visible...");
-                we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
-                System.out.println("Obteniendo texto del elemento...");
-                textoElemento = we.getText();
-                break;
-            case "classname":
-                localizador = classname(id1);
-                System.out.println("Esperando a que el elemento sea visible...");
-                we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
-                System.out.println("Obteniendo texto del elemento...");
-                textoElemento = we.getText();
-                break;
-            case "id":
-                localizador = id(id1);
-                System.out.println("Esperando a que el elemento sea visible...");
-                we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
-                System.out.println("Obteniendo texto del elemento...");
-                textoElemento = we.getText();
-                break;
-            case "tagname":
-                localizador = tag(id1);
-
-                System.out.println("Esperando a que el elemento sea visible...");
-                we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
-                System.out.println("Obteniendo texto del elemento...");
-                textoElemento = we.getText();
-                break;
-            case "tag":
-                localizador = tag(id1);
-
-                System.out.println("Esperando a que el elemento sea visible...");
-                we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
-                System.out.println("Obteniendo texto del elemento...");
-                textoElemento = we.getText();
-                break;
-            case "name":
-                localizador = name(id1);
-
-                System.out.println("Esperando a que el elemento sea visible...");
-                we = wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
-                System.out.println("Obteniendo texto del elemento...");
-                textoElemento = we.getText();
-                break;
-            default:
-                System.out.println("Tipo de localizador no reconocido: " + tipo);
-                throw new IllegalArgumentException("Tipo de localizador no reconocido: " + tipo);
-        }
-        // Validar
-        try {
-            assertEquals("El campo no coincide", valor1, textoElemento);
-        } catch (AssertionError e) {
-            System.out.println("Error de validación: " + e.getMessage());
-            throw e;
-        }
-
-    }
-
     /**
      * Se encarga de exponer un listado con los textos que hay contenidos dentro del conjunto de elementos web
      * representados por el localizador, a todos los niveles.
@@ -543,6 +416,5 @@ public class BasePageObject {
     protected String obtenerTextoCeldaTabla(By locator, int filaIndex, String columna) {
         return obtenerTablaDeDatos(locator).getTextoCelda(filaIndex, columna);
     }
-
 
 }
