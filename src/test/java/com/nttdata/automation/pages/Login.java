@@ -1,6 +1,7 @@
 package com.nttdata.automation.pages;
 
 import com.nttdata.automation.base.BasePageObject;
+import com.nttdata.automation.utils.EnvironmentConfig;
 import org.openqa.selenium.By;
 
 public class Login extends BasePageObject {
@@ -20,20 +21,21 @@ public class Login extends BasePageObject {
         pulsar(btonAccederDeTodosModosBy);
     }
 
+
     public void abrirWebPortalUsuario(){
-        driver.get(url("web_usuario"));
+        driver.get(new EnvironmentConfig(propertiesReader).environmentProperty("web_usuario"));
     }
 
     public void abrirWebPortalAdministrador_WP(){
-        driver.get(url("web_wp"));
+        driver.get(new EnvironmentConfig(propertiesReader).environmentProperty("web_wp"));
     }
 
     public void abrirWebPortalAdministrador_EEAProvider(){
-        driver.get(url("web_eaa"));
+        driver.get(new EnvironmentConfig(propertiesReader).environmentProperty("web_eaa"));
     }
 
     public void abrirWebPortalAdministrador_PIDProvider(){
-        driver.get(url("web_pid"));
+        driver.get(new EnvironmentConfig(propertiesReader).environmentProperty("web_pid"));
     }
 
     public boolean apareceInicioNoSeguro() {

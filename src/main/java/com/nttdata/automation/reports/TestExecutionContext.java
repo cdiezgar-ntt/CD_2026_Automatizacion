@@ -12,13 +12,8 @@ public class TestExecutionContext {
     }
 
     public static TestReporter getReporter() {
-        TestReporter reporter = reporterTL.get();
 
-        if (reporter == null) {
-            return NoOpTestReporter.INSTANCE;
-        }
-
-        return reporter;
+        return reporterTL.get();
     }
 
     public static void clear() {

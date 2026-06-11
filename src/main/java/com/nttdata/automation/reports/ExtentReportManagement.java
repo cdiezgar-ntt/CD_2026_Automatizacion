@@ -18,6 +18,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ExtentReportManagement {
 
+
+    private ExtentReportManagement() {
+    }
+
     private static ExtentReports globalExtent;
 
     private static final Map<String, ExtentReports> featureReports = new ConcurrentHashMap<>();
@@ -90,14 +94,6 @@ public class ExtentReportManagement {
         }
 
         for (ExtentReports report : featureReports.values()) {
-            report.flush();
-        }
-    }
-
-    public static synchronized void flushFeature(String featureName) {
-        ExtentReports report = featureReports.get(featureName);
-
-        if (report != null) {
             report.flush();
         }
     }

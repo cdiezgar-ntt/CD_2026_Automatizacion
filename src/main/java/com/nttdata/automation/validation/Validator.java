@@ -53,7 +53,6 @@ public class Validator {
     }
 
     private static void logPass(String msg, boolean conCaptura) {
-        TestReporter reporter = TestExecutionContext.getReporter();
 
         if (conCaptura) {
             String imgBase64 = ScreenRecorder.takeScreenShotBase64();
@@ -64,12 +63,12 @@ public class Validator {
                         "Evidencia OK"
                 );
 
-                reporter.pass(msg + html);
+                Report.pass(msg + html);
                 return;
             }
         }
 
-        reporter.pass(msg);
+        Report.pass(msg);
     }
 
     private static void logFail(String msg, boolean conCaptura) {
@@ -80,8 +79,6 @@ public class Validator {
             XrayResultCollector.markFail(currentTestKey);
         }
 
-        TestReporter reporter = TestExecutionContext.getReporter();
-
         if (conCaptura) {
             String imgBase64 = ScreenRecorder.takeScreenShotBase64();
 
@@ -91,12 +88,12 @@ public class Validator {
                         "Evidencia ERROR"
                 );
 
-                reporter.fail(msg + html);
+                Report.fail(msg + html);
                 return;
             }
         }
 
-        reporter.fail(msg);
+        Report.fail(msg);
     }
 
 }

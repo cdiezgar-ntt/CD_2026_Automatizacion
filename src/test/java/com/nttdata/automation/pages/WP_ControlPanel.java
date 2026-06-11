@@ -61,10 +61,6 @@ public class WP_ControlPanel extends BasePageObject {
         super("elements/web_wp.properties");
     }
 
-    public void cargarWeb() {
-        driver.get(url("web_wp"));
-    }
-
     /**
      * @description Método para hacer click en el botón "Buscar" de la pantalla de inicio del Control Panel del Wallet Provider
      */

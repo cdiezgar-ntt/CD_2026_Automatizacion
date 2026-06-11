@@ -3,7 +3,6 @@ package com.nttdata.automation.base;
 import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.reports.Report;
 import com.nttdata.automation.utils.Commons;
-import com.nttdata.automation.utils.EnvironmentConfig;
 import com.nttdata.automation.utils.PropertiesReader;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -40,7 +39,7 @@ public class BasePageObject {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
-    private static final PropertiesReader propertiesReader = new PropertiesReader();
+    protected static final PropertiesReader propertiesReader = new PropertiesReader();
     private final String elementsFile;
 
     /**
@@ -67,6 +66,43 @@ public class BasePageObject {
     }
 
     /**
+     * Permite localizar los elementos web sin conocer a priori el tipo de selector usado. Utiliza la siguiente logica
+     * interna, similar a lo que hace playwright, en función de como empiece:
+     * / o ./ --> xpath
+     * # -> id
+     * * -> name
+     * . -> classname
+     * En cualquier otro caso -> css-selector
+     * @param selector el nombre de la property en el fichero de localizadores
+     * @return Una instancia de By que localiza el/los elemento/s
+     */
+
+    protected By loc(String selector) {
+        String elemento = element(selector);
+        if (elemento == null || elemento.isBlank()) {
+            throw new IllegalArgumentException("Selector cannot be null or blank");
+        }
+
+        if (elemento.startsWith("#")) {
+            return By.id(elemento.substring(1));
+        }
+
+        if (elemento.startsWith("./") || elemento.startsWith("/")) {
+            return By.xpath(elemento);
+        }
+
+        if (elemento.startsWith(".")) {
+            return By.className(elemento.substring(1));
+        }
+
+        if (elemento.startsWith("*")) {
+            return By.name(elemento.substring(1));
+        }
+
+        return By.cssSelector(elemento);
+    }
+
+    /**
      * Expone la url actual del navegador para relizar validaciones sobre la misma.
      *
      * @return La url de la ventana/pestaña activa en el contexto actual del navegador levantado por el Driver.
@@ -78,17 +114,6 @@ public class BasePageObject {
         return (currentUrl == null) ? "" : currentUrl;
     }
 
-    /**
-     * Realiza una llamada a la clase configuración para encontrar la url proporcionada en el entorno donde se ejecute
-     * la prueba. Llama a la clase EnvironmentConfig para encontrar el entorno y buscar en el fichero de propiedades
-     * correcto.
-     *
-     * @param key Clave de la url a obtener. Ejemplo: web_usuario
-     * @return La url asociada a esa clave.
-     */
-    public String url(String key) {
-        return new EnvironmentConfig(propertiesReader).environmentProperty(key);
-    }
 
 
     /**
@@ -311,7 +336,6 @@ public class BasePageObject {
         try {
             List<WebElement> we = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(localizador));
             List<WebElement> we_filtrados = we.stream().filter(e -> e.getText().contentEquals(opcion)).toList();
-
             if (we_filtrados.size() > 1) {
                 Report.warn("La lista tiene más de un elemento. Por defecto se va a pulsar en el primero...");
             }

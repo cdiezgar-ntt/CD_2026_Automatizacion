@@ -56,10 +56,6 @@ public class ExtentReportHook {
         TestExecutionContext.setReporter(new ExtentTestReporter());
         XrayTestContext.setCurrentTestKey(featureName);
 
-        System.out.println("Inicio escenario: " + scenario.getName());
-        System.out.println("Feature: " + featureName);
-        System.out.println("CasePath: " + casePath);
-        System.out.println("Tags: " + tags);
     }
 
     @After
