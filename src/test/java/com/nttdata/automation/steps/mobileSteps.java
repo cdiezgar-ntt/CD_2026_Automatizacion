@@ -1,6 +1,9 @@
 package com.nttdata.automation.steps;
 
 
+import com.nttdata.automation.utils.qr_manager;
+import io.appium.java_client.android.AndroidDriver;
+import io.cucumber.java.After;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Given;
 
@@ -11,28 +14,63 @@ import com.nttdata.automation.driver.appiumDriver;
 public class mobileSteps {
 
     Android_initPage androidApp;
-    appiumDriver driverapp;
+    qr_manager qrManager = new qr_manager();
 
     @Given("que el sistema enciende el emulador e instala la aplicación móvil")
     public void encenderEInstalarApp() {
-        // Al invocar initDriver, Appium levanta el emulador e instala el APK automáticamente
         appiumDriver.initDriver();
+
+        AndroidDriver driverActivo = appiumDriver.getDriver();
+        androidApp = new Android_initPage(driverActivo);
     }
 
-    @Given("que el usuario se encuentra en la pantalla de login de la App")
-    public void usuarioEnPantallaLogin() {
-        // Al instanciar la página por primera vez, se disparará initDriver()
-        // y el emulador se encenderá en tu pantalla automáticamente.
-        androidApp = new Android_initPage();
+    @When("presiona el botón de siguiente")
+    public void presionaBotonSiguiente() {
+        androidApp.hacerClicEnSiguiente1();
     }
 
-    @When("ingresa su correo {string} y clave {string} en el dispositivo móvil")
-    public void ingresaCredencialesMovil(String usuario, String password) {
-        androidApp.ingresarCredenciales(usuario, password);
+    @When("presiona el botón de empezar")
+    public void presionaBotonEmpezar() {
+        androidApp.hacerClicEnEmpezar();
     }
 
-    @When("presiona el botón de inicio de sesión de la App")
-    public void presionaBotonIngresar() {
-        androidApp.hacerClicEnIngresar();
+    @When("hago scroll hasta términos y condiciones")
+    public void scrollHastaTyC() {
+        androidApp.scrollPantallaTyC();
+    }
+
+    @When("presiona politicas de privacidad")
+    public void presionaPoliticasPrivacidad() {
+        androidApp.hacerClicEnTyC1();
+    }
+
+    @When("presiona aviso legal y términos y condiciones")
+    public void presionaAvisoLegalTyC() {
+        androidApp.hacerClicEnTyC2();
+    }
+
+    @When("presiona acepar términos y condiciones")
+    public void presionaAceptarTyC() {
+        androidApp.hacerClicEnAceptarTyC();
+    }
+
+    @Given("que el sistema prepara el código QR {string}")
+    public void prepararCodigoQR(String nombreQR) {
+        qrManager.cambiarQrEnEmulador(nombreQR);
+    }
+
+    @When("abre el escáner de QR")
+    public void abrirEscaner() {
+        //androidApp.hacerClicEnBotonEscanear();
+    }
+
+
+    @After
+    public void finalizarEscenario() {
+        if (appiumDriver.getDriver() != null) {
+
+            appiumDriver.getDriver().quit();
+            appiumDriver.resetDriver();
+        }
     }
 }

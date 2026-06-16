@@ -10,34 +10,31 @@ public class appiumDriver {
     private static AndroidDriver driver;
 
     public static void initDriver() {
-        if (driver == null) {
-            try {
-                UiAutomator2Options options = new UiAutomator2Options();
-                options.setPlatformName("Android");
-                options.setAutomationName("UiAutomator2");
+        try {
+            UiAutomator2Options options = new UiAutomator2Options();
+            options.setPlatformName("Android");
+            options.setAutomationName("UiAutomator2");
 
-                //CONFIGURACIÓN PARA ARRANCAR EL EMULADOR AUTOMÁTICAMENTE
-                // Reemplaza "Pixel_7_API_34" por el nombre exacto de tu emulador en Android Studio
-                String nombreEmulador = "Pixel_7_Auto_2";
-                options.setAvd(nombreEmulador);
-                options.setDeviceName(nombreEmulador);
+            String nombreEmulador = "Pixel_7_Auto_2";
+            options.setAvd(nombreEmulador);
+            options.setDeviceName(nombreEmulador);
+            options.setAvdLaunchTimeout(Duration.ofMinutes(3));
+            options.setApp("C:/apks/cd_2026061201_se_DEV.apk");
+            options.setNewCommandTimeout(Duration.ofSeconds(60));
 
-                // Tiempo máximo de espera para que el emulador encienda (3 minutos)
-                options.setAvdLaunchTimeout(Duration.ofMinutes(3));
+            //false borra datos y caché antes de iniciar
+            options.setNoReset(false);
 
-                // Ruta de tu aplicación .apk
-                options.setApp(System.getProperty("user.dir") + "/src/test/resources/apps/cd_2026021101_pre.apk");
-                options.setNewCommandTimeout(Duration.ofSeconds(60));
+            //Evita reinstalar la app
+            options.setFullReset(false);
 
-                options.setNoReset(true);
-                // Inicializa el driver conectándose al servidor local de Appium
-                driver = new AndroidDriver(new URL("http://localhost:4723"), options);
-                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            driver = new AndroidDriver(new URL("http://localhost:4723"), options);
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-            } catch (MalformedURLException e) {
-                throw new RuntimeException("Error crítico en la URL del servidor de Appium", e);
-            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Error crítico en la URL del servidor de Appium", e);
         }
+
     }
 
     public static AndroidDriver getDriver() {
@@ -52,5 +49,9 @@ public class appiumDriver {
             driver.quit();
             driver = null;
         }
+    }
+
+    public static void resetDriver() {
+        driver = null;
     }
 }
