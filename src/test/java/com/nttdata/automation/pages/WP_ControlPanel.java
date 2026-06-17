@@ -1,6 +1,7 @@
 package com.nttdata.automation.pages;
 
 import com.nttdata.automation.base.BasePageObject;
+import com.nttdata.automation.base.TablaDatos;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -65,7 +66,6 @@ public class WP_ControlPanel extends BasePageObject {
      * @description Método para hacer click en el botón "Buscar" de la pantalla de inicio del Control Panel del Wallet Provider
      */
     public void clickBtnBuscar() {
-        System.out.println(btnBuscarBy);
         pulsar(btnBuscarBy);
     }
 
@@ -73,7 +73,9 @@ public class WP_ControlPanel extends BasePageObject {
      * @description Método para hacer click en el primer elemento de la lista de resultados de búsqueda de la pantalla de inicio del Control Panel del Wallet Provider
      */
     public void clickPrimerElementoLista() {
-        pulsar(primerElementoListaBy);
+      //  pulsar(primerElementoListaBy);
+        TablaDatos tabla_wp=obtenerTablaDeDatos(By.tagName("app-tabla"));
+        tabla_wp.getElementoCelda(0,"ID Credencial", By.tagName("a") );
     }
 
     /**

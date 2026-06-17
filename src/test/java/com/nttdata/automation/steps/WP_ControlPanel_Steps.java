@@ -31,9 +31,8 @@ public class WP_ControlPanel_Steps {
      */
     @When("Click en el botón buscar")
     public void hacerClickEnElBotonBuscar() {
+        Report.info("Se va a pulsar en el boton buscar");
         wp_cp.clickBtnBuscar();
-        System.out.println("Botón buscar clickeado");
-        Report.info("Botón buscar clickeado");
     }
 
     /**

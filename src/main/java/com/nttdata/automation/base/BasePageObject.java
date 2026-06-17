@@ -237,6 +237,7 @@ public class BasePageObject {
         try {
             hacerScroll(we);
             we.click();
+            Report.info("Se ha pulsado: " + we );
         } catch (Exception e) {
             Report.fail("No se ha podido pulsar en el elemento. Causa: " + e.getMessage());
             throw new RuntimeException("Error al clicar", e);
@@ -306,7 +307,6 @@ public class BasePageObject {
         try {
             List<WebElement> we = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(localizador));
             hacerScroll(we.getFirst());
-            List<String> textos = we.stream().map(WebElement::getText).toList();
             return we.stream().map(WebElement::getText).collect(Collectors.toList());
         } catch (Exception e) {
             Report.fail("No se han encontrado textos asociados. Causa: " + e.getMessage());

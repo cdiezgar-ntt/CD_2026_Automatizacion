@@ -1,12 +1,11 @@
 Feature: WALLET-1754
 
-  @TC_01
-Scenario: PID PROVIDER (AEAD) - EJECUTIVO - Pantalla inicio - búsqueda de Credenciales con filtros
+  @WALLET-1754
+  Scenario: PID PROVIDER (AEAD) - EJECUTIVO - Pantalla inicio - búsqueda de Credenciales con filtros
     Given Abrir la web PID provider
-    When Click en el botón acceder
-    When Rellenar el texto "50649281S" en el campo de búsqueda DNI/NIE
-    When Click en el botón buscar
-    And Click en el primer elemento de la lista
-    Then Validar que el campo "pid_dniFiltro" de tipo "xpath" tiene el valor "50649281S"
+    Given Rellenar el texto "79194371N" en el campo de busqueda DNI
+    When Click en el botón buscar PID
+    And Click en el primer elemento de la lista de credenciales
+    Then Validar que el campo dni del filtro tiene el valor "79194371N"
     And Cerrar el navegador
 

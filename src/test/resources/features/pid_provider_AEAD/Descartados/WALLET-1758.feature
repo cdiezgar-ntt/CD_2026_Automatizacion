@@ -1,6 +1,6 @@
 Feature: WALLET-1758
 
-  @TC_01
+  @WALLET-1758
 Scenario: PID PROVIDER (AEAD) - EJECUTIVO - Credencial revocada - mostrar respuesta de error en el detalle de credencial revocada
     Given Abrir la web PID provider
     When Click en el botón acceder

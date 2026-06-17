@@ -86,7 +86,25 @@ public class CommonSteps {
         //Ahora mismo aparece pagina de información no segura
         if (login.apareceInicioNoSeguro()) {
             Report.info("Aparece acceso a pagina no segura. Aceptando acceso...");
-            login.clickAccederTodosModos();
+           // login.clickAccederTodosModos();
+            try {
+                Robot robot = new Robot();
+
+                robot.keyPress(KeyEvent.VK_TAB);
+                robot.keyRelease(KeyEvent.VK_TAB);
+                robot.delay(300);
+
+                robot.keyPress(KeyEvent.VK_TAB);
+                robot.keyRelease(KeyEvent.VK_TAB);
+                robot.delay(300);
+
+                robot.keyPress(KeyEvent.VK_ENTER);
+                robot.keyRelease(KeyEvent.VK_ENTER);
+
+            } catch (AWTException e) {
+                System.err.println("Error al inicializar la clase Robot: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 
