@@ -65,7 +65,7 @@ public class mobileSteps {
     }
 
 
-    @After
+    @After ("Android")
     public void finalizarEscenario() {
         if (appiumDriver.getDriver() != null) {
 

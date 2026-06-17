@@ -7,7 +7,7 @@ import java.net.URL;
 import java.time.Duration;
 
 public class appiumDriver {
-    private static AndroidDriver driver;
+    private static AndroidDriver driverAndroid;
 
     public static void initDriver() {
         try {
@@ -28,8 +28,8 @@ public class appiumDriver {
             //Evita reinstalar la app
             options.setFullReset(false);
 
-            driver = new AndroidDriver(new URL("http://localhost:4723"), options);
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            driverAndroid = new AndroidDriver(new URL("http://localhost:4723"), options);
+            driverAndroid.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         } catch (MalformedURLException e) {
             throw new RuntimeException("Error crítico en la URL del servidor de Appium", e);
@@ -38,20 +38,20 @@ public class appiumDriver {
     }
 
     public static AndroidDriver getDriver() {
-        if (driver == null) {
+        if (driverAndroid == null) {
             initDriver();
         }
-        return driver;
+        return driverAndroid;
     }
 
     public static void quitDriver() {
-        if (driver != null) {
-            driver.quit();
-            driver = null;
+        if (driverAndroid != null) {
+            driverAndroid.quit();
+            driverAndroid = null;
         }
     }
 
     public static void resetDriver() {
-        driver = null;
+        driverAndroid = null;
     }
 }

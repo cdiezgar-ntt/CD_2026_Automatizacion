@@ -1,16 +1,12 @@
 package com.nttdata.automation.pages;
 
-import com.nttdata.automation.driver.appiumDriver;
 //import drivers.AppiumDriverFactory;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.nativekey.AndroidKey;
-import io.appium.java_client.android.nativekey.KeyEvent;
-import io.appium.java_client.pagefactory.AndroidFindBy;
+        import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.PointerInput;
+        import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,12 +14,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.Collections;
-import java.util.NoSuchElementException;
 
 
 public class Android_initPage {
 
-    private AndroidDriver driver;
+    private AndroidDriver driverMovil;
 
     @AndroidFindBy(xpath = "//android.widget.Button[@clickable='true']")
     private WebElement btnSiguientePantallaLogin1;
@@ -36,13 +31,13 @@ public class Android_initPage {
     @AndroidFindBy(xpath = "(//android.widget.Button[@content-desc=\"Aceptar\"])[2]")
     private WebElement tycAceptar;
 
-    public Android_initPage(AndroidDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+    public Android_initPage(AndroidDriver driverMov) {
+        this.driverMovil = driverMov;
+        PageFactory.initElements(new AppiumFieldDecorator(driverMov), this);
     }
 
     public void hacerClicEnSiguiente1() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driverMovil, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(btnSiguientePantallaLogin1));
         int x = 530;
         int y = 2238;
@@ -55,11 +50,11 @@ public class Android_initPage {
         // Presionar la pantalla
         tap.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
         tap.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-        driver.perform(Collections.singletonList(tap));
+        driverMovil.perform(Collections.singletonList(tap));
     }
 
     public void hacerClicEnEmpezar() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driverMovil, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(btnEmpezarPantallaLogin));
         btnEmpezarPantallaLogin.click();
     }
@@ -67,24 +62,24 @@ public class Android_initPage {
     public void scrollPantallaTyC(){
         String scrollAlFinalSelector = "new UiScrollable(new UiSelector().scrollable(true)).scrollToEnd(60);";
        // String scrollAlFinalSelector = "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"Aceptar\"))";
-                driver.findElement(AppiumBy.androidUIAutomator(scrollAlFinalSelector));
+                driverMovil.findElement(AppiumBy.androidUIAutomator(scrollAlFinalSelector));
 
         }
 
     public void hacerClicEnTyC1() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driverMovil, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(tyc1));
         tyc1.click();
     }
 
     public void hacerClicEnTyC2() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driverMovil, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(tyc2));
         tyc2.click();
     }
 
     public void hacerClicEnAceptarTyC() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driverMovil, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(tycAceptar));
         tycAceptar.click();
     }
