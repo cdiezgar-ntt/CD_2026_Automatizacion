@@ -372,4 +372,25 @@ public class WP_ControlPanel_Steps {
         System.out.println("Combo Motivo Revocacion seleccionado con el texto: " + texto);
     }
 
+    @And("Click en el botón revocacion por archivo")
+    public void clickEnElBotonRevocacionPorArchivo() {
+        System.out.println("Clicando en el botón revocacion por archivo");
+        wp_cp.clickBtnRevocacionPorArchivo();
+        System.out.println("Botón revocacion por archivo clicado");
+    }
+
+    @And("Subir archivo CSV")
+    public void subirArchivoCSV() {
+        System.out.println("Subiendo archivo CSV");
+        wp_cp.insertarArchivoRevocacion();
+        System.out.println("Archivo CSV subido");
+    }
+
+    @And("Click confirmar revocacion por achivo")
+    public void clickConfirmarRevocacionPorArchivo() {
+        System.out.println("Clicando en el botón confirmar revocacion por archivo");
+        wp_cp.continuarRevocacionArchivo();
+        System.out.println("Botón confirmar revocacion por archivo clicado");
+    }
+
 }

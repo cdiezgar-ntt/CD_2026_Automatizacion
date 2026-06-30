@@ -1,7 +1,6 @@
 package com.nttdata.automation.pages;
 
 import com.nttdata.automation.base.BasePageObject;
-import com.nttdata.automation.base.TablaDatos;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -38,6 +37,9 @@ public class WP_ControlPanel extends BasePageObject {
     private final By tituloSinResultadosBy = xpath("wp_pantallaInicio_SinResultados");
     private final By wp_pantallaInicio_SinResultados_descripcionBy = xpath("wp_pantallaInicio_SinResultados_descripcion");
     private final By wp_informacionGeneralEstadoBy = tag("wp_carterasActivas_titulo");
+    private final By wp_revocacionPorArchivoBy = xpath("wp_revocacionPorArchivo");
+    private final By wp_eligeTuArchivoBy = xpath("wp_EligeTuArchivo");
+    private final By wp_confirmarRevocacionArhivoBy = xpath("wp_confirmarRevocacionArchivo");
 
     private final By wp_detalleCartera_tituloBy = tag("wp_detalleCartera_titulo");
     private final By wp_detalleCartera_InformacionContacto_emailBy = tag("wp_detalleCartera_InformacionContacto_email");
@@ -74,8 +76,7 @@ public class WP_ControlPanel extends BasePageObject {
      */
     public void clickPrimerElementoLista() {
       //  pulsar(primerElementoListaBy);
-        TablaDatos tabla_wp=obtenerTablaDeDatos(By.tagName("app-tabla"));
-        tabla_wp.getElementoCelda(0,"ID Credencial", By.tagName("a") );
+        pulsar(primerElementoListaBy);
     }
 
     /**
@@ -327,6 +328,19 @@ public class WP_ControlPanel extends BasePageObject {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    public void clickBtnRevocacionPorArchivo(){
+        pulsar(wp_revocacionPorArchivoBy);
+    }
+
+    public void insertarArchivoRevocacion(){
+        WebElement csv = driver.findElement(wp_eligeTuArchivoBy);
+        csv.sendKeys("src/test/resources/csvRevocacion/wallet_id.csv");
+    }
+
+    public void continuarRevocacionArchivo(){
+        pulsar(wp_confirmarRevocacionArhivoBy);
     }
 
 }

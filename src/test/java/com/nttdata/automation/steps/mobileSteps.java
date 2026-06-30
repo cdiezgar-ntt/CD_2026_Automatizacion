@@ -1,6 +1,7 @@
 package com.nttdata.automation.steps;
 
 
+import com.nttdata.automation.utils.androidInfraestructura;
 import com.nttdata.automation.utils.qr_manager;
 import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.java.After;
@@ -15,6 +16,12 @@ public class mobileSteps {
 
     Android_initPage androidApp;
     qr_manager qrManager = new qr_manager();
+
+    @Given("levanta el emulador de Android")
+    public void verificarYLevantarInfraestructuraAndroid() {
+        // Ejecuta el control inteligente antes de que actúe tu driver actual
+        androidInfraestructura.prepareAndroidEnvironment();
+    }
 
     @Given("que el sistema enciende el emulador e instala la aplicación móvil")
     public void encenderEInstalarApp() {

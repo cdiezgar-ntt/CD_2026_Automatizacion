@@ -28,5 +28,6 @@ Scenario: WALLET PROVIDER - EJECUTIVO - Detalle de Cartera – Cartera revocable
     And El usuario elige el motivo "Cambio de datos de identidad"
     And Click en el botón confirmar revocación
     And Acepta la alerta de autofirma
+    And Esperar 5 segundos
     And Selecciona su certificado en autofirma
     And Cerrar el navegador

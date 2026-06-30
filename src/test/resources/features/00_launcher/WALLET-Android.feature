@@ -1,8 +1,13 @@
+@Android @TestAndroid1
 Feature: WALLET-XXXX
 
-  @Android
-    Scenario: Android
-  Given que el sistema enciende el emulador e instala la aplicación móvil
+
+  Background:
+    Given levanta el emulador de Android
+
+  Scenario: Android
+
+    Given que el sistema enciende el emulador e instala la aplicación móvil
     And Esperar 5 segundos
     When presiona el botón de siguiente
     And Esperar 5 segundos
