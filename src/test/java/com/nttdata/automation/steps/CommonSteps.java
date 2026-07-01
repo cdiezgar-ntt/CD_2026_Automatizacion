@@ -1,6 +1,5 @@
 package com.nttdata.automation.steps;
 
-import com.nttdata.automation.base.BasePageObject;
 import com.nttdata.automation.driver.DriverManager;
 import com.nttdata.automation.hooks.ExtentReportHook;
 import com.nttdata.automation.pages.Login;
@@ -12,13 +11,13 @@ import com.nttdata.automation.utils.Commons;
 import com.nttdata.automation.validation.Validator;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Match;
+import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
-
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -86,7 +85,7 @@ public class CommonSteps {
         //Ahora mismo aparece pagina de información no segura
         if (login.apareceInicioNoSeguro()) {
             Report.info("Aparece acceso a pagina no segura. Aceptando acceso...");
-           // login.clickAccederTodosModos();
+            // login.clickAccederTodosModos();
             try {
                 Robot robot = new Robot();
 
@@ -129,7 +128,6 @@ public class CommonSteps {
     @When("Click en el botón acceder")
     public void hacerClickEnElBotonAcceder() {
         System.out.println("Se va a clicar en acceder");
-
         login.clickBtnAcceder();
 
     }
@@ -158,11 +156,10 @@ public class CommonSteps {
     }
 
 
-
     /**
-     * @description Método para seleccionar una opción de un combo, se le pasa el id del combo y el valor a seleccionar
      * @param xpath: String con el xpath del combo
      * @param texto: String con el valor a seleccionar en el combo
+     * @description Método para seleccionar una opción de un combo, se le pasa el id del combo y el valor a seleccionar
      */
     @And("Seleccionar en el combo con xpath {string} la opcion con valor {string}")
     public void seleccionarElComboXpathConElTexto(String xpath, String texto) {
@@ -185,15 +182,15 @@ public class CommonSteps {
 
 
     /*----------------------CONTROL DE AUTOFIRMA---------------------
-    * TODO Actualmente lo hace con la Libreria Siculix que depende de interfaz grafica
-    *  */
+     * TODO Actualmente lo hace con la Libreria Siculix que depende de interfaz grafica
+     *  */
 
     @When("Acepta la alerta de autofirma")
     public void aceptarAlertaAutofirma() {
         Report.info("Aceptando alerta de navegador...");
         try {
-            Match abrir_autofirma = new Screen().wait(Commons.getResourcePath("sikuli/Abrir_autofirma.png"));
-            abrir_autofirma.click();
+            Pattern imagen = new Pattern(Commons.getResourcePath("sikuli/Abrir_autofirma.png")).similar(0.80);
+            new Screen().click(imagen);
         } catch (FindFailed e) {
             ExtentReportHook.getTest().warning("No se ha podido aceptar la alerta del navegador...");
         }
@@ -206,7 +203,7 @@ public class CommonSteps {
         Screen screen = new Screen();
 
         try {
-            Match certificado =screen.wait(Commons.getResourcePath("sikuli/certificado_eidas.png"), 30);
+            Match certificado = screen.wait(Commons.getResourcePath("sikuli/certificado_eidas.png"), 30);
             certificado.click();
             Match aceptar = screen.wait(Commons.getResourcePath("sikuli/boton_aceptar.png"), 30);
             aceptar.click();
@@ -221,7 +218,7 @@ public class CommonSteps {
     @Given("El usuario dispone de una cartera valida")
     public void crearCartera() {
         String email = cartera.getEmail();
-        Report.info("Creando nueva cartera con email: "+ email+"...");
+        Report.info("Creando nueva cartera con email: " + email + "...");
         cartera.nuevaCartera();
         if (cartera.estaCreada()) {
             Report.info("La cartera se ha creado correctamente. Esperando 20 segundos...");

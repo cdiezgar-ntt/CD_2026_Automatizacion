@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
                 "com.nttdata.automation.steps",       // Dónde está el código Java de los pasos
                 "com.nttdata.automation.hooks"        // Dónde están los Hooks (@Before, @After)
         },
-        tags = "@WALLET-1760" +
+        tags = "@WALLET-1773" +
                 "",
         //tags = "@wallet_provider and not @wp_descartado",
         plugin = {"pretty", "html:target/cucumber-report.html"},

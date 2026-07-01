@@ -77,9 +77,65 @@ public class PID_ControlPanel_Steps {
     }
 
     @Then("Seleccionar en el combo motivo revocacion PID la opcion con valor {string}")
-    public void seleccionarComboMotivoRevocacionPID() {
+    public void seleccionarComboMotivoRevocacionPID(String texto) {
+        Report.info("Se elige el motivo de la revocacion");
+        pid_cp.rellenarBoxMotivoRevocacionPID(texto);
+    }
+
+    @When("Click en el botón confirmar revocación PID")
+    public void clickConfirmacionRevocacion() {
+        pid_cp.clickBtnConfirmarRevocacionPID();
 
     }
 
+    @When("Click en el botón ver todas pid activas ultimo mes")
+    public void clickVerTodasPIDActivasUltimoMes() {
+        pid_cp.clickBtnVerTodasPIDActivasUltimoMes();
+    }
+
+    @When("Click en el botón ver todas pid revocadas ultimo mes")
+    public void clickVerTodasPIDRevocadasUltimoMes() {
+        pid_cp.clickBtnVerTodasPIDRevocadasUltimoMes();
+    }
+
+    @When("Click en el botón detalle PID emitidas ultimo mes")
+    public void clickVerTodasPIDEmitidasUltimoMes() {
+        pid_cp.clickBtnVerTodasPIDEmitidasUltimoMes();
+    }
+
+    @Then("Validar que el campo informacion general estado credencial tiene un valor valido")
+    public void validarEstadoDetalleCredencialEmitida() {
+        pid_cp.validarEstadosVarios("Validación estado credencial", true, true);
+    }
+
+    @Then("Seleccionar PID de la lista")
+    public void seleccionarPIDCheckboxListado() {
+        pid_cp.clickCheckboxPrimeroListaCredencial();
+    }
+
+    @Then("Pulsar el botón revocar seleccionadas")
+    public void clickRevocarSeleccionadas() {
+        pid_cp.clickRevocarSeleccionadasPID();
+    }
+
+    @When("Click en el botón revocacion por archivo")
+    public void clickRevocacionArchivo() {
+        pid_cp.clickRevocarArchivo();
+    }
+
+    @Then("Click en el boton elige tu archivo")
+    public void clickElegirArchivo() {
+
+    }
+
+    @When("Click en el botón historico revocacion")
+    public void clickHistoricoRevocacion() {
+        pid_cp.clickHistoricoRevocacion();
+    }
+
+    @And("Click en el boton ver detalle de la credencial")
+    public void clickVerDetalleHistorico() {
+        pid_cp.clickDetalleHistoricoRevocacion();
+    }
 
 }
