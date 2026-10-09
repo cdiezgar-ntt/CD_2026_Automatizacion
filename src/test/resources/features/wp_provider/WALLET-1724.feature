@@ -10,11 +10,8 @@ Feature: WALLET-1724
   @WALLET-1724 @wallet_provider
   Scenario: WALLET PROVIDER - EJECUTIVO - Detalle de información destacada – Carteras activas - mostrar respuesta de detalle de Carteras activas en el último mes
     Given Abrir la web wallet provider
-    And Esperar 5 segundos
     When Click en el botón acceder
-    And  Intro en certificado
     When Click en el botón ver todas carteras activas ultimo mes
-    And Esperar 5 segundos
     And Validar que el campo carteras activas titulo tiene el valor "Carteras activas"
     When Click en el botón buscar
     And Click en el primer elemento de la lista

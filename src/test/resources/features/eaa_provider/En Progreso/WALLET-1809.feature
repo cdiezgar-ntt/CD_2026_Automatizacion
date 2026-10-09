@@ -1,6 +1,5 @@
 Feature: WALLET-1809
-
-  @eaa_provider
+    @eaa_provider
 Scenario: EAA PROVIDER - CONSULTIVO - Pantalla inicio - búsqueda de credenciales con filtros
     Given Abrir la web EAA provider
     When Click en el botón acceder

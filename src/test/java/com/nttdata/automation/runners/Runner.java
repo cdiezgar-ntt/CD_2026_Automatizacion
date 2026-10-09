@@ -1,8 +1,8 @@
 package com.nttdata.automation.runners;
 
+import org.junit.runner.RunWith;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
-import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -14,9 +14,7 @@ import org.junit.runner.RunWith;
                 "com.nttdata.automation.steps",       // Dónde está el código Java de los pasos
                 "com.nttdata.automation.hooks"        // Dónde están los Hooks (@Before, @After)
         },
-        tags = "@WALLET-1773" +
-                "",
-        //tags = "@wallet_provider and not @wp_descartado",
+        tags = "@WALLET-1724",
         plugin = {"pretty", "html:target/cucumber-report.html"},
         monochrome = true
 )
